@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #B8860B;
+  --color-primary-dark: #9A7209;
+  --color-accent: #8B4513;
+  --color-background-light: #FDF8F0;
+  --color-background-dark: #121212;
+  --color-surface-light: #FAF5EB;
+  --color-surface-dark: #1E1E1E;
+  --color-text-main-light: #3E2723;
+  --color-text-main-dark: #EDE0D4;
+  --color-text-sub-light: #5D4037;
+  --color-text-sub-dark: #A1887F;
+  --color-cream: #F5E6D3;
+  --color-gold-light: #D4AF37;
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-archivo: var(--font-archivo);
+
+  --background-image-texture-light: url('/patterns/cream-paper.png');
+  --background-image-texture-dark: url('/patterns/dark-leather.png');
+
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 2px 8px rgba(62, 39, 35, 0.08);
+  --shadow-inner-light: inset 0 0 20px rgba(164, 126, 59, 0.1);
+  --shadow-gold: 0 4px 15px rgba(184, 134, 11, 0.3);
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  @apply bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-body transition-colors duration-300;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Traditional Indian Style Headings */
+.font-display {
+  font-family: var(--font-display), 'Cormorant Garamond', serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.font-archivo {
+  font-family: var(--font-archivo), sans-serif;
+  font-weight: 400;
+}
+
+/* Custom scrollbar hiding */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37, #B8860B, #8B4513);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Traditional border decorative */
+.border-traditional {
+  border-image: linear-gradient(to right, transparent, #B8860B, transparent) 1;
+}
+
+/* Marquee animation for live rates */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+}
+
+/* Performance optimizations */
+img {
+  content-visibility: auto;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide Next.js dev indicator */
+nextjs-portal {
+  display: none !important;
+}
