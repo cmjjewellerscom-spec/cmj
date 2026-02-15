@@ -25,7 +25,7 @@ const Footer = () => {
         { name: "0% VAD Items", href: "/vad-items" },
         { name: "Silver Bars & Ornaments", href: "/silver" },
         { name: "Customer Reviews", href: "/reviews" },
-        { name: "Contact Us", href: "/contact" },
+        { name: "Contact Us", href: "https://wa.me/919997631117" },
         { name: "Admin", href: "/admin" },
     ];
 
