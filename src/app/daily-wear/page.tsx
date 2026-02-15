@@ -6,13 +6,13 @@ import { useRates } from '@/context/RatesContext';
 import { ShoppingBag, Sparkles, ArrowLeft, Shield, Award, Scale } from 'lucide-react';
 
 export default function DailyWearPage() {
-    const { gold24k } = useRates();
+    const { gold22k } = useRates();
     const [selectedGrams, setSelectedGrams] = useState(1);
     const [customGrams, setCustomGrams] = useState('');
 
     const gramOptions = [1, 2, 5, 8, 10];
     const activeGrams = customGrams ? parseFloat(customGrams) || 0 : selectedGrams;
-    const totalPrice = Math.round(gold24k * activeGrams);
+    const totalPrice = Math.round(gold22k * activeGrams);
 
     return (
         <div className="min-h-screen">
@@ -32,7 +32,7 @@ export default function DailyWearPage() {
                         <div className="relative w-full aspect-square">
                             <Image
                                 src="/images/daily_wear_24k.jpeg"
-                                alt="Daily Wear 24K Gold Jewellery"
+                                alt="Daily Wear 22K Gold Jewellery"
                                 fill
                                 className="object-cover"
                                 priority
@@ -40,7 +40,7 @@ export default function DailyWearPage() {
                             {/* 24K Purity Badge */}
                             <div className="absolute top-4 left-4 bg-[#D4AF37] text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2">
                                 <Sparkles className="w-4 h-4" />
-                                24K Purity
+                                22K Purity
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@ export default function DailyWearPage() {
                                 Perfect for Daily Office & Home Wear
                             </h1>
                             <p className="text-gray-600 mt-4 text-lg leading-relaxed">
-                                Lightweight, elegant designs crafted in pure 24K gold for everyday comfort.
+                                Lightweight, elegant designs crafted in 22K gold for everyday comfort.
                                 Each piece is meticulously handcrafted by our master artisans, ensuring
                                 durability and timeless beauty.
                             </p>
@@ -61,9 +61,9 @@ export default function DailyWearPage() {
 
                         {/* Live Price Card */}
                         <div className="bg-white rounded-2xl p-6 border border-amber-200 shadow-lg">
-                            <p className="text-xs text-gray-500 uppercase tracking-wider font-bold mb-1">Today&apos;s Live 24K Gold Rate</p>
+                            <p className="text-xs text-gray-500 uppercase tracking-wider font-bold mb-1">Today&apos;s Live 22K Gold Rate</p>
                             <div className="flex items-end gap-2">
-                                <p className="text-4xl font-bold text-[#3E2723]">₹{gold24k.toLocaleString('en-IN')}</p>
+                                <p className="text-4xl font-bold text-[#3E2723]">₹{gold22k.toLocaleString('en-IN')}</p>
                                 <span className="text-gray-500 text-lg mb-1">/gram</span>
                             </div>
                         </div>
@@ -113,7 +113,7 @@ export default function DailyWearPage() {
                                 <div className="flex items-center justify-between">
                                     <div>
                                         <p className="text-xs text-gray-500 font-semibold">
-                                            Price for <span className="text-[#D4AF37] font-bold">{activeGrams}g</span> of 24K Gold
+                                            Price for <span className="text-[#D4AF37] font-bold">{activeGrams}g</span> of 22K Gold
                                         </p>
                                         <p className="text-3xl font-bold text-[#3E2723] mt-1">
                                             ₹{totalPrice.toLocaleString('en-IN')}
@@ -138,8 +138,8 @@ export default function DailyWearPage() {
                             <div className="flex items-center gap-3 bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
                                 <Award className="w-8 h-8 text-[#D4AF37] flex-shrink-0" />
                                 <div>
-                                    <p className="font-bold text-[#3E2723] text-sm">100% Pure Gold</p>
-                                    <p className="text-xs text-gray-500">24 Karat Guaranteed</p>
+                                    <p className="font-bold text-[#3E2723] text-sm">Premium Gold</p>
+                                    <p className="text-xs text-gray-500">22 Karat Guaranteed</p>
                                 </div>
                             </div>
                         </div>

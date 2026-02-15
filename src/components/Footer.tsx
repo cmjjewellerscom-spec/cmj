@@ -26,6 +26,7 @@ const Footer = () => {
         { name: "Silver Bars & Ornaments", href: "/silver" },
         { name: "Customer Reviews", href: "/reviews" },
         { name: "Contact Us", href: "/contact" },
+        { name: "Admin", href: "/admin" },
     ];
 
     return (
