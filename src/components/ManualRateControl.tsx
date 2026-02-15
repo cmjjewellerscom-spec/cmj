@@ -6,7 +6,7 @@ import { Save, RefreshCw, DollarSign } from 'lucide-react';
 export default function ManualRateControl() {
     const {
         gold24k, gold24k10g, gold22k, gold18k, silver, diamond,
-        updateManualRates, loading
+        updateManualRates, loading, error
     } = useRates();
 
     const [values, setValues] = useState({
@@ -37,15 +37,18 @@ export default function ManualRateControl() {
         setValues(prev => ({ ...prev, [field]: numValue }));
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         setIsSaving(true);
-        // Simulate a small delay for better UX
-        setTimeout(() => {
-            updateManualRates(values);
-            setIsSaving(false);
+        setMessage(null);
+
+        const success = await updateManualRates(values);
+
+        setIsSaving(false);
+
+        if (success) {
             setMessage("Rates updated successfully!");
             setTimeout(() => setMessage(null), 3000);
-        }, 500);
+        }
     };
 
     return (
@@ -132,9 +135,9 @@ export default function ManualRateControl() {
             </div>
 
             <div className="flex items-center justify-end gap-4 mt-6">
-                {message && (
-                    <span className="text-green-600 dark:text-green-400 text-sm font-medium animate-fade-in">
-                        {message}
+                {(message || error) && (
+                    <span className={`text-sm font-medium animate-fade-in ${error ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>
+                        {error || message}
                     </span>
                 )}
 

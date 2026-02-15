@@ -8,7 +8,7 @@ interface RatesContextType extends Rates {
     loading: boolean;
     error: string | null;
     isManual: boolean;
-    updateManualRates: (newRates: Rates) => Promise<void>;
+    updateManualRates: (newRates: Rates) => Promise<boolean>;
 }
 
 // Default rates (updated to current market rates)
@@ -26,7 +26,7 @@ const RatesContext = createContext<RatesContextType>({
     loading: false,
     error: null,
     isManual: false,
-    updateManualRates: async () => { },
+    updateManualRates: async () => false,
 });
 
 export const useRates = () => useContext(RatesContext);
@@ -61,19 +61,22 @@ export const RatesProvider = ({ children }: { children: ReactNode }) => {
         loadRates();
     }, []);
 
-    const updateManualRates = async (newRates: Rates) => {
+    const updateManualRates = async (newRates: Rates): Promise<boolean> => {
         setLoading(true);
         try {
             const success = await RatesService.updateRates(newRates);
             if (success) {
                 setRates(newRates);
                 setError(null);
+                return true;
             } else {
                 setError("Failed to update rates");
+                return false;
             }
         } catch (e) {
             console.error("Failed to update rates", e);
             setError("Failed to update rates");
+            return false;
         } finally {
             setLoading(false);
         }
