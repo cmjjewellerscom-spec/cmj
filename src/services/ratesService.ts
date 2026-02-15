@@ -1,6 +1,6 @@
 
-const BIN_ID = process.env.NEXT_PUBLIC_JSONBIN_BIN_ID;
-const MASTER_KEY = process.env.NEXT_PUBLIC_JSONBIN_MASTER_KEY;
+const BIN_ID = process.env.NEXT_PUBLIC_JSONBIN_BIN_ID || "69919c51d0ea881f40bbeffd";
+const MASTER_KEY = process.env.NEXT_PUBLIC_JSONBIN_MASTER_KEY || "$2a$10$rbO6cOJC8rJ4N9UQHVKWD.s6kj4c0D4srlldGNZ1dcndo9VG2Jiim";
 const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
 
 export interface Rates {
