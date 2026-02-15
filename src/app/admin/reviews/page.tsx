@@ -36,7 +36,9 @@ export default function AdminReviews() {
         addReview({
             title: title.trim(),
             description: description.trim(),
-            link: link.trim()
+            link: link.trim(),
+            name: 'Admin',
+            rating: 5,
         });
 
         setReviews(getAllReviews());
