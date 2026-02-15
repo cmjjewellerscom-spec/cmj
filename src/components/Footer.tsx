@@ -27,6 +27,8 @@ const Footer = () => {
         { name: "Customer Reviews", href: "/reviews" },
         { name: "Contact Us", href: "/contact" },
         { name: "Admin", href: "/admin" },
+        { name: "Privacy Policy", href: "/privacy-policy" },
+        { name: "Terms of Service", href: "/terms-of-service" },
     ];
 
     return (
