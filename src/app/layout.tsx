@@ -41,9 +41,14 @@ export const metadata: Metadata = {
     icon: "/logo.png",
     apple: "/logo.png",
   },
+  verification: {
+    google: "mpmwPxWq-gP9Em4slJZ9XXFaFfXptdcb4MjvykNhSbo",
+  },
 };
 
 import { RatesProvider } from "@/context/RatesContext";
+
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -55,6 +60,7 @@ export default function RootLayout({
       <body className={`${cormorant.variable} ${poppins.variable} ${pinyonScript.variable} ${archivo.variable} font-body`}>
         <RatesProvider>
           {children}
+          <Footer />
         </RatesProvider>
       </body>
     </html>

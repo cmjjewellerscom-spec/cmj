@@ -3,64 +3,71 @@ import React from 'react';
 import { useRates } from '@/context/RatesContext';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
-interface Rate {
-    label: string;
-    price: string;
-    trend: "up" | "down" | "stable";
-    change?: string;
-}
-
 export default function LiveRates() {
-    const { gold24k, gold22k, silver, diamond, loading } = useRates();
+    const { gold24k, gold24k10g, gold22k, gold18k, silver, diamond, loading } = useRates();
 
-    const rates: Rate[] = [
-        { label: "GOLD 24K", price: loading ? "Loading..." : `₹${gold24k.toLocaleString('en-IN')}/g`, trend: "stable" },
-        { label: "GOLD 24K (10g)", price: loading ? "Loading..." : `₹${(gold24k * 10).toLocaleString('en-IN')}`, trend: "stable" },
-        { label: "GOLD 22K", price: loading ? "Loading..." : `₹${gold22k.toLocaleString('en-IN')}/g`, trend: "stable" },
-        { label: "SILVER", price: loading ? "Loading..." : `₹${silver.toLocaleString('en-IN')}/g`, trend: "stable" },
-        { label: "DIAMOND", price: loading ? "Loading..." : `₹${diamond.toLocaleString('en-IN')}/ct`, trend: "stable" },
-    ];
+    const RateItem = ({ label, value }: { label: string, value: string }) => (
+        <div className="flex items-center gap-2 mx-8 whitespace-nowrap">
+            <span className="text-[#B8860B] font-bold font-sans text-sm uppercase tracking-wide">{label}:</span>
+            <span className="text-[#262626] font-archivo text-lg tracking-wide">
+                {loading ? "..." : value}
+            </span>
+        </div>
+    );
 
-    const getTrendIcon = (trend: string) => {
-        if (trend === "up") return <TrendingUp className="w-3 h-3 text-green-500" />;
-        if (trend === "down") return <TrendingDown className="w-3 h-3 text-red-500" />;
-        return null;
-    };
-
-    const getTrendColor = (trend: string) => {
-        if (trend === "up") return "text-green-500";
-        if (trend === "down") return "text-red-500";
-        return "text-gray-400";
-    };
+    // Duplicate content for smoother infinite scroll illusion
+    const content = (
+        <>
+            <RateItem label="GOLD 24K (10G)" value={`₹${(gold24k10g || gold24k * 10).toLocaleString('en-IN')}`} />
+            <span className="text-primary/20 text-xs">•</span>
+            <RateItem label="GOLD 24K (1G)" value={`₹${gold24k.toLocaleString('en-IN')}`} />
+            <span className="text-primary/20 text-xs">•</span>
+            <RateItem label="GOLD 22K (1G)" value={`₹${gold22k.toLocaleString('en-IN')}`} />
+            <span className="text-primary/20 text-xs">•</span>
+            <RateItem label="GOLD 18K (1G)" value={`₹${gold18k.toLocaleString('en-IN')}`} />
+            <span className="text-primary/20 text-xs">•</span>
+            <RateItem label="SILVER (1G)" value={`₹${silver.toLocaleString('en-IN')}`} />
+            <span className="text-primary/20 text-xs">•</span>
+            <RateItem label="DIAMOND (1CT)" value={`₹${diamond?.toLocaleString('en-IN') || '65,000'}`} />
+            <span className="text-primary/20 text-xs">•</span>
+        </>
+    );
 
     return (
-        <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 dark:from-primary/20 dark:via-primary/10 dark:to-primary/20 border-b border-primary/20 overflow-hidden py-3 relative">
-            {/* Live indicator */}
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex items-center gap-2 bg-white dark:bg-black/60 px-3 py-1 rounded-full shadow-sm">
-                <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                </span>
-                <span className="text-[0.6rem] font-bold uppercase tracking-wider text-text-main-light dark:text-text-main-dark">Live</span>
-            </div>
+        <div className="w-full bg-[#FFF8F0] border-b border-primary/10 overflow-hidden relative z-40 h-10 flex items-center">
 
-            {/* Scrolling ticker with CSS animation */}
-            <div className="flex whitespace-nowrap overflow-hidden ml-20">
-                <div className="flex gap-8 md:gap-16 px-4 animate-marquee">
-                    {[...rates, ...rates, ...rates, ...rates].map((rate, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm font-medium">
-                            <span className="text-primary font-bold uppercase tracking-wider">{rate.label}:</span>
-                            <span className="text-text-main-light dark:text-text-main-dark font-semibold">{rate.price}</span>
-                            {rate.change && (
-                                <span className={`flex items-center gap-1 text-xs ${getTrendColor(rate.trend)}`}>
-                                    {getTrendIcon(rate.trend)}
-                                    {rate.change}
-                                </span>
-                            )}
-                        </div>
-                    ))}
+            {/* Left Label */}
+            <div className="absolute left-0 top-0 bottom-0 bg-[#FFF8F0] z-20 px-4 flex items-center border-r border-primary/10 shadow-[4px_0_12px_-4px_rgba(0,0,0,0.05)]">
+                <div className="flex items-center gap-2 bg-red-50 px-2.5 py-1 rounded-full border border-red-100/50 shadow-sm">
+                    <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                    <span className="text-[0.65rem] font-bold text-red-600 uppercase tracking-widest whitespace-nowrap pt-0.5">
+                        LIVE
+                    </span>
                 </div>
             </div>
+
+            {/* Marquee Container */}
+            <div className="flex animate-marquee hover:[animation-play-state:paused] items-center pl-32 md:pl-0">
+                <div className="flex items-center">
+                    {content}
+                </div>
+                {/* Duplicate for seamless loop */}
+                <div className="flex items-center" aria-hidden="true">
+                    {content}
+                </div>
+                <div className="flex items-center" aria-hidden="true">
+                    {content}
+                </div>
+                <div className="flex items-center" aria-hidden="true">
+                    {content}
+                </div>
+            </div>
+
+            {/* Right Fade (optional) */}
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[#FFF8F0] to-transparent z-10 pointer-events-none"></div>
         </div>
     );
 }

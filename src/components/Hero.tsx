@@ -1,10 +1,14 @@
 "use client";
 import React from 'react';
+import { Edit, ShoppingBag, Percent, Coins } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Hero() {
+
     return (
         <section className="relative overflow-hidden">
+            {/* ... (rest of the file) */}
+
             {/* Hero Background with Traditional Temple Jewelry Image */}
             <div className="relative min-h-[400px] md:min-h-[500px]">
                 {/* Background Image */}
@@ -87,38 +91,62 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Daily Wear Categories */}
-            <div className="bg-surface-light px-4 py-8">
-                <h2 className="font-display text-xl md:text-2xl text-center text-text-main-light mb-6">
-                    Daily Wear
-                </h2>
+            {/* Customer Love Section */}
+            <div className="bg-surface-light shimmer-gold px-4 py-10 md:py-16">
+                <div className="ornament-divider">
+                    <h2 className="text-2xl md:text-4xl text-center text-[#3E2723] font-bold inline-block bg-surface-light px-6">
+                        We Know what our CMJ customers love to
+                    </h2>
+                </div>
 
-                <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
-                    {[
-                        { name: 'Plain Bangles', image: '/designs/plain bangles.jpeg' },
-                        { name: 'Necklace', image: '/designs/neckles.jpeg' },
-                        { name: 'Antique Haram', image: '/designs/antique Haram.jpeg' },
-                    ].map((item) => (
-                        <Link
-                            key={item.name}
-                            href="/categories"
-                            className="flex flex-col items-center group"
-                        >
-                            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-primary/20 group-hover:border-primary transition-colors mb-2 shadow-sm bg-white">
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                    onError={(e) => {
-                                        (e.target as HTMLImageElement).style.display = 'none';
-                                    }}
-                                />
-                            </div>
-                            <span className="text-xs md:text-sm text-text-main-light font-medium text-center">{item.name}</span>
-                        </Link>
-                    ))}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-7xl mx-auto px-2 md:px-4 mt-8">
+                    {/* Order Your Own */}
+                    <Link
+                        href="/order/custom"
+                        className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
+                    >
+                        <Edit strokeWidth={1.5} className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110" />
+                        <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
+                            Order Your Own
+                        </span>
+                    </Link>
+
+                    {/* Daily Wear Items - Links to dedicated page */}
+                    <Link
+                        href="/daily-wear"
+                        className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
+                    >
+                        <ShoppingBag strokeWidth={1.5} className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110" />
+                        <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
+                            Daily wear items
+                        </span>
+                    </Link>
+
+                    {/* 0% VAD Items */}
+                    <Link
+                        href="/vad-items"
+                        className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
+                    >
+                        <Percent strokeWidth={1.5} className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110" />
+                        <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
+                            0% VAD items
+                        </span>
+                    </Link>
+
+                    {/* Silver Bars */}
+                    <Link
+                        href="/silver"
+                        className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
+                    >
+                        <Coins strokeWidth={1.5} className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110" />
+                        <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
+                            Silver Bars and Silver ornaments
+                        </span>
+                    </Link>
                 </div>
             </div>
+
+
         </section>
     );
 }

@@ -8,6 +8,7 @@ import {
     Eye, Menu, X, Edit, Trash2, ExternalLink, Settings, ChevronLeft
 } from 'lucide-react';
 import { products } from '@/data/products';
+import ManualRateControl from '@/components/ManualRateControl';
 
 export default function AdminDashboard() {
     const router = useRouter();
@@ -159,6 +160,9 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                     </div>
+
+                    {/* Manual Gold Rate Control */}
+                    <ManualRateControl />
 
                     {/* Quick Actions */}
                     <div className="bg-white dark:bg-gray-800/50 rounded-2xl p-6 border border-primary/10 dark:border-gray-700 shadow-sm mb-8">

@@ -3,6 +3,8 @@ export interface Review {
     title: string;
     description: string;
     link: string;
+    name: string;
+    rating: number;
     createdAt: string;
 }
 

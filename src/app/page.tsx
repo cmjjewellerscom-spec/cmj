@@ -6,6 +6,7 @@ import Categories from "@/components/Categories";
 import OrderForm from "@/components/OrderForm";
 import TrustSection from "@/components/TrustSection";
 import BullionSection from "@/components/BullionSection";
+import ReviewsScroller from "@/components/ReviewsScroller";
 
 import { ShieldCheck } from 'lucide-react';
 
@@ -28,6 +29,8 @@ export default function Home() {
 
 
           <BullionSection />
+
+          <ReviewsScroller />
 
           <OrderForm />
         </main>

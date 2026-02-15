@@ -1,13 +1,15 @@
 "use client";
 import React from 'react';
-import { Coins, TrendingUp, ArrowRight } from 'lucide-react';
+import { Coins, TrendingUp, ArrowRight, Edit, ShoppingBag, Percent } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function BullionSection() {
     return (
         <section id="bullion-section" className="px-4 mb-10 md:mb-16">
-            <div className="max-w-md md:max-w-5xl mx-auto">
+            {/* ... (rest of the file) */}
+
+            {/* <div className="mt-16"> Removed Duplicate Section </div> */}            <div className="max-w-md md:max-w-5xl mx-auto">
                 <div className="bg-gradient-to-br from-[#FFF8E7] to-[#F5DEB3] rounded-2xl overflow-hidden shadow-gold relative border border-primary/20">
                     {/* Background Pattern/Texture */}
                     <div className="absolute inset-0 opacity-10 bg-[url('/patterns/cream-paper.png')] mix-blend-multiply"></div>
@@ -62,6 +64,8 @@ export default function BullionSection() {
                         </div>
                     </div>
                 </div>
+
+                {/* Remove Duplicate Section */}
             </div>
         </section>
     );

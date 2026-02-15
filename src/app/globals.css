@@ -4,9 +4,9 @@
   --color-primary: #B8860B;
   --color-primary-dark: #9A7209;
   --color-accent: #8B4513;
-  --color-background-light: #FDF8F0;
+  --color-background-light: #FDF5F0;
   --color-background-dark: #121212;
-  --color-surface-light: #FAF5EB;
+  --color-surface-light: #FBF0E8;
   --color-surface-dark: #1E1E1E;
   --color-text-main-light: #3E2723;
   --color-text-main-dark: #EDE0D4;
@@ -44,6 +44,10 @@
 
 body {
   @apply bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-body transition-colors duration-300;
+  background-color: #FBF0E4;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.12'%3E%3Cpath d='M50 30c3 0 6 8 6 12s-3 6-6 6-6-2-6-6 3-12 6-12z'/%3E%3Cpath d='M70 50c0 3-8 6-12 6s-6-3-6-6 2-6 6-6 12 3 12 6z'/%3E%3Cpath d='M50 70c-3 0-6-8-6-12s3-6 6-6 6 2 6 6-3 12-6 12z'/%3E%3Cpath d='M30 50c0-3 8-6 12-6s6 3 6 6-2 6-6 6-12-3-12-6z'/%3E%3Ccircle cx='50' cy='50' r='4'/%3E%3Ccircle cx='15' cy='15' r='2'/%3E%3Ccircle cx='85' cy='15' r='2'/%3E%3Ccircle cx='15' cy='85' r='2'/%3E%3Ccircle cx='85' cy='85' r='2'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
 }
 
 html {
@@ -85,6 +89,42 @@ html {
   border-image: linear-gradient(to right, transparent, #B8860B, transparent) 1;
 }
 
+/* Ornamental section divider */
+.ornament-divider {
+  position: relative;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #D4AF37, transparent);
+}
+
+.ornament-divider::before {
+  left: 5%;
+}
+
+.ornament-divider::after {
+  right: 5%;
+}
+
+/* Warm card backgrounds with subtle shimmer */
+.card-warm {
+  background: linear-gradient(135deg, #FFFBF5 0%, #FFF5EB 50%, #FFF0E5 100%);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.card-warm:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.12);
+}
+
 /* Marquee animation for live rates */
 @keyframes marquee {
   0% {
@@ -99,6 +139,23 @@ html {
 .animate-marquee {
   animation: marquee 25s linear infinite;
   will-change: transform;
+}
+
+/* Subtle shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 8s ease-in-out infinite;
 }
 
 /* Performance optimizations */
