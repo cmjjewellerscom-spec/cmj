@@ -1,0 +1,12 @@
+import { MetadataRoute } from 'next';
+
+export default function robots(): MetadataRoute.Robots {
+    return {
+        rules: {
+            userAgent: '*',
+            allow: '/',
+            disallow: ['/admin/', '/debug/'], // Prevent scanning admin panel and debug routes
+        },
+        sitemap: 'https://cmjjewellers.com/sitemap.xml',
+    };
+}

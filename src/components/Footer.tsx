@@ -25,12 +25,12 @@ const Footer = () => {
         { name: "0% VAD Items", href: "/vad-items" },
         { name: "Silver Bars & Ornaments", href: "/silver" },
         { name: "Customer Reviews", href: "/reviews" },
-        { name: "Contact Us", href: "https://wa.me/919997631117" },
+        { name: "Contact Us", href: "/contact" },
         { name: "Admin", href: "/admin" },
     ];
 
     return (
-        <footer className="bg-[#3E2723] text-[#F5DEB3] pt-16 pb-8 mt-16">
+        <footer className="bg-[#3E2723] text-[#F5DEB3] pt-10 md:pt-16 pb-8 mt-6 md:mt-16">
             <div className="max-w-7xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                     {/* Brand Section - Merged into simplified columns for better space */}

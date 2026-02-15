@@ -15,7 +15,7 @@ export default function DailyWearPage() {
     const totalPrice = Math.round(gold22k * activeGrams);
 
     return (
-        <div className="min-h-screen">
+        <div className="bg-gradient-to-b from-[#FFF8E7] via-white to-[#FFF8E7]">
             {/* Back Navigation */}
             <div className="max-w-7xl mx-auto px-4 pt-6">
                 <Link href="/" className="inline-flex items-center gap-2 text-[#3E2723] hover:text-[#D4AF37] transition-colors text-sm font-medium">
@@ -25,7 +25,7 @@ export default function DailyWearPage() {
             </div>
 
             {/* Hero Section */}
-            <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+            <div className="max-w-7xl mx-auto px-4 py-4 md:py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
                     {/* Product Image */}
                     <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-amber-100">
