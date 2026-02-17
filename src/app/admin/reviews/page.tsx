@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash2, ExternalLink, Star, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-// import { addReviewFn, deleteReviewFn, Review } from '@/lib/firestoreUtils';
+import { addReview, deleteReview, updateReviewApproval } from '@/lib/supabaseUtils';
+import { supabase } from '@/lib/supabase';
 import { useReviews } from '@/hooks/useReviews';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminAuthCheck from '@/components/admin/AdminAuthCheck';
 
 function AdminReviewsContent() {
-    const { reviews, loading: reviewsLoading } = useReviews();
+    const { reviews, loading: reviewsLoading } = useReviews(false); // False to get all reviews
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
@@ -25,8 +26,14 @@ function AdminReviewsContent() {
         setSubmitting(true);
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            alert('Add Review is disabled (Static Mode).');
+            await addReview({
+                name: 'Admin',
+                title: title.trim(),
+                description: description.trim(),
+                rating: 5,
+                approved: true
+            });
+            alert('Review added successfully!');
 
             setTitle('');
             setDescription('');
@@ -39,9 +46,27 @@ function AdminReviewsContent() {
         }
     };
 
-    const handleDelete = async (id: string, name: string) => {
-        if (!confirm(`Are you sure you want to delete the review by "${name}"?`)) return;
-        alert('Delete Review is disabled (Static Mode).');
+    const handleDelete = async (id: number, title: string) => {
+        if (!confirm(`Are you sure you want to delete the review "${title}"?`)) return;
+        try {
+            await deleteReview(id);
+            alert('Review deleted');
+            window.location.reload();
+        } catch (error) {
+            console.error("Delete failed", error);
+            alert("Failed to delete review");
+        }
+    };
+
+    const handleApprove = async (id: number, approved: boolean) => {
+        try {
+            await updateReviewApproval(id, approved);
+            alert(approved ? 'Review approved' : 'Review unapproved');
+            window.location.reload();
+        } catch (error) {
+            console.error("Update failed", error);
+            alert("Failed to update review");
+        }
     };
 
     return (
@@ -186,15 +211,26 @@ function AdminReviewsContent() {
                                                         </a>
                                                     )}
                                                     <p className="text-xs text-gray-400 mt-2">
-                                                        Added {new Date(review.createdAt).toLocaleDateString()}
+                                                        Added {review.created_at ? new Date(review.created_at).toLocaleDateString() : 'N/A'}
                                                     </p>
                                                 </div>
-                                                <button
-                                                    onClick={() => handleDelete(review.id, review.title)}
-                                                    className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button>
+                                                <div className="flex items-center gap-2">
+                                                    <button
+                                                        onClick={() => handleApprove(Number(review.id), !review.approved)}
+                                                        className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${review.approved
+                                                            ? 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                                                            : 'bg-green-100 text-green-700 hover:bg-green-200'
+                                                            }`}
+                                                    >
+                                                        {review.approved ? 'Unapprove' : 'Approve'}
+                                                    </button>
+                                                    <button
+                                                        onClick={() => handleDelete(Number(review.id), review.title)}
+                                                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}

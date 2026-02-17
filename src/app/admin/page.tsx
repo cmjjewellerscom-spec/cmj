@@ -3,17 +3,13 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock, User, Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
-
-const ADMIN_CREDENTIALS = {
-    username: "manasag",
-    password: "211027@Bujji"
-};
+import { supabase } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
 export default function AdminLogin() {
     const router = useRouter();
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
@@ -25,16 +21,17 @@ export default function AdminLogin() {
         setLoading(true);
 
         try {
-            // Simple validation against hardcoded credentials
-            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-                localStorage.setItem('cmj_admin_auth', 'true');
-                router.push('/admin/dashboard');
-            } else {
-                throw new Error("Invalid credentials");
-            }
-        } catch (err) {
+            const { error: signInError } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
+
+            if (signInError) throw signInError;
+
+            router.push('/admin/dashboard');
+        } catch (err: any) {
             console.error(err);
-            setError('Invalid email or password');
+            setError(err.message || 'Invalid email or password');
             setLoading(false);
         }
     };
@@ -62,7 +59,7 @@ export default function AdminLogin() {
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 text-center">Sign In</h2>
 
                     <form onSubmit={handleLogin} className="space-y-5">
-                        {/* Username */}
+                        {/* Email */}
                         <div>
                             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-2">
                                 Email
@@ -71,8 +68,8 @@ export default function AdminLogin() {
                                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
                                 <input
                                     type="email"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className="w-full bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-xl pl-12 pr-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                                     placeholder="Enter email"
                                     required

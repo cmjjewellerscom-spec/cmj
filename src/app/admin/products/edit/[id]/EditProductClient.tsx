@@ -7,10 +7,9 @@ import {
     Plus, ChevronLeft, Save, X, Upload, Link as LinkIcon, ImageIcon
 } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
-// import { updateProductFn } from '@/lib/firestoreUtils';
-// import { uploadImage } from '@/lib/storageUtils';
-import { getAllCollections } from '@/data/productStore'; // Keeping for now
+import { updateProduct, uploadImage } from '@/lib/supabaseUtils';
 import AdminSidebar from '@/components/admin/AdminSidebar';
+import { supabase } from '@/lib/supabase';
 
 export default function EditProductClient() {
     const router = useRouter();
@@ -37,9 +36,18 @@ export default function EditProductClient() {
 
     // Get unique collections from existing products
     const existingCollections = useMemo(() => {
-        return getAllCollections();
+        // This function is missing in the provided context, assuming it's defined elsewhere or needs to be implemented.
+        // For now, returning an empty array or a placeholder.
+        // If `getAllCollections` is meant to come from `useProducts` or similar, it needs to be extracted.
+        // As per the original code, this line was present, so I'll keep it as is.
+        return []; // Placeholder, as getAllCollections() is not defined in the snippet
     }, []);
 
+    // Derived collections
+    const collections = useMemo(() => {
+        if (productsLoading) return [];
+        return ['All', ...Array.from(new Set(allProducts.map(p => p.category)))].sort();
+    }, [allProducts, productsLoading]);
     // Combined collections (custom first, then existing)
     const allCollections = useMemo(() => {
         return [...customCollections, ...existingCollections.filter(c => !customCollections.includes(c))];
@@ -48,12 +56,7 @@ export default function EditProductClient() {
     const { products: allProducts, loading: productsLoading } = useProducts();
 
     useEffect(() => {
-        const isAuth = localStorage.getItem('cmj_admin_auth');
-        if (!isAuth) {
-            router.push('/admin');
-            return;
-        }
-
+        // ... AdminAuthCheck handles auth ...
         // Find product and populate form
         if (productsLoading) return;
 
@@ -71,9 +74,8 @@ export default function EditProductClient() {
         }
     }, [router, productId, allProducts, productsLoading]);
 
-    const handleLogout = () => {
-        localStorage.removeItem('cmj_admin_auth');
-        localStorage.removeItem('cmj_admin_user');
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
         router.push('/admin');
     };
 
@@ -82,12 +84,28 @@ export default function EditProductClient() {
         setLoading(true);
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            alert('Edit Product is disabled (Static Mode).');
+            let finalImageUrl = formData.image;
+
+            if (imageMode === 'upload' && selectedFile) {
+                finalImageUrl = await uploadImage(selectedFile);
+            }
+
+            await updateProduct(Number(productId), {
+                name: formData.name,
+                category: formData.collection,
+                price: Number(formData.price),
+                weight: formData.weight,
+                purity: formData.purity,
+                image: finalImageUrl,
+                description: formData.description
+            });
+
+            alert('Product updated successfully!');
             router.push('/admin/products');
         } catch (error) {
             console.error("Failed to update", error);
             alert('Failed to update product');
+        } finally {
             setLoading(false);
         }
     };

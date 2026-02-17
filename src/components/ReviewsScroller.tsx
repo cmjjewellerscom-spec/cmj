@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Star, ChevronLeft, ChevronRight, MessageSquare } from 'lucide-react';
 import { useReviews } from '@/hooks/useReviews';
-// import { Review } from '@/lib/firestoreUtils';
+
 
 export default function ReviewsScroller() {
     const { reviews, loading } = useReviews();
@@ -124,9 +124,9 @@ export default function ReviewsScroller() {
                         </div>
                         <div>
                             <p className="font-bold text-[#3E2723] text-sm">{review.name || 'Customer'}</p>
-                            {review.createdAt && (
+                            {review.created_at && (
                                 <p className="text-xs text-gray-400">
-                                    {new Date(review.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                                    {new Date(review.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                                 </p>
                             )}
                         </div>

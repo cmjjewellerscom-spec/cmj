@@ -9,27 +9,26 @@ import {
 } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
 import ManualRateControl from '@/components/ManualRateControl';
+import AdminAuthCheck from '@/components/admin/AdminAuthCheck';
+import { supabase } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
-export default function AdminDashboard() {
+function DashboardContent() {
     const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [adminUser, setAdminUser] = useState('Admin');
 
     useEffect(() => {
-        const isAuth = localStorage.getItem('cmj_admin_auth');
-        if (!isAuth) {
-            router.push('/admin');
-            return;
-        }
-        const user = localStorage.getItem('cmj_admin_user');
-        if (user) setAdminUser(user);
-    }, [router]);
+        const fetchUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user?.email) setAdminUser(user.email.split('@')[0]);
+        };
+        fetchUser();
+    }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem('cmj_admin_auth');
-        localStorage.removeItem('cmj_admin_user');
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
         router.push('/admin');
     };
 
@@ -284,5 +283,13 @@ export default function AdminDashboard() {
                 ></div>
             )}
         </div>
+    );
+}
+
+export default function AdminDashboard() {
+    return (
+        <AdminAuthCheck>
+            <DashboardContent />
+        </AdminAuthCheck>
     );
 }

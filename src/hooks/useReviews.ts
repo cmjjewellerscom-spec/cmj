@@ -1,27 +1,24 @@
 "use client";
+import { useState, useEffect } from 'react';
+import { getReviews, Review } from '@/lib/supabaseUtils';
 
-import { useEffect, useState } from 'react';
-
-export interface Review {
-    id: string;
-    title: string;
-    description: string;
-    name: string;
-    rating: number;
-    createdAt: string;
-    approved?: boolean;
-    link?: string;
-}
-
-export function useReviews() {
+export function useReviews(onlyApproved: boolean = true) {
     const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Mock empty reviews or local storage
-        setReviews([]);
-        setLoading(false);
-    }, []);
+        async function fetchReviews() {
+            try {
+                const data = await getReviews(onlyApproved);
+                setReviews(data || []);
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchReviews();
+    }, [onlyApproved]);
 
     return { reviews, loading };
 }

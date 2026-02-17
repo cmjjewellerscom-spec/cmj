@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 import { Star, Send, User, MessageSquare, X } from 'lucide-react';
 import { useReviews } from '@/hooks/useReviews';
-// import { addReviewFn } from '@/lib/firestoreUtils';
+import { addReview } from '@/lib/supabaseUtils';
 
 export default function CustomerReviews() {
     const { reviews, loading } = useReviews();
@@ -26,8 +26,13 @@ export default function CustomerReviews() {
         setSubmitLoading(true);
 
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            // alert('Review submission is disabled (Static Mode).');
+            await addReview({
+                name: name.trim(),
+                title: title.trim(),
+                description: description.trim(),
+                rating,
+                approved: false // Default to false for moderation
+            });
 
             // Reset form
             setName('');
@@ -241,9 +246,9 @@ export default function CustomerReviews() {
                                                 {review.description}
                                             </p>
                                             {/* Date */}
-                                            {review.createdAt && (
+                                            {review.created_at && (
                                                 <p className="text-xs text-gray-400 mt-2">
-                                                    {new Date(review.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                                                    {new Date(review.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                                                 </p>
                                             )}
                                         </div>

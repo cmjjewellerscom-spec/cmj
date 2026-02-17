@@ -7,9 +7,9 @@ import {
     Plus, ChevronLeft, Save, X, Upload, Link as LinkIcon, ImageIcon
 } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
-// import { addProduct } from '@/lib/firestoreUtils';
-// import { uploadImage } from '@/lib/storageUtils';
+import { addProduct, uploadImage } from '@/lib/supabaseUtils';
 import AdminSidebar from '@/components/admin/AdminSidebar';
+import { supabase } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,21 +39,20 @@ export default function AddProduct() {
         return [...new Set(allProducts.map(p => p.category))].sort();
     }, [allProducts, productsLoading]);
 
+    // Derived collections
+    const collections = useMemo(() => {
+        if (productsLoading) return []; // Changed 'loading' to 'productsLoading' to match context
+        return ['All', ...Array.from(new Set(allProducts.map(p => p.category)))].sort();
+    }, [allProducts, productsLoading]); // Changed 'loading' to 'productsLoading' to match context
     // Combined collections (custom first, then existing)
     const allCollections = useMemo(() => {
         return [...new Set([...customCollections, ...existingCollections])];
     }, [existingCollections, customCollections]);
 
-    useEffect(() => {
-        const isAuth = localStorage.getItem('cmj_admin_auth');
-        if (!isAuth) {
-            router.push('/admin');
-        }
-    }, [router]);
 
-    const handleLogout = () => {
-        localStorage.removeItem('cmj_admin_auth');
-        localStorage.removeItem('cmj_admin_user');
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
         router.push('/admin');
     };
 
@@ -61,19 +60,30 @@ export default function AddProduct() {
         e.preventDefault();
         setLoading(true);
 
-        // Use uploaded image or URL
-        const finalImage = imageMode === 'upload' ? uploadedImage : formData.image;
-
-        if (!finalImage) {
-            alert('Please provide an image');
-            setLoading(false);
-            return;
-        }
-
         try {
-            // Mock submission
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            alert('Add Product is disabled (Static Mode).');
+            let finalImageUrl = formData.image;
+
+            if (imageMode === 'upload' && selectedFile) {
+                finalImageUrl = await uploadImage(selectedFile);
+            }
+
+            if (!finalImageUrl) {
+                alert('Please provide an image');
+                setLoading(false);
+                return;
+            }
+
+            await addProduct({
+                name: formData.name,
+                category: formData.collection,
+                purity: formData.purity,
+                image: finalImageUrl,
+                description: formData.description,
+                price: 0, // Default price if not in form
+                weight: '', // Default weight if not in form
+            });
+
+            alert('Product added successfully!');
             router.push('/admin/products');
         } catch (err) {
             console.error(err);

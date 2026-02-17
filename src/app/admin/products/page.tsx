@@ -7,9 +7,11 @@ import {
     Plus, Search, Edit2, Trash2, ChevronRight, ChevronLeft, FolderOpen, Package
 } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
-// import { deleteProductFn } from '@/lib/firestoreUtils';
+
 import { Product } from '@/data/products';
 import AdminSidebar from '@/components/admin/AdminSidebar';
+
+import { deleteProduct } from '@/lib/supabaseUtils';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,22 +27,16 @@ export default function ProductsList() {
         return ['All', ...Array.from(new Set(allProducts.map(p => p.category)))].sort();
     }, [allProducts, loading]);
 
-    useEffect(() => {
-        const isAuth = localStorage.getItem('cmj_admin_auth');
-        if (!isAuth) {
-            router.push('/admin');
-        }
-    }, [router]);
-
-    const handleLogout = () => {
-        localStorage.removeItem('cmj_admin_auth');
-        localStorage.removeItem('cmj_admin_user');
-        router.push('/admin');
-    };
-
     const handleDeleteProduct = async (id: number) => {
         if (!confirm('Are you sure you want to delete this product?')) return;
-        alert('Product deletion is disabled (Static Mode).');
+        try {
+            await deleteProduct(id);
+            alert('Product deleted successfully');
+            window.location.reload(); // Quick refresh
+        } catch (error) {
+            console.error('Failed to delete product:', error);
+            alert('Failed to delete product');
+        }
     };
 
     const handleDeleteCollection = async (collection: string, e: React.MouseEvent) => {

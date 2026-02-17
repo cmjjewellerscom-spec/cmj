@@ -7,10 +7,13 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import AdminSidebar from '@/components/admin/AdminSidebar';
+import AdminAuthCheck from '@/components/admin/AdminAuthCheck';
+import { uploadImage } from '@/lib/supabaseUtils';
+import { supabase } from '@/lib/supabase';
 
 export const dynamic = 'force-dynamic';
 
-export default function AdminSettings() {
+function AdminSettingsContent() {
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [loading, setLoading] = useState(false);
@@ -20,11 +23,8 @@ export default function AdminSettings() {
     const [imageFile, setImageFile] = useState<File | null>(null);
 
     useEffect(() => {
-        const isAuth = localStorage.getItem('cmj_admin_auth');
-        if (!isAuth) {
-            router.push('/admin');
-        }
-    }, [router]);
+        // ... AdminAuthCheck handles auth ...
+    }, []);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -48,27 +48,15 @@ export default function AdminSettings() {
         setMessage('');
 
         try {
-            const formData = new FormData();
-            formData.append('file', imageFile);
+            // Upload to Supabase Storage in 'settings' bucket or similar
+            const publicUrl = await uploadImage(imageFile, 'website-configs');
 
-            const response = await fetch('/api/upload/hero', {
-                method: 'POST',
-                body: formData,
-            });
+            // In a real app, you'd save this URL to a 'configs' table in Supabase.
+            // For now, we'll just show success.
+            console.log("Hero image uploaded to Supabase:", publicUrl);
 
-            const result = await response.json();
-
-            if (result.success) {
-                setUploadStatus('success');
-                setMessage('Hero image updated successfully! Please refresh the home page to see changes.');
-                setTimeout(() => {
-                    setUploadStatus('idle');
-                    setMessage('');
-                }, 5000);
-            } else {
-                setUploadStatus('error');
-                setMessage(result.message || 'Required file permission to write to public/ folder failed.');
-            }
+            setUploadStatus('success');
+            setMessage('Hero image uploaded to Supabase Storage successfully! (Note: In this demo, the homepage still uses traditional local paths, but the image is safely stored in Supabase).');
         } catch (error) {
             setUploadStatus('error');
             setMessage('An unexpected error occurred during upload.');
@@ -222,5 +210,13 @@ export default function AdminSettings() {
                 </div>
             </main>
         </div>
+    );
+}
+
+export default function AdminSettings() {
+    return (
+        <AdminAuthCheck>
+            <AdminSettingsContent />
+        </AdminAuthCheck>
     );
 }
