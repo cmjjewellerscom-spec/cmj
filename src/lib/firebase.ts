@@ -4,34 +4,28 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyD-rh4UAAQ4ThVMcwPSNibfdn6cWziCeBU",
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "cmj-jewellers.firebaseapp.com",
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "cmj-jewellers",
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "cmj-jewellers.firebasestorage.app",
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "846535450718",
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:846535450718:web:8e9a16fadd8d73edcb54cf"
 };
 
 // Initialize Firebase (Singleton pattern)
-// Check if API key exists to prevent build errors in CI/CD if env vars are missing
 let app;
 let auth;
 let db;
 let storage;
 
-if (typeof window !== 'undefined' || process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-    try {
-        app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-        auth = getAuth(app);
-        db = getFirestore(app);
-        storage = getStorage(app);
-    } catch (error) {
-        console.error("Firebase initialization error:", error);
-    }
-} else {
-    // Return mock/null for build time to prevent crashes
-    // The app won't function without env vars, but it will build.
-    // Explicitly casting to avoid type errors in other files, but they will fail at runtime if used.
+try {
+    app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+    auth = getAuth(app);
+    db = getFirestore(app);
+    storage = getStorage(app);
+} catch (error) {
+    console.error("Firebase initialization error:", error);
+    // Mock for build safety if something critically fails, though hardcoded keys should prevent this
     app = {} as any;
     auth = {} as any;
     db = {} as any;
