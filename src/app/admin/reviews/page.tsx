@@ -1,57 +1,57 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash2, ExternalLink, Star, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { getAllReviews, addReview, deleteReview, Review } from '@/data/reviewStore';
+import { addReviewFn, deleteReviewFn, Review } from '@/lib/firestoreUtils';
+import { useReviews } from '@/hooks/useReviews';
 import AdminSidebar from '@/components/admin/AdminSidebar';
+import AdminAuthCheck from '@/components/admin/AdminAuthCheck';
 
-export default function AdminReviews() {
-    const router = useRouter();
-    const [reviews, setReviews] = useState<Review[]>([]);
+function AdminReviewsContent() {
+    const { reviews, loading: reviewsLoading } = useReviews(); // Real-time reviews
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
-    useEffect(() => {
-        const isAuth = localStorage.getItem('cmj_admin_auth');
-        if (!isAuth) {
-            router.push('/admin');
-            return;
-        }
-
-        setReviews(getAllReviews());
-    }, [router]);
-
-    const handleAddReview = (e: React.FormEvent) => {
+    const handleAddReview = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!title.trim() || !description.trim()) {
             alert('Please fill in title and description');
             return;
         }
 
-        setLoading(true);
+        setSubmitting(true);
 
-        addReview({
-            title: title.trim(),
-            description: description.trim(),
-            link: link.trim(),
-            name: 'Admin',
-            rating: 5,
-        });
+        try {
+            await addReviewFn({
+                title: title.trim(),
+                description: description.trim(),
+                link: link.trim(),
+                name: 'Admin',
+                rating: 5,
+            });
 
-        setReviews(getAllReviews());
-        setTitle('');
-        setDescription('');
-        setLink('');
-        setLoading(false);
+            setTitle('');
+            setDescription('');
+            setLink('');
+        } catch (error) {
+            console.error("Error adding review:", error);
+            alert("Failed to add review");
+        } finally {
+            setSubmitting(false);
+        }
     };
 
-    const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this review?')) {
-            deleteReview(id);
-            setReviews(getAllReviews());
+    const handleDelete = async (id: string, name: string) => {
+        if (confirm(`Are you sure you want to delete the review by "${name}"?`)) {
+            try {
+                await deleteReviewFn(id);
+            } catch (error) {
+                console.error("Error deleting review:", error);
+                alert("Failed to delete review");
+            }
         }
     };
 
@@ -128,10 +128,10 @@ export default function AdminReviews() {
 
                                 <button
                                     type="submit"
-                                    disabled={loading}
+                                    disabled={submitting}
                                     className="w-full bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50"
                                 >
-                                    {loading ? 'Adding...' : 'Add Review'}
+                                    {submitting ? 'Adding...' : 'Add Review'}
                                 </button>
                             </form>
 
@@ -166,7 +166,9 @@ export default function AdminReviews() {
                                 Existing Reviews ({reviews.length})
                             </h3>
 
-                            {reviews.length === 0 ? (
+                            {reviewsLoading ? (
+                                <div className="text-center py-12">Loading reviews...</div>
+                            ) : reviews.length === 0 ? (
                                 <div className="text-center py-12">
                                     <Star className="w-12 h-12 text-gray-300 mx-auto mb-3" />
                                     <p className="text-gray-500">No reviews yet</p>
@@ -199,7 +201,7 @@ export default function AdminReviews() {
                                                     </p>
                                                 </div>
                                                 <button
-                                                    onClick={() => handleDelete(review.id)}
+                                                    onClick={() => handleDelete(review.id, review.title)}
                                                     className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
                                                 >
                                                     <Trash2 className="w-4 h-4" />
@@ -214,5 +216,13 @@ export default function AdminReviews() {
                 </div>
             </main>
         </div>
+    );
+}
+
+export default function AdminReviews() {
+    return (
+        <AdminAuthCheck>
+            <AdminReviewsContent />
+        </AdminAuthCheck>
     );
 }

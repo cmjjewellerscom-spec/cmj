@@ -13,10 +13,30 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase (Singleton pattern)
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+// Check if API key exists to prevent build errors in CI/CD if env vars are missing
+let app;
+let auth;
+let db;
+let storage;
 
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+if (typeof window !== 'undefined' || process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+    try {
+        app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+        auth = getAuth(app);
+        db = getFirestore(app);
+        storage = getStorage(app);
+    } catch (error) {
+        console.error("Firebase initialization error:", error);
+    }
+} else {
+    // Return mock/null for build time to prevent crashes
+    // The app won't function without env vars, but it will build.
+    // Explicitly casting to avoid type errors in other files, but they will fail at runtime if used.
+    app = {} as any;
+    auth = {} as any;
+    db = {} as any;
+    storage = {} as any;
+}
 
+export { auth, db, storage };
 export default app;

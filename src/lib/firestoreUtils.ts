@@ -1,6 +1,19 @@
 import { db } from '@/lib/firebase';
-import { collection, doc, getDocs, query, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, setDoc, updateDoc, deleteDoc, query } from 'firebase/firestore';
 import { Product } from '@/data/products';
+
+export interface Review {
+    id: string; // Firestore uses string IDs
+    title: string;
+    description: string;
+    link?: string;
+    name: string;
+    rating: number;
+    createdAt: string;
+    approved?: boolean;
+}
+
+// --- Product Functions ---
 
 export async function addProduct(product: Omit<Product, 'id'>) {
     // Generate a numeric ID to match existing logic/URLs
@@ -29,5 +42,27 @@ export async function updateProductFn(id: number, updates: Partial<Product>) {
 
 export async function deleteProductFn(id: number) {
     const ref = doc(db, 'products', id.toString());
+    await deleteDoc(ref);
+}
+
+// --- Review Functions ---
+
+export async function addReviewFn(review: Omit<Review, 'id' | 'createdAt'>) {
+    // Create a new doc reference with auto-generated ID
+    const newReviewRef = doc(collection(db, 'reviews'));
+
+    const newReview: Review = {
+        ...review,
+        id: newReviewRef.id,
+        createdAt: new Date().toISOString(),
+        approved: true // Auto-approve for now
+    };
+
+    await setDoc(newReviewRef, newReview);
+    return newReview;
+}
+
+export async function deleteReviewFn(id: string) {
+    const ref = doc(db, 'reviews', id);
     await deleteDoc(ref);
 }

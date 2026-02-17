@@ -2,16 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Star, ChevronLeft, ChevronRight, MessageSquare } from 'lucide-react';
-import { getAllReviews, Review } from '@/data/reviewStore';
+import { useReviews } from '@/hooks/useReviews';
+import { Review } from '@/lib/firestoreUtils';
 
 export default function ReviewsScroller() {
-    const [reviews, setReviews] = useState<Review[]>([]);
+    const { reviews, loading } = useReviews();
     const [current, setCurrent] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
-
-    useEffect(() => {
-        setReviews(getAllReviews());
-    }, []);
 
     // Auto-scroll every 4 seconds
     useEffect(() => {
@@ -39,6 +36,14 @@ export default function ReviewsScroller() {
             setIsAnimating(false);
         }, 300);
     };
+
+    if (loading) {
+        return (
+            <section className="px-4 py-12 max-w-4xl mx-auto text-center">
+                <div className="w-8 h-8 border-2 border-[#D4AF37]/30 border-t-[#D4AF37] rounded-full animate-spin mx-auto"></div>
+            </section>
+        );
+    }
 
     if (reviews.length === 0) {
         return (

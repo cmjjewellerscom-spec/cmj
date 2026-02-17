@@ -1,15 +1,16 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 import { Star, Send, User, MessageSquare, X } from 'lucide-react';
-import { getAllReviews, addReview, Review } from '@/data/reviewStore';
+import { useReviews } from '@/hooks/useReviews';
+import { addReviewFn } from '@/lib/firestoreUtils';
 
 export default function CustomerReviews() {
-    const [reviews, setReviews] = useState<Review[]>([]);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const { reviews, loading } = useReviews();
     const [showForm, setShowForm] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [submitLoading, setSubmitLoading] = useState(false);
 
     // Form state
     const [name, setName] = useState('');
@@ -18,36 +19,37 @@ export default function CustomerReviews() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
-    useEffect(() => {
-        setReviews(getAllReviews());
-        setIsLoaded(true);
-    }, []);
-
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!name.trim() || !title.trim() || !description.trim() || rating === 0) return;
 
-        addReview({
-            title: title.trim(),
-            description: description.trim(),
-            name: name.trim(),
-            rating,
-            link: '',
-        });
+        setSubmitLoading(true);
 
-        // Refresh reviews
-        setReviews(getAllReviews());
+        try {
+            await addReviewFn({
+                title: title.trim(),
+                description: description.trim(),
+                name: name.trim(),
+                rating,
+                link: '',
+            });
 
-        // Reset form
-        setName('');
-        setRating(0);
-        setTitle('');
-        setDescription('');
-        setShowForm(false);
-        setSubmitted(true);
+            // Reset form
+            setName('');
+            setRating(0);
+            setTitle('');
+            setDescription('');
+            setShowForm(false);
+            setSubmitted(true);
 
-        // Hide success message after 3s
-        setTimeout(() => setSubmitted(false), 3000);
+            // Hide success message after 3s
+            setTimeout(() => setSubmitted(false), 3000);
+        } catch (error) {
+            console.error("Error submitting review:", error);
+            alert("Failed to submit review. Please try again.");
+        } finally {
+            setSubmitLoading(false);
+        }
     };
 
     const avgRating = reviews.length > 0
@@ -181,18 +183,24 @@ export default function CustomerReviews() {
                                 {/* Submit */}
                                 <button
                                     type="submit"
-                                    disabled={!name.trim() || !title.trim() || !description.trim() || rating === 0}
+                                    disabled={!name.trim() || !title.trim() || !description.trim() || rating === 0 || submitLoading}
                                     className="w-full py-3.5 bg-[#D4AF37] hover:bg-[#B8960F] disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-bold text-base transition-all flex items-center justify-center gap-2 shadow-md"
                                 >
-                                    <Send className="w-4 h-4" />
-                                    Submit Review
+                                    {submitLoading ? (
+                                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                    ) : (
+                                        <>
+                                            <Send className="w-4 h-4" />
+                                            Submit Review
+                                        </>
+                                    )}
                                 </button>
                             </form>
                         </div>
                     )}
 
                     {/* Reviews List */}
-                    {!isLoaded ? (
+                    {loading ? (
                         <div className="text-center py-12">
                             <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin mx-auto"></div>
                         </div>
