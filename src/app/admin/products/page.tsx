@@ -11,7 +11,9 @@ import { useProducts } from '@/hooks/useProducts';
 import { Product } from '@/data/products';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 
-export default function AdminProducts() {
+export const dynamic = 'force-dynamic';
+
+export default function ProductsList() {
     const router = useRouter();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCollection, setSelectedCollection] = useState<string | null>(null);

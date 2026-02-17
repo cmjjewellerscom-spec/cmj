@@ -11,6 +11,8 @@ import { useProducts } from '@/hooks/useProducts';
 // import { uploadImage } from '@/lib/storageUtils';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 
+export const dynamic = 'force-dynamic';
+
 export default function AddProduct() {
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);

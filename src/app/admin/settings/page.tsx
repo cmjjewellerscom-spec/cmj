@@ -8,6 +8,8 @@ import {
 import Link from 'next/link';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminSettings() {
     const router = useRouter();
     const fileInputRef = useRef<HTMLInputElement>(null);

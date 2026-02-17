@@ -208,6 +208,8 @@ function AdminReviewsContent() {
     );
 }
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminReviews() {
     return (
         <AdminAuthCheck>
