@@ -41,7 +41,7 @@ export default function ProductsList() {
 
     const handleDeleteCollection = async (collection: string, e: React.MouseEvent) => {
         e.stopPropagation();
-        // Since we are using Firestore, deleting a "collection" means deleting all products in it.
+        // Since we are using Supabase, deleting a "collection" means deleting all products in it.
         // This is dangerous and not directly supported by a single function in our utils yet.
         // We will disable this for now or implement batch delete.
         alert("Deleting collections is not supported in this version.");
