@@ -1,16 +1,31 @@
 import { createClient } from '@supabase/supabase-js';
 
-const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const envKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-// Check if URL is valid (basic check)
-const isValidUrl = (url: string | undefined) => url && url.startsWith('http') && !url.includes('...');
+// Helper to check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined';
 
-const supabaseUrl = isValidUrl(envUrl) ? envUrl! : 'https://placeholder.supabase.co';
-const supabaseAnonKey = (envKey && !envKey.includes('...')) ? envKey : 'placeholder-key';
+// Helper to validate environment variables
+const isValidEnv = (url: string, key: string) => {
+    return url && key && url.startsWith('http') && !url.includes('...') && !key.includes('...');
+};
 
-if (!isValidUrl(envUrl) || !envKey || envKey.includes('...')) {
-    console.warn('Supabase URL or Anon Key is missing or invalid. Using placeholder values for build.');
+// Start with a dummy client if env vars are missing (prevents build crash)
+let client = createClient('https://placeholder.supabase.co', 'placeholder-key');
+
+if (isValidEnv(supabaseUrl, supabaseAnonKey)) {
+    client = createClient(supabaseUrl, supabaseAnonKey, {
+        auth: {
+            persistSession: isBrowser, // Only persist session in browser
+            autoRefreshToken: isBrowser,
+            detectSessionInUrl: isBrowser
+        }
+    });
+} else {
+    if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_SUPABASE_URL) {
+        console.warn('Supabase env vars missing in production build!');
+    }
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = client;
