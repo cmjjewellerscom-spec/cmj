@@ -38,7 +38,7 @@ import { getSiteConfig } from "@/lib/supabaseUtils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteTitle = await getSiteConfig('site_title');
-  const title = siteTitle || "CMJ Gold & Diamond Jewellers | Tradition Crafted in Gold";
+  const title = siteTitle || "CMJ Gold & Diamond Jewellers";
 
   return {
     title: title,
