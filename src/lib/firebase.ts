@@ -21,6 +21,7 @@ let storage;
 
 try {
     // Ensure we are in a browser environment or have config
+    // This prevents "invalid-api-key" crashes during static build if vars are missing
     if (typeof window !== 'undefined' || firebaseConfig.apiKey) {
         app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
         auth = getAuth(app);
