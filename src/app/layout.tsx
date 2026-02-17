@@ -34,17 +34,24 @@ const archivo = Archivo_Black({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "CMJ Gold & Diamond Jewellers | Tradition Crafted in Gold",
-  description: "Traditional Indian Gold & Diamond Jewellery - Temple Jewellery, Bangles, Chains, Necklaces & More",
-  icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
-  },
-  verification: {
-    google: "mpmwPxWq-gP9Em4slJZ9XXFaFfXptdcb4MjvykNhSbo",
-  },
-};
+import { getSiteConfig } from "@/lib/supabaseUtils";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const siteTitle = await getSiteConfig('site_title');
+  const title = siteTitle || "CMJ Gold & Diamond Jewellers | Tradition Crafted in Gold";
+
+  return {
+    title: title,
+    description: "Traditional Indian Gold & Diamond Jewellery - Temple Jewellery, Bangles, Chains, Necklaces & More",
+    icons: {
+      icon: "/logo.png",
+      apple: "/logo.png",
+    },
+    verification: {
+      google: "mpmwPxWq-gP9Em4slJZ9XXFaFfXptdcb4MjvykNhSbo",
+    },
+  };
+}
 
 import { RatesProvider } from "@/context/RatesContext";
 

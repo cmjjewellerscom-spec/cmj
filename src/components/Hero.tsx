@@ -3,7 +3,19 @@ import React from 'react';
 import { Edit, ShoppingBag, Percent, Coins } from 'lucide-react';
 import Link from 'next/link';
 
+
+
 export default function Hero() {
+    const [bannerUrl, setBannerUrl] = React.useState("/hero-bg.jpg");
+
+    React.useEffect(() => {
+        const fetchBanner = async () => {
+            const { getSiteConfig } = await import('@/lib/supabaseUtils');
+            const url = await getSiteConfig('home_banner');
+            if (url) setBannerUrl(url);
+        };
+        fetchBanner();
+    }, []);
 
     return (
         <section className="relative overflow-hidden">
@@ -14,7 +26,7 @@ export default function Hero() {
                 {/* Background Image */}
                 <div className="absolute inset-0">
                     <img
-                        src="/hero-bg.jpg"
+                        src={bannerUrl}
                         alt="Traditional Gold Jewelry"
                         className="w-full h-full object-cover"
                         onError={(e) => {

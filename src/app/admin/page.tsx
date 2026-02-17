@@ -21,11 +21,8 @@ export default function AdminLogin() {
         setLoading(true);
 
         try {
-            // Allow login with just username (e.g. "manasag" -> "manasag@cmj.admin")
-            const emailToUse = email.includes('@') ? email : `${email}@cmj.admin`;
-
             const { error: signInError } = await supabase.auth.signInWithPassword({
-                email: emailToUse,
+                email,
                 password,
             });
 
@@ -78,11 +75,11 @@ export default function AdminLogin() {
                             <div className="relative">
                                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
                                 <input
-                                    type="text"
+                                    type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="w-full bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-xl pl-12 pr-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                                    placeholder="Enter username or email"
+                                    placeholder="Enter email"
                                     required
                                 />
                             </div>
