@@ -44,9 +44,9 @@ export default function CustomerReviews() {
 
             // Hide success message after 3s
             setTimeout(() => setSubmitted(false), 3000);
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error submitting review:", error);
-            alert("Failed to submit review. Please try again.");
+            alert(`Failed to submit review: ${error.message || JSON.stringify(error)}`);
         } finally {
             setSubmitLoading(false);
         }

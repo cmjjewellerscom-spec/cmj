@@ -1,14 +1,15 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// DEBUG: Hardcoded for verification (Process.env isn't reliable in Vercel sometimes if not redeployed)
+const supabaseUrl = 'https://nbpljyhvpsbxwfxkmuvj.supabase.co';
+const supabaseAnonKey = 'sb_publishable_tRFeJxNClUycTgMC8h-eCg_DlCV05sd'; // User provided this
 
 // Helper to check if we're in a browser environment
 const isBrowser = typeof window !== 'undefined';
 
 // Helper to validate environment variables
 const isValidEnv = (url: string, key: string) => {
-    return url && key && url.startsWith('http') && !url.includes('...') && !key.includes('...');
+    return url && key && url.startsWith('http');
 };
 
 // Start with a dummy client if env vars are missing (prevents build crash)
