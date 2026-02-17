@@ -12,7 +12,8 @@ export function useReviews(onlyApproved: boolean = true) {
                 const data = await getReviews(onlyApproved);
                 setReviews(data || []);
             } catch (error) {
-                console.error('Error fetching reviews:', error);
+                console.error('Error fetching reviews (DB might be empty):', error);
+                setReviews([]); // Graceful fallback
             } finally {
                 setLoading(false);
             }

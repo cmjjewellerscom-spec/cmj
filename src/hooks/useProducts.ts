@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { getProducts } from '@/lib/supabaseUtils';
-import { Product } from '@/data/products';
+import { Product, products as staticProducts } from '@/data/products';
 
 export function useProducts() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -23,10 +23,16 @@ export function useProducts() {
 
             try {
                 const data = await getProducts();
-                setProducts(data || []);
+                if (data && data.length > 0) {
+                    setProducts(data);
+                } else {
+                    // Fallback to static products if DB is empty or connection fails silently
+                    console.warn('Supabase returned no products, using static fallback.');
+                    setProducts(staticProducts);
+                }
             } catch (error) {
-                console.error('Error fetching products:', error);
-                setProducts([]); // Fallback to empty on error
+                console.error('Error fetching products, using static fallback:', error);
+                setProducts(staticProducts);
             } finally {
                 setLoading(false);
             }
