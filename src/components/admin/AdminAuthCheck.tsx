@@ -14,9 +14,16 @@ export default function AdminAuthCheck({ children }: { children: React.ReactNode
             const { data: { session } } = await supabase.auth.getSession();
 
             if (!session) {
-                router.push('/admin');
+                // Only redirect if NOT already on the login page
+                if (pathname !== '/admin') {
+                    router.push('/admin');
+                }
             } else {
                 setAuthorized(true);
+                // If on login page and already auth'd, go to dashboard
+                if (pathname === '/admin') {
+                    router.push('/admin/dashboard');
+                }
             }
             setLoading(false);
         };
@@ -25,15 +32,20 @@ export default function AdminAuthCheck({ children }: { children: React.ReactNode
 
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: any) => {
             if (!session) {
-                router.push('/admin');
+                if (pathname !== '/admin') {
+                    router.push('/admin');
+                }
                 setAuthorized(false);
             } else {
                 setAuthorized(true);
+                if (pathname === '/admin') {
+                    router.push('/admin/dashboard');
+                }
             }
         });
 
         return () => subscription.unsubscribe();
-    }, [router]);
+    }, [router, pathname]);
 
     if (loading) {
         return (
@@ -41,6 +53,11 @@ export default function AdminAuthCheck({ children }: { children: React.ReactNode
                 <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
             </div>
         );
+    }
+
+    // If on login page, show content (Login Form) even if not authorized yet
+    if (pathname === '/admin' && !loading) {
+        return <>{children}</>;
     }
 
     return authorized ? <>{children}</> : null;
