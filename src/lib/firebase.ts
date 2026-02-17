@@ -12,22 +12,15 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
 };
 
-let app;
-let auth;
-let db;
-let storage;
+// Initialize Firebase only on client side
+const app = typeof window !== "undefined"
+    ? (!getApps().length ? initializeApp(firebaseConfig) : getApp())
+    : null;
 
-if (typeof window !== "undefined") {
-    app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-    auth = getAuth(app);
-    db = getFirestore(app);
-    storage = getStorage(app);
-} else {
-    // Server-side: set to null or mock to prevent build errors if imported
-    auth = null;
-    db = null;
-    storage = null;
-}
+// Export services safely - they will be null on server/build
+export const auth = typeof window !== "undefined" && app ? getAuth(app) : null;
+export const db = typeof window !== "undefined" && app ? getFirestore(app) : null;
+export const storage = typeof window !== "undefined" && app ? getStorage(app) : null;
 
-export { auth, db, storage };
+// Default export for app if needed (though named exports are preferred)
 export default app;
