@@ -11,7 +11,7 @@ import { addProduct, uploadImage } from '@/lib/supabaseUtils';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import { supabase } from '@/lib/supabase';
 
-export const dynamic = 'force-dynamic';
+
 
 export default function AddProduct() {
     const router = useRouter();

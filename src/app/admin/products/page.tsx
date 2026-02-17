@@ -13,7 +13,7 @@ import AdminSidebar from '@/components/admin/AdminSidebar';
 
 import { deleteProduct } from '@/lib/supabaseUtils';
 
-export const dynamic = 'force-dynamic';
+
 
 export default function ProductsList() {
     const router = useRouter();
@@ -197,7 +197,7 @@ export default function ProductsList() {
                                         {/* Action Buttons Overlay */}
                                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                                             <Link
-                                                href={`/admin/products/edit/${product.id}`}
+                                                href={`/admin/products/edit?id=${product.id}`}
                                                 className="p-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
                                             >
                                                 <Edit2 className="w-5 h-5" />

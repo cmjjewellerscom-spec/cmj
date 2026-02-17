@@ -5,7 +5,7 @@ import { Lock, User, Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 
-export const dynamic = 'force-dynamic';
+
 
 export default function AdminLogin() {
     const router = useRouter();

@@ -12,7 +12,7 @@ import ManualRateControl from '@/components/ManualRateControl';
 import AdminAuthCheck from '@/components/admin/AdminAuthCheck';
 import { supabase } from '@/lib/supabase';
 
-export const dynamic = 'force-dynamic';
+
 
 function DashboardContent() {
     const router = useRouter();
@@ -256,7 +256,7 @@ function DashboardContent() {
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center justify-end gap-2">
                                                     <Link
-                                                        href={`/admin/products/edit/${product.id}`}
+                                                        href={`/admin/products/edit?id=${product.id}`}
                                                         className="p-2 rounded-lg text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition-colors"
                                                     >
                                                         <Edit className="w-4 h-4" />

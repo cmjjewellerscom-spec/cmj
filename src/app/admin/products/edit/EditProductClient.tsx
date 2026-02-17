@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState, useMemo, useRef } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -13,8 +13,8 @@ import { supabase } from '@/lib/supabase';
 
 export default function EditProductClient() {
     const router = useRouter();
-    const params = useParams();
-    const productId = params.id as string;
+    const searchParams = useSearchParams();
+    const productId = searchParams.get('id');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const [loading, setLoading] = useState(false);
@@ -33,6 +33,8 @@ export default function EditProductClient() {
         image: '',
         description: ''
     });
+
+    const { products: allProducts, loading: productsLoading } = useProducts();
 
     // Get unique collections from existing products
     const existingCollections = useMemo(() => {
@@ -53,12 +55,11 @@ export default function EditProductClient() {
         return [...customCollections, ...existingCollections.filter(c => !customCollections.includes(c))];
     }, [existingCollections, customCollections]);
 
-    const { products: allProducts, loading: productsLoading } = useProducts();
 
     useEffect(() => {
         // ... AdminAuthCheck handles auth ...
         // Find product and populate form
-        if (productsLoading) return;
+        if (productsLoading || !productId) return;
 
         const product = allProducts.find(p => p.id.toString() === productId);
         if (product) {
@@ -82,6 +83,12 @@ export default function EditProductClient() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
+
+        if (!productId) {
+            alert('Product ID is missing');
+            setLoading(false);
+            return;
+        }
 
         try {
             let finalImageUrl = formData.image;
@@ -151,6 +158,10 @@ export default function EditProductClient() {
             fileInputRef.current.value = '';
         }
     };
+
+    if (!productId) {
+        return <div className="p-10 text-center">Invalid Product ID</div>;
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50 flex">

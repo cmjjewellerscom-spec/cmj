@@ -11,7 +11,7 @@ import AdminAuthCheck from '@/components/admin/AdminAuthCheck';
 import { uploadImage } from '@/lib/supabaseUtils';
 import { supabase } from '@/lib/supabase';
 
-export const dynamic = 'force-dynamic';
+
 
 function AdminSettingsContent() {
     const router = useRouter();
