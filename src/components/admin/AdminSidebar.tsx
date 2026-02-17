@@ -11,10 +11,17 @@ export default function AdminSidebar() {
     const router = useRouter();
     const pathname = usePathname();
 
-    const handleLogout = () => {
-        localStorage.removeItem('cmj_admin_auth');
-        localStorage.removeItem('cmj_admin_user');
-        router.push('/admin');
+    const handleLogout = async () => {
+        try {
+            const { signOut } = await import('firebase/auth');
+            const { auth } = await import('@/lib/firebase');
+            await signOut(auth);
+            localStorage.removeItem('cmj_admin_auth');
+            localStorage.removeItem('cmj_admin_user');
+            router.push('/admin');
+        } catch (error) {
+            console.error("Logout failed", error);
+        }
     };
 
     const isActive = (path: string) => pathname === path;

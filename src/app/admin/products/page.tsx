@@ -6,26 +6,28 @@ import Image from 'next/image';
 import {
     Plus, Search, Edit2, Trash2, ChevronRight, ChevronLeft, FolderOpen, Package
 } from 'lucide-react';
-import { getAllProducts, deleteProduct, getAllCollections, getProductsByCollection, deleteCollection, Product } from '@/data/productStore';
+import { useProducts } from '@/hooks/useProducts';
+import { deleteProductFn } from '@/lib/firestoreUtils';
+import { Product } from '@/data/products';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 
 export default function AdminProducts() {
     const router = useRouter();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCollection, setSelectedCollection] = useState<string | null>(null);
-    const [allProducts, setAllProducts] = useState<Product[]>([]);
-    const [collections, setCollections] = useState<string[]>([]);
+    const { products: allProducts, loading } = useProducts();
+
+    // Derived collections
+    const collections = useMemo(() => {
+        if (loading) return [];
+        return ['All', ...Array.from(new Set(allProducts.map(p => p.category)))].sort();
+    }, [allProducts, loading]);
 
     useEffect(() => {
         const isAuth = localStorage.getItem('cmj_admin_auth');
         if (!isAuth) {
             router.push('/admin');
-            return;
         }
-
-        // Load data
-        setAllProducts(getAllProducts());
-        setCollections(getAllCollections());
     }, [router]);
 
     const handleLogout = () => {
@@ -34,21 +36,23 @@ export default function AdminProducts() {
         router.push('/admin');
     };
 
-    const handleDelete = (id: number) => {
+    const handleDelete = async (id: number) => {
         if (confirm('Are you sure you want to delete this product?')) {
-            deleteProduct(id);
-            setAllProducts(getAllProducts());
+            try {
+                await deleteProductFn(id);
+            } catch (error) {
+                console.error("Failed to delete", error);
+                alert("Failed to delete product");
+            }
         }
     };
 
-    const handleDeleteCollection = (collection: string, e: React.MouseEvent) => {
+    const handleDeleteCollection = async (collection: string, e: React.MouseEvent) => {
         e.stopPropagation();
-        const count = allProducts.filter(p => p.category === collection).length;
-        if (confirm(`Are you sure you want to delete the "${collection}" collection?\n\nNote: This will only delete custom products (${count} products total).`)) {
-            deleteCollection(collection);
-            setAllProducts(getAllProducts());
-            setCollections(getAllCollections());
-        }
+        // Since we are using Firestore, deleting a "collection" means deleting all products in it.
+        // This is dangerous and not directly supported by a single function in our utils yet.
+        // We will disable this for now or implement batch delete.
+        alert("Deleting collections is not supported in this version.");
     };
 
     // Get products for selected collection

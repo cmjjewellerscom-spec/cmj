@@ -1,19 +1,21 @@
 "use client";
 import React, { useMemo, useState, useEffect } from 'react';
+import { Product } from '@/data/products';
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
-import { getAllProducts, Product } from "@/data/productStore";
+import { useProducts } from '@/hooks/useProducts';
 import Link from 'next/link';
 
 export default function CategoriesPage() {
-    const [allProducts, setAllProducts] = useState<Product[]>([]);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const { products: allProducts, loading } = useProducts();
+    // const [allProducts, setAllProducts] = useState<Product[]>([]);
+    // const [isLoaded, setIsLoaded] = useState(false);
 
     // Load products from store (includes localStorage)
-    useEffect(() => {
-        setAllProducts(getAllProducts());
-        setIsLoaded(true);
-    }, []);
+    // useEffect(() => {
+    //     setAllProducts(getAllProducts());
+    //     setIsLoaded(true);
+    // }, []);
 
     // Memoize grouped products to prevent re-computation
     const { groupedByCategory, categories } = useMemo(() => {
@@ -49,7 +51,7 @@ export default function CategoriesPage() {
                             return (
                                 <Link
                                     key={category}
-                                    href={`/collection/${encodeURIComponent(category)}`}
+                                    href={`/collection?name=${encodeURIComponent(category)}`}
                                     className="group block relative aspect-square overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all"
                                 >
                                     {/* Image */}

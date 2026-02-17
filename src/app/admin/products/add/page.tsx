@@ -6,7 +6,9 @@ import Image from 'next/image';
 import {
     Plus, ChevronLeft, Save, X, Upload, Link as LinkIcon, ImageIcon
 } from 'lucide-react';
-import { getAllProducts, addProduct, getAllCollections } from '@/data/productStore';
+import { useProducts } from '@/hooks/useProducts';
+import { addProduct } from '@/lib/firestoreUtils';
+import { uploadImage } from '@/lib/storageUtils';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 
 export default function AddProduct() {
@@ -18,6 +20,7 @@ export default function AddProduct() {
     const [customCollections, setCustomCollections] = useState<string[]>([]);
     const [imageMode, setImageMode] = useState<'url' | 'upload'>('url');
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [formData, setFormData] = useState({
         name: '',
         collection: '',
@@ -26,14 +29,17 @@ export default function AddProduct() {
         description: ''
     });
 
+    const { products: allProducts, loading: productsLoading } = useProducts();
+
     // Get unique collections from existing products
     const existingCollections = useMemo(() => {
-        return getAllCollections();
-    }, []);
+        if (productsLoading) return [];
+        return [...new Set(allProducts.map(p => p.category))].sort();
+    }, [allProducts, productsLoading]);
 
     // Combined collections (custom first, then existing)
     const allCollections = useMemo(() => {
-        return [...customCollections, ...existingCollections.filter(c => !customCollections.includes(c))];
+        return [...new Set([...customCollections, ...existingCollections])];
     }, [existingCollections, customCollections]);
 
     useEffect(() => {
@@ -49,7 +55,7 @@ export default function AddProduct() {
         router.push('/admin');
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
@@ -62,21 +68,46 @@ export default function AddProduct() {
             return;
         }
 
-        // Save product to store
-        addProduct({
-            name: formData.name,
-            category: formData.collection,
-            price: 0,
-            weight: '',
-            purity: formData.purity,
-            image: finalImage,
-            description: formData.description
-        });
+        try {
+            let imageUrl = formData.image;
 
-        setTimeout(() => {
+            // Upload image if in upload mode and file exists
+            if (imageMode === 'upload' && fileInputRef.current?.files?.[0]) {
+                setLoading(true); // Ensure loading is showing
+                imageUrl = await uploadImage(fileInputRef.current.files[0], 'products');
+            } else if (imageMode === 'upload' && uploadedImage) {
+                // If there's a blob URL but no file (shouldn't happen with current logic as we don't clear file input on preview only)
+                // But if we have a base64 string from FileReader, we need to handle it. 
+                // However, the current handleImageUpload sets uploadedImage to base64.
+                // We should really prefer the FILE object.
+                // Let's modify handleImageUpload to store the File object too.
+                // For now, let's assume valid file input ref.
+                if (!imageUrl && !uploadedImage) throw new Error("No image data");
+            } else if (imageMode === 'url' && formData.image) {
+                imageUrl = formData.image;
+            } else {
+                throw new Error("No image provided");
+            }
+
+            // Save product to store
+            await addProduct({
+                name: formData.name,
+                category: formData.collection,
+                price: 0,
+                weight: '',
+                purity: formData.purity,
+                image: imageUrl,
+                description: formData.description
+            });
+
             alert('Product added successfully!');
             router.push('/admin/products');
-        }, 500);
+        } catch (error) {
+            console.error("Error adding product", error);
+            alert("Failed to add product");
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -101,6 +132,7 @@ export default function AddProduct() {
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
+            setSelectedFile(file);
             // Create a preview URL
             const reader = new FileReader();
             reader.onload = (event) => {

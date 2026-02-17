@@ -7,7 +7,7 @@ import {
     LayoutDashboard, Package, Plus, LogOut, FolderOpen,
     Eye, Menu, X, Edit, Trash2, ExternalLink, Settings, ChevronLeft
 } from 'lucide-react';
-import { products } from '@/data/products';
+import { useProducts } from '@/hooks/useProducts';
 import ManualRateControl from '@/components/ManualRateControl';
 
 export default function AdminDashboard() {
@@ -31,18 +31,22 @@ export default function AdminDashboard() {
         router.push('/admin');
     };
 
+    const { products, loading } = useProducts();
+
     // Calculate stats
     const stats = useMemo(() => {
+        if (loading) return { totalProducts: 0, totalCollections: 0, collections: [] };
         const collections = [...new Set(products.map(p => p.category))];
         return {
             totalProducts: products.length,
             totalCollections: collections.length,
             collections: collections
         };
-    }, []);
+    }, [products, loading]);
 
     // Group products by collection
     const productsByCollection = useMemo(() => {
+        if (loading) return {};
         return products.reduce((acc, product) => {
             if (!acc[product.category]) {
                 acc[product.category] = [];
@@ -50,7 +54,7 @@ export default function AdminDashboard() {
             acc[product.category].push(product);
             return acc;
         }, {} as Record<string, typeof products>);
-    }, []);
+    }, [products, loading]);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex">

@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 import { products } from '@/data/products';
 import { getAllCollections } from '@/data/productStore';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://cmjjewellers.com';
 

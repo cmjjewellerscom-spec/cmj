@@ -1,30 +1,24 @@
 "use client";
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, Suspense } from 'react';
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
-import { getAllProducts, Product } from "@/data/productStore";
+import { useProducts } from '@/hooks/useProducts';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
-export default function CollectionPage() {
-    const params = useParams();
-    const categoryName = decodeURIComponent(params?.name as string);
-    const [products, setProducts] = useState<Product[]>([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        setProducts(getAllProducts());
-        setIsLoaded(true);
-    }, []);
+function CollectionContent() {
+    const searchParams = useSearchParams();
+    const categoryName = searchParams.get('name') || '';
+    const { products, loading } = useProducts();
 
     // Memoize filtered products
-    const categoryProducts = useMemo(() =>
-        products.filter(p => p.category === categoryName),
-        [categoryName, products]
-    );
+    const categoryProducts = useMemo(() => {
+        if (!categoryName) return [];
+        return products.filter(p => p.category === categoryName);
+    }, [categoryName, products]);
 
-    if (!isLoaded) {
+    if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
                 <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div>
@@ -32,11 +26,13 @@ export default function CollectionPage() {
         );
     }
 
-    if (categoryProducts.length === 0) {
+    if (!categoryName || categoryProducts.length === 0) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
                 <div className="text-center">
-                    <p className="text-xl mb-4">Collection not found</p>
+                    <p className="text-xl mb-4 text-gray-700 dark:text-gray-300">
+                        {categoryName ? `No products found in "${categoryName}"` : "Collection not found"}
+                    </p>
                     <Link href="/categories" className="text-primary hover:underline">
                         Browse All Collections
                     </Link>
@@ -66,7 +62,7 @@ export default function CollectionPage() {
                                 key={product.id}
                                 className="bg-surface-light dark:bg-surface-dark rounded-xl overflow-hidden shadow-card hover:shadow-xl transition-shadow group border border-primary/10"
                             >
-                                <Link href={`/product/${product.id}`} className="block h-full">
+                                <Link href={`/product?id=${product.id}`} className="block h-full">
                                     <div className="aspect-square bg-white dark:bg-black/20 overflow-hidden relative">
                                         <img
                                             src={product.image || "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&q=80&w=400"}
@@ -96,5 +92,13 @@ export default function CollectionPage() {
                 <BottomNav />
             </div>
         </div>
+    );
+}
+
+export default function CollectionClient() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div></div>}>
+            <CollectionContent />
+        </Suspense>
     );
 }

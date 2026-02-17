@@ -17,21 +17,21 @@ export default function AdminLogin() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
-        setTimeout(() => {
-            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
-                localStorage.setItem('cmj_admin_auth', 'true');
-                localStorage.setItem('cmj_admin_user', username);
-                router.push('/admin/dashboard');
-            } else {
-                setError('Invalid username or password');
-                setLoading(false);
-            }
-        }, 500);
+        try {
+            const { signInWithEmailAndPassword } = await import('firebase/auth');
+            const { auth } = await import('@/lib/firebase');
+            await signInWithEmailAndPassword(auth, username, password);
+            // Router push is handled by AdminAuthCheck
+        } catch (err: any) {
+            console.error(err);
+            setError('Invalid email or password');
+            setLoading(false);
+        }
     };
 
     return (
@@ -60,16 +60,16 @@ export default function AdminLogin() {
                         {/* Username */}
                         <div>
                             <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-2">
-                                Username
+                                Email
                             </label>
                             <div className="relative">
                                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-primary/50" />
                                 <input
-                                    type="text"
+                                    type="email"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     className="w-full bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-xl pl-12 pr-4 py-3 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                                    placeholder="Enter username"
+                                    placeholder="Enter email"
                                     required
                                 />
                             </div>

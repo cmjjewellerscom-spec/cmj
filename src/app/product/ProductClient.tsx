@@ -1,29 +1,29 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, useMemo } from 'react';
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
-import { getAllProducts, Product } from "@/data/productStore";
 import { ArrowLeft, CheckCircle, ShieldCheck, Truck, Lock } from 'lucide-react';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useRates } from '@/context/RatesContext';
+import { useProducts } from '@/hooks/useProducts';
 
-export default function ProductPage() {
-    const routeParams = useParams();
-    const id = parseInt(routeParams?.id as string);
-    const { gold24k, gold22k, gold18k, silver, loading } = useRates();
+function ProductContent() {
+    const searchParams = useSearchParams();
+    const idParam = searchParams.get('id');
+    const id = idParam ? parseInt(idParam) : null;
 
-    const [product, setProduct] = useState<Product | null>(null);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const { gold24k, gold22k, gold18k, silver, loading: ratesLoading } = useRates();
+    const { products, loading: productsLoading } = useProducts();
 
-    useEffect(() => {
-        const allProducts = getAllProducts();
-        const foundProduct = allProducts.find(p => p.id === id);
-        setProduct(foundProduct || null);
-        setIsLoaded(true);
-    }, [id]);
+    const product = useMemo(() =>
+        products.find(p => p.id === id),
+        [products, id]
+    );
 
-    if (!isLoaded) {
+    const loading = ratesLoading || productsLoading;
+
+    if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
                 <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div>
@@ -32,7 +32,16 @@ export default function ProductPage() {
     }
 
     if (!product) {
-        return <div className="p-10 text-center">Product not found</div>;
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+                <div className="text-center">
+                    <p className="text-xl mb-4">Product not found</p>
+                    <Link href="/categories" className="text-primary hover:underline">
+                        Browse Collections
+                    </Link>
+                </div>
+            </div>
+        );
     }
 
     // Determine Rate based on Purity
@@ -184,5 +193,13 @@ export default function ProductPage() {
 
             <BottomNav />
         </div>
+    );
+}
+
+export default function ProductClient() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div></div>}>
+            <ProductContent />
+        </Suspense>
     );
 }

@@ -214,6 +214,47 @@ export default function AdminSettings() {
                                 )}
                             </div>
                         </div>
+
+                        {/* Database Management */}
+                        <div className="bg-white rounded-2xl border border-primary/10 shadow-sm overflow-hidden">
+                            <div className="p-6 border-b border-primary/10 bg-primary/5">
+                                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                                    <AlertCircle className="w-5 h-5 text-primary" />
+                                    Database Management
+                                </h3>
+                                <p className="text-sm text-gray-500">Manage your product data.</p>
+                            </div>
+                            <div className="p-8">
+                                <button
+                                    onClick={async () => {
+                                        if (!confirm('This will upload all default products to Firebase. Continue?')) return;
+                                        setLoading(true);
+                                        try {
+                                            const { db } = await import('@/lib/firebase');
+                                            const { writeBatch, doc } = await import('firebase/firestore');
+                                            const { products } = await import('@/data/products');
+
+                                            const batch = writeBatch(db);
+                                            products.forEach((p) => {
+                                                const ref = doc(db, 'products', p.id.toString());
+                                                batch.set(ref, p);
+                                            });
+                                            await batch.commit();
+                                            alert('Database seeded successfully!');
+                                        } catch (e) {
+                                            console.error(e);
+                                            alert('Error seeding database: ' + (e as Error).message);
+                                        } finally {
+                                            setLoading(false);
+                                        }
+                                    }}
+                                    disabled={loading}
+                                    className="px-6 py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-black transition-colors disabled:opacity-50"
+                                >
+                                    Seed Database (Upload Defaults)
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
