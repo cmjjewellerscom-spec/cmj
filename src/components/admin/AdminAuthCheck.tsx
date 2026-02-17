@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { onAuthStateChanged } from 'firebase/auth';
-import { getFirebaseAuth } from '@/lib/firebase';
 
 export default function AdminAuthCheck({ children }: { children: React.ReactNode }) {
     const router = useRouter();
@@ -11,28 +9,20 @@ export default function AdminAuthCheck({ children }: { children: React.ReactNode
     const [authenticated, setAuthenticated] = useState(false);
 
     useEffect(() => {
-        const auth = getFirebaseAuth();
-        if (!auth) {
-            setLoading(false);
-            return;
-        }
+        const isAuth = localStorage.getItem('cmj_admin_auth');
 
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setAuthenticated(true);
-                if (pathname === '/admin') {
-                    router.push('/admin/dashboard');
-                }
-            } else {
-                setAuthenticated(false);
-                if (pathname !== '/admin') {
-                    router.push('/admin');
-                }
+        if (isAuth === 'true') {
+            setAuthenticated(true);
+            if (pathname === '/admin') {
+                router.push('/admin/dashboard');
             }
-            setLoading(false);
-        });
-
-        return () => unsubscribe();
+        } else {
+            setAuthenticated(false);
+            if (pathname !== '/admin') {
+                router.push('/admin');
+            }
+        }
+        setLoading(false);
     }, [pathname, router]);
 
     if (loading) {

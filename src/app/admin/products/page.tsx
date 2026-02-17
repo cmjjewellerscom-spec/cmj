@@ -7,7 +7,7 @@ import {
     Plus, Search, Edit2, Trash2, ChevronRight, ChevronLeft, FolderOpen, Package
 } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
-import { deleteProductFn } from '@/lib/firestoreUtils';
+// import { deleteProductFn } from '@/lib/firestoreUtils';
 import { Product } from '@/data/products';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 
@@ -36,15 +36,9 @@ export default function AdminProducts() {
         router.push('/admin');
     };
 
-    const handleDelete = async (id: number) => {
-        if (confirm('Are you sure you want to delete this product?')) {
-            try {
-                await deleteProductFn(id);
-            } catch (error) {
-                console.error("Failed to delete", error);
-                alert("Failed to delete product");
-            }
-        }
+    const handleDeleteProduct = async (id: number) => {
+        if (!confirm('Are you sure you want to delete this product?')) return;
+        alert('Product deletion is disabled (Static Mode).');
     };
 
     const handleDeleteCollection = async (collection: string, e: React.MouseEvent) => {
@@ -213,7 +207,7 @@ export default function AdminProducts() {
                                             <button
                                                 onClick={(e) => {
                                                     e.stopPropagation();
-                                                    handleDelete(product.id);
+                                                    handleDeleteProduct(product.id);
                                                 }}
                                                 className="p-3 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
                                             >

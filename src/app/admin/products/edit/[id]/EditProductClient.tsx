@@ -7,8 +7,8 @@ import {
     Plus, ChevronLeft, Save, X, Upload, Link as LinkIcon, ImageIcon
 } from 'lucide-react';
 import { useProducts } from '@/hooks/useProducts';
-import { updateProductFn } from '@/lib/firestoreUtils';
-import { uploadImage } from '@/lib/storageUtils';
+// import { updateProductFn } from '@/lib/firestoreUtils';
+// import { uploadImage } from '@/lib/storageUtils';
 import { getAllCollections } from '@/data/productStore'; // Keeping for now
 import AdminSidebar from '@/components/admin/AdminSidebar';
 
@@ -81,65 +81,10 @@ export default function EditProductClient() {
         e.preventDefault();
         setLoading(true);
 
-        // Use uploaded image or URL
-        let finalImage = formData.image;
-
         try {
-            if (imageMode === 'upload') {
-                if (selectedFile) {
-                    finalImage = await uploadImage(selectedFile, 'products');
-                } else if (uploadedImage) {
-                    // Existing uploaded image (if any logic supported retaining it without re-upload, but here we just keep it if it's already a URL? No, uploadedImage is base64 for preview usually.)
-                    // But if it's a URL (e.g. from existing product), it should be in formData.image.
-                    // If user switched to upload mode but didn't pick a NEW file, we might want to keep existing image?
-                    // But Logic says: "Use uploaded image or URL".
-                    // If selectedFile is null but uploadedImage is set, it might be base64.
-                    // Ideally we should have the File. 
-                    // If user is editing and didn't change image, imageMode might be 'url' (default?)
-                    // Let's assume if they picked 'upload' they want to upload a NEW file.
-                    // If they revert to 'url', they use formData.image.
-                    if (!selectedFile && !uploadedImage.startsWith('http')) {
-                        // Base64 without file? Should not accept.
-                        // Or maybe we accept it for now if we don't strictly enforce Storage.
-                        // But we want Storage.
-                        if (!finalImage) throw new Error("Please select an image file");
-                    } else if (uploadedImage.startsWith('http')) {
-                        finalImage = uploadedImage;
-                    }
-                }
-            }
-
-            if (!finalImage) {
-                // Fallback to existing logic
-                finalImage = imageMode === 'upload' && uploadedImage ? uploadedImage : formData.image;
-            }
-
-            if (!finalImage) {
-                alert('Please provide an image');
-                setLoading(false);
-                return;
-            }
-
-            // Re-upload check
-            if (selectedFile) {
-                finalImage = await uploadImage(selectedFile, 'products');
-            }
-
-            // Update product in store
-            await updateProductFn(parseInt(productId), {
-                name: formData.name,
-                category: formData.collection,
-                price: parseInt(formData.price) || 0,
-                weight: formData.weight,
-                purity: formData.purity,
-                image: finalImage,
-                description: formData.description
-            });
-
-            setTimeout(() => {
-                alert('Product updated successfully!');
-                router.push('/admin/products');
-            }, 500);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            alert('Edit Product is disabled (Static Mode).');
+            router.push('/admin/products');
         } catch (error) {
             console.error("Failed to update", error);
             alert('Failed to update product');

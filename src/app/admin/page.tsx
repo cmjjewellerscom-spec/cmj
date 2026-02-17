@@ -25,16 +25,14 @@ export default function AdminLogin() {
         setLoading(true);
 
         try {
-            const { signInWithEmailAndPassword } = await import('firebase/auth');
-            const { getFirebaseAuth } = await import('@/lib/firebase');
-            const auth = getFirebaseAuth();
-            if (auth) {
-                await signInWithEmailAndPassword(auth, username, password);
+            // Simple validation against hardcoded credentials
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                localStorage.setItem('cmj_admin_auth', 'true');
+                router.push('/admin/dashboard');
             } else {
-                throw new Error("Auth not initialized");
+                throw new Error("Invalid credentials");
             }
-            // Router push is handled by AdminAuthCheck
-        } catch (err: any) {
+        } catch (err) {
             console.error(err);
             setError('Invalid email or password');
             setLoading(false);

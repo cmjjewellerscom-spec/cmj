@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 import { Star, Send, User, MessageSquare, X } from 'lucide-react';
 import { useReviews } from '@/hooks/useReviews';
-import { addReviewFn } from '@/lib/firestoreUtils';
+// import { addReviewFn } from '@/lib/firestoreUtils';
 
 export default function CustomerReviews() {
     const { reviews, loading } = useReviews();
@@ -26,13 +26,8 @@ export default function CustomerReviews() {
         setSubmitLoading(true);
 
         try {
-            await addReviewFn({
-                title: title.trim(),
-                description: description.trim(),
-                name: name.trim(),
-                rating,
-                link: '',
-            });
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            // alert('Review submission is disabled (Static Mode).');
 
             // Reset form
             setName('');

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Star, ChevronLeft, ChevronRight, MessageSquare } from 'lucide-react';
 import { useReviews } from '@/hooks/useReviews';
-import { Review } from '@/lib/firestoreUtils';
+// import { Review } from '@/lib/firestoreUtils';
 
 export default function ReviewsScroller() {
     const { reviews, loading } = useReviews();

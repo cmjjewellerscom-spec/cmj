@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash2, ExternalLink, Star, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { addReviewFn, deleteReviewFn, Review } from '@/lib/firestoreUtils';
+// import { addReviewFn, deleteReviewFn, Review } from '@/lib/firestoreUtils';
 import { useReviews } from '@/hooks/useReviews';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminAuthCheck from '@/components/admin/AdminAuthCheck';
 
 function AdminReviewsContent() {
-    const { reviews, loading: reviewsLoading } = useReviews(); // Real-time reviews
+    const { reviews, loading: reviewsLoading } = useReviews();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
@@ -25,13 +25,8 @@ function AdminReviewsContent() {
         setSubmitting(true);
 
         try {
-            await addReviewFn({
-                title: title.trim(),
-                description: description.trim(),
-                link: link.trim(),
-                name: 'Admin',
-                rating: 5,
-            });
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            alert('Add Review is disabled (Static Mode).');
 
             setTitle('');
             setDescription('');
@@ -45,14 +40,8 @@ function AdminReviewsContent() {
     };
 
     const handleDelete = async (id: string, name: string) => {
-        if (confirm(`Are you sure you want to delete the review by "${name}"?`)) {
-            try {
-                await deleteReviewFn(id);
-            } catch (error) {
-                console.error("Error deleting review:", error);
-                alert("Failed to delete review");
-            }
-        }
+        if (!confirm(`Are you sure you want to delete the review by "${name}"?`)) return;
+        alert('Delete Review is disabled (Static Mode).');
     };
 
     return (

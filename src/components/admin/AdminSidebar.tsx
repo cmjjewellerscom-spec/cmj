@@ -13,9 +13,6 @@ export default function AdminSidebar() {
 
     const handleLogout = async () => {
         try {
-            const { signOut } = await import('firebase/auth');
-            const { auth } = await import('@/lib/firebase');
-            await signOut(auth);
             localStorage.removeItem('cmj_admin_auth');
             localStorage.removeItem('cmj_admin_user');
             router.push('/admin');
