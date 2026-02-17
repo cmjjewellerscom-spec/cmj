@@ -10,6 +10,8 @@ import {
 import { useProducts } from '@/hooks/useProducts';
 import ManualRateControl from '@/components/ManualRateControl';
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminDashboard() {
     const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState(false);

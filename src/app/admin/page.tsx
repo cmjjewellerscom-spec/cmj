@@ -9,6 +9,10 @@ const ADMIN_CREDENTIALS = {
     password: "211027@Bujji"
 };
 
+};
+
+export const dynamic = 'force-dynamic';
+
 export default function AdminLogin() {
     const router = useRouter();
     const [username, setUsername] = useState('');
