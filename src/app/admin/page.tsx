@@ -26,8 +26,13 @@ export default function AdminLogin() {
 
         try {
             const { signInWithEmailAndPassword } = await import('firebase/auth');
-            const { auth } = await import('@/lib/firebase');
-            await signInWithEmailAndPassword(auth, username, password);
+            const { getFirebaseAuth } = await import('@/lib/firebase');
+            const auth = getFirebaseAuth();
+            if (auth) {
+                await signInWithEmailAndPassword(auth, username, password);
+            } else {
+                throw new Error("Auth not initialized");
+            }
             // Router push is handled by AdminAuthCheck
         } catch (err: any) {
             console.error(err);

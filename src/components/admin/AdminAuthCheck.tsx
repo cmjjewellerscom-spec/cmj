@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
+import { getFirebaseAuth } from '@/lib/firebase';
 
 export default function AdminAuthCheck({ children }: { children: React.ReactNode }) {
     const router = useRouter();
@@ -11,6 +11,12 @@ export default function AdminAuthCheck({ children }: { children: React.ReactNode
     const [authenticated, setAuthenticated] = useState(false);
 
     useEffect(() => {
+        const auth = getFirebaseAuth();
+        if (!auth) {
+            setLoading(false);
+            return;
+        }
+
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setAuthenticated(true);

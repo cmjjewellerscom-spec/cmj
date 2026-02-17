@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { getFirebaseDb } from '@/lib/firebase';
 import { Review } from '@/lib/firestoreUtils';
 
 export function useReviews() {
@@ -10,6 +10,12 @@ export function useReviews() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const db = getFirebaseDb();
+        if (!db) {
+            setLoading(false);
+            return;
+        }
+
         const q = query(
             collection(db, 'reviews')
             // orderBy('createdAt', 'desc') // Requires index sometimes, let's keep it simple first or handle locally

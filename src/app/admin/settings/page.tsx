@@ -230,7 +230,10 @@ export default function AdminSettings() {
                                         if (!confirm('This will upload all default products to Firebase. Continue?')) return;
                                         setLoading(true);
                                         try {
-                                            const { db } = await import('@/lib/firebase');
+                                            const { getFirebaseDb } = await import('@/lib/firebase');
+                                            const db = getFirebaseDb();
+                                            if (!db) throw new Error("Firebase not initialized");
+
                                             const { writeBatch, doc } = await import('firebase/firestore');
                                             const { products } = await import('@/data/products');
 

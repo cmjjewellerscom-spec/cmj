@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+import { getFirebaseDb } from '@/lib/firebase';
 import { Product } from '@/data/products'; // Import type directly
 
 export function useProducts() {
@@ -9,6 +9,12 @@ export function useProducts() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const db = getFirebaseDb();
+        if (!db) {
+            setLoading(false);
+            return;
+        }
+
         const q = query(collection(db, 'products'), orderBy('id'));
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const items: Product[] = [];

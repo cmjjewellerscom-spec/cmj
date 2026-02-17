@@ -1,4 +1,4 @@
-import { storage } from './firebase';
+import { getFirebaseStorage } from './firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 /**
@@ -8,6 +8,9 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
  * @returns The download URL of the uploaded image
  */
 export async function uploadImage(file: File, path: string = 'products'): Promise<string> {
+    const storage = getFirebaseStorage();
+    if (!storage) throw new Error("Firebase storage not initialized");
+
     try {
         // Create a unique filename using timestamp
         const timestamp = Date.now();
