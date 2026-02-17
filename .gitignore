@@ -52,3 +52,6 @@ jdk21/
 *.apk
 resources/
 build_log.txt
+
+# Exclude entire android folder from git (as requested)
+android/
