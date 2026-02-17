@@ -8,3 +8,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+// Force Vercel rebuild: 2026-02-17-01
