@@ -25,6 +25,12 @@ function AdminSettingsContent() {
     const [siteTitle, setSiteTitle] = useState('');
     const [titleLoading, setTitleLoading] = useState(false);
 
+    // Hero Text State
+    const [heroHeadline1, setHeroHeadline1] = useState('');
+    const [heroHeadline2, setHeroHeadline2] = useState('');
+    const [heroDesc, setHeroDesc] = useState('');
+    const [heroTextLoading, setHeroTextLoading] = useState(false);
+
     // Seeding State
     const [seeding, setSeeding] = useState(false);
 
@@ -35,8 +41,16 @@ function AdminSettingsContent() {
     const loadSettings = async () => {
         const title = await getSiteConfig('site_title');
         const banner = await getSiteConfig('home_banner');
+
+        const h1 = await getSiteConfig('hero_headline_1');
+        const h2 = await getSiteConfig('hero_headline_2');
+        const desc = await getSiteConfig('hero_description');
+
         if (title) setSiteTitle(title);
         if (banner) setPreviewImage(banner);
+        if (h1) setHeroHeadline1(h1);
+        if (h2) setHeroHeadline2(h2);
+        if (desc) setHeroDesc(desc);
     };
 
     // --- Banner Logic ---
@@ -94,6 +108,21 @@ function AdminSettingsContent() {
             alert('Failed to update title');
         } finally {
             setTitleLoading(false);
+        }
+    };
+
+    const handleSaveHeroText = async () => {
+        setHeroTextLoading(true);
+        try {
+            if (heroHeadline1) await updateSiteConfig('hero_headline_1', heroHeadline1);
+            if (heroHeadline2) await updateSiteConfig('hero_headline_2', heroHeadline2);
+            if (heroDesc) await updateSiteConfig('hero_description', heroDesc);
+            alert('Banner text updated!');
+        } catch (error) {
+            console.error(error);
+            alert('Failed to update banner text');
+        } finally {
+            setHeroTextLoading(false);
         }
     };
 
@@ -164,6 +193,50 @@ function AdminSettingsContent() {
                                 className="px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary-dark disabled:opacity-50"
                             >
                                 {titleLoading ? 'Saving...' : 'Save'}
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Hero Text Content */}
+                    <div className="bg-white rounded-2xl border border-primary/10 p-6 shadow-sm">
+                        <h3 className="text-lg font-bold text-gray-900 mb-4">Banner Text Content</h3>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Headline Line 1</label>
+                                <input
+                                    type="text"
+                                    value={heroHeadline1}
+                                    onChange={(e) => setHeroHeadline1(e.target.value)}
+                                    placeholder="e.g. Tradition"
+                                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Headline Line 2</label>
+                                <input
+                                    type="text"
+                                    value={heroHeadline2}
+                                    onChange={(e) => setHeroHeadline2(e.target.value)}
+                                    placeholder="e.g. Crafted in Gold"
+                                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Description</label>
+                                <textarea
+                                    value={heroDesc}
+                                    onChange={(e) => setHeroDesc(e.target.value)}
+                                    placeholder="Banner description..."
+                                    rows={3}
+                                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3"
+                                />
+                            </div>
+                            <button
+                                onClick={handleSaveHeroText}
+                                disabled={heroTextLoading}
+                                className="w-full py-3 bg-primary text-white rounded-xl hover:bg-primary-dark disabled:opacity-50"
+                            >
+                                {heroTextLoading ? 'Saving Text...' : 'Update Banner Text'}
                             </button>
                         </div>
                     </div>

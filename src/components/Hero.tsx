@@ -7,19 +7,32 @@ import Link from 'next/link';
 
 export default function Hero() {
     const [bannerUrl, setBannerUrl] = React.useState("/hero-bg.jpg");
+    const [headline1, setHeadline1] = React.useState("Tradition");
+    const [headline2, setHeadline2] = React.useState("Crafted in Gold");
+    const [description, setDescription] = React.useState("Exquisite handcrafted temple jewellery, passed down through generations of master artisans.");
 
     React.useEffect(() => {
-        const fetchBanner = async () => {
+        const fetchConfig = async () => {
             const { getSiteConfig } = await import('@/lib/supabaseUtils');
+
             const url = await getSiteConfig('home_banner');
             if (url) setBannerUrl(url);
+
+            const h1 = await getSiteConfig('hero_headline_1');
+            if (h1) setHeadline1(h1);
+
+            const h2 = await getSiteConfig('hero_headline_2');
+            if (h2) setHeadline2(h2);
+
+            const desc = await getSiteConfig('hero_description');
+            if (desc) setDescription(desc);
         };
-        fetchBanner();
+        fetchConfig();
     }, []);
 
     return (
         <section className="relative overflow-hidden">
-            {/* ... (rest of the file) */}
+            {/* ... (rest of the file) */}{/* ... (rest of the file) */}
 
             {/* Hero Background with Traditional Temple Jewelry Image */}
             <div className="relative min-h-[400px] md:min-h-[500px]">
@@ -27,7 +40,7 @@ export default function Hero() {
                 <div className="absolute inset-0">
                     <img
                         src={bannerUrl}
-                        alt="Traditional Gold Jewelry"
+                        alt={headline1 + " " + headline2}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                             const target = e.target as HTMLImageElement;
@@ -56,7 +69,7 @@ export default function Hero() {
                                 borderRadius: '4px'
                             }}
                         >
-                            Tradition
+                            {headline1}
                         </span>
                         <br />
                         <span
@@ -66,12 +79,12 @@ export default function Hero() {
                                 borderRadius: '4px'
                             }}
                         >
-                            Crafted in Gold
+                            {headline2}
                         </span>
                     </h1>
 
                     <p className="text-sm md:text-base text-[#5D4037] mb-8 max-w-sm">
-                        Exquisite handcrafted temple jewellery, passed down through generations of master artisans.
+                        {description}
                     </p>
 
                     {/* CTA Buttons */}
