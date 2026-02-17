@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash2, ExternalLink, Star, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { addReview, deleteReview, updateReviewApproval } from '@/lib/supabaseUtils';
+import { addReview, deleteReview } from '@/lib/supabaseUtils';
 import { supabase } from '@/lib/supabase';
 import { useReviews } from '@/hooks/useReviews';
 import AdminSidebar from '@/components/admin/AdminSidebar';
@@ -55,17 +55,6 @@ function AdminReviewsContent() {
         } catch (error) {
             console.error("Delete failed", error);
             alert("Failed to delete review");
-        }
-    };
-
-    const handleApprove = async (id: number, approved: boolean) => {
-        try {
-            await updateReviewApproval(id, approved);
-            alert(approved ? 'Review approved' : 'Review unapproved');
-            window.location.reload();
-        } catch (error) {
-            console.error("Update failed", error);
-            alert("Failed to update review");
         }
     };
 
@@ -216,19 +205,10 @@ function AdminReviewsContent() {
                                                 </div>
                                                 <div className="flex items-center gap-2">
                                                     <button
-                                                        onClick={() => handleApprove(Number(review.id), !review.approved)}
-                                                        className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${review.approved
-                                                            ? 'bg-amber-100 text-amber-700 hover:bg-amber-200'
-                                                            : 'bg-green-100 text-green-700 hover:bg-green-200'
-                                                            }`}
-                                                    >
-                                                        {review.approved ? 'Unapprove' : 'Approve'}
-                                                    </button>
-                                                    <button
                                                         onClick={() => handleDelete(Number(review.id), review.title)}
-                                                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+                                                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors group-hover:opacity-100"
                                                     >
-                                                        <Trash2 className="w-4 h-4" />
+                                                        <Trash2 className="w-5 h-5" />
                                                     </button>
                                                 </div>
                                             </div>
