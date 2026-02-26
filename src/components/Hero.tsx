@@ -60,9 +60,9 @@ export default function Hero() {
     };
 
     return (
-        <section className="relative overflow-hidden">
+        <section className="relative overflow-hidden px-4 md:px-6 pt-4">
             {/* Banner Slideshow */}
-            <div className="relative min-h-[400px] md:min-h-[500px]">
+            <div className="relative min-h-[400px] md:min-h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg">
                 {/* Slides */}
                 {banners.map((url, index) => (
                     <div
@@ -128,8 +128,8 @@ export default function Hero() {
                                 key={index}
                                 onClick={() => goToSlide(index)}
                                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentIndex
-                                        ? 'bg-white scale-125 shadow-md'
-                                        : 'bg-white/50 hover:bg-white/80'
+                                    ? 'bg-white scale-125 shadow-md'
+                                    : 'bg-white/50 hover:bg-white/80'
                                     }`}
                                 aria-label={`Go to slide ${index + 1}`}
                             />
