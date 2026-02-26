@@ -96,10 +96,10 @@ export default function Hero() {
                 />
 
                 {/* CTA Buttons — Bottom Right */}
-                <div className="absolute bottom-8 right-2 md:bottom-10 md:right-6 z-10 flex flex-wrap justify-end gap-2 md:gap-3">
+                <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 z-10 flex flex-wrap justify-end gap-2 md:gap-3">
                     <Link
                         href="/categories"
-                        className="inline-flex items-center gap-1.5 bg-primary text-white px-3 py-1.5 md:px-6 md:py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg text-xs md:text-base whitespace-nowrap"
+                        className="inline-flex items-center gap-1.5 bg-primary text-white px-4 py-2 md:px-6 md:py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg text-sm md:text-base whitespace-nowrap"
                     >
                         View Collection
                     </Link>
