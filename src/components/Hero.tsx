@@ -62,7 +62,7 @@ export default function Hero() {
     return (
         <section className="relative overflow-hidden px-4 md:px-6 pt-4">
             {/* Banner Slideshow */}
-            <div className="relative min-h-[400px] md:min-h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg">
+            <div className="relative min-h-[250px] md:min-h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg">
                 {/* Slides */}
                 {banners.map((url, index) => (
                     <div
