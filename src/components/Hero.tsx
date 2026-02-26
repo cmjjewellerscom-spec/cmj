@@ -96,10 +96,10 @@ export default function Hero() {
                 />
 
                 {/* CTA Buttons — Bottom Left */}
-                <div className="absolute bottom-6 left-4 md:left-8 z-10 flex flex-wrap gap-3">
+                <div className="absolute bottom-6 left-4 md:left-8 z-10 flex flex-wrap gap-2 md:gap-3">
                     <Link
                         href="/categories"
-                        className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg text-sm md:text-base"
+                        className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 md:px-6 md:py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg text-xs md:text-base"
                     >
                         View Collection
                     </Link>
@@ -114,7 +114,7 @@ export default function Hero() {
                                 }, 500);
                             }
                         }}
-                        className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-[#3E2723] px-6 py-3 rounded-lg font-medium border-2 border-primary/30 hover:border-primary transition-all cursor-pointer text-sm md:text-base"
+                        className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-[#3E2723] px-4 py-2 md:px-6 md:py-3 rounded-lg font-medium border-2 border-primary/30 hover:border-primary transition-all cursor-pointer text-xs md:text-base"
                     >
                         24K Bullion
                     </button>
