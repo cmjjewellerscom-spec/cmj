@@ -62,7 +62,7 @@ export default function Hero() {
     return (
         <section className="relative overflow-hidden px-4 md:px-6 pt-4">
             {/* Banner Slideshow */}
-            <div className="relative min-h-[250px] md:min-h-[500px] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg">
+            <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-2xl md:rounded-3xl overflow-hidden shadow-lg bg-black">
                 {/* Slides */}
                 {banners.map((url, index) => (
                     <div
@@ -73,10 +73,18 @@ export default function Hero() {
                             zIndex: index === currentIndex ? 2 : 1,
                         }}
                     >
+                        {/* Blurred background fill so there are no empty gaps */}
+                        <img
+                            src={url}
+                            alt=""
+                            className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-60"
+                            aria-hidden="true"
+                        />
+                        {/* Actual sharp image — fully visible, no cropping */}
                         <img
                             src={url}
                             alt={`Banner ${index + 1}`}
-                            className="w-full h-full object-cover"
+                            className="relative w-full h-full object-contain"
                             onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 if (target.src !== FALLBACK_BANNERS[0]) {
