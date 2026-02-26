@@ -96,10 +96,10 @@ export default function Hero() {
                 />
 
                 {/* CTA Buttons — Bottom Left */}
-                <div className="absolute bottom-6 left-4 md:left-8 z-10 flex flex-wrap gap-2 md:gap-3">
+                <div className="absolute bottom-8 left-2 md:bottom-10 md:left-6 z-10 flex flex-wrap gap-2 md:gap-3">
                     <Link
                         href="/categories"
-                        className="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 md:px-6 md:py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg text-xs md:text-base"
+                        className="inline-flex items-center gap-1.5 bg-primary text-white px-3 py-1.5 md:px-6 md:py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg text-xs md:text-base whitespace-nowrap"
                     >
                         View Collection
                     </Link>
@@ -114,7 +114,7 @@ export default function Hero() {
                                 }, 500);
                             }
                         }}
-                        className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-[#3E2723] px-4 py-2 md:px-6 md:py-3 rounded-lg font-medium border-2 border-primary/30 hover:border-primary transition-all cursor-pointer text-xs md:text-base"
+                        className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-[#3E2723] px-3 py-1.5 md:px-6 md:py-3 rounded-lg font-medium border-2 border-primary/30 hover:border-primary transition-all cursor-pointer text-xs md:text-base whitespace-nowrap"
                     >
                         24K Bullion
                     </button>
@@ -122,12 +122,12 @@ export default function Hero() {
 
                 {/* Slide Indicator Dots */}
                 {banners.length > 1 && (
-                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                    <div className="absolute bottom-2 md:bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
                         {banners.map((_, index) => (
                             <button
                                 key={index}
                                 onClick={() => goToSlide(index)}
-                                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentIndex
+                                className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${index === currentIndex
                                     ? 'bg-white scale-125 shadow-md'
                                     : 'bg-white/50 hover:bg-white/80'
                                     }`}
