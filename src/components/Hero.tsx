@@ -4,9 +4,9 @@ import Link from 'next/link';
 import type { Banner } from '@/lib/supabaseUtils';
 
 const FALLBACK_BANNERS = [
-    "https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    "https://images.pexels.com/photos/10983780/pexels-photo-10983780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    "https://images.pexels.com/photos/13022427/pexels-photo-13022427.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "/banners/banner1.png",
+    "/banners/banner2.png",
+    "/banners/banner3.png",
 ];
 
 const SLIDE_DURATION = 5000; // 5 seconds per slide
