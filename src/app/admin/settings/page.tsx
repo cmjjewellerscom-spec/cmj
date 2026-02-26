@@ -1,8 +1,10 @@
 "use client";
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import Cropper from 'react-easy-crop';
+import type { Area } from 'react-easy-crop';
 import {
-    ChevronLeft, Save, Upload, X, ImageIcon, CheckCircle, AlertCircle, Trash2, Plus
+    ChevronLeft, Save, Upload, X, ImageIcon, CheckCircle, AlertCircle, Trash2, Plus, Crop
 } from 'lucide-react';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminAuthCheck from '@/components/admin/AdminAuthCheck';
@@ -10,6 +12,46 @@ import { uploadImage, getSiteConfig, updateSiteConfig, addProduct, getBanners, a
 import type { Banner } from '@/lib/supabaseUtils';
 
 const MAX_BANNERS = 3;
+const CROP_ASPECT = 16 / 9; // Match the banner aspect ratio
+
+// ---- Canvas-based crop helper ----
+async function getCroppedImg(imageSrc: string, pixelCrop: Area): Promise<Blob> {
+    const image = new Image();
+    image.crossOrigin = 'anonymous';
+    await new Promise<void>((resolve, reject) => {
+        image.onload = () => resolve();
+        image.onerror = reject;
+        image.src = imageSrc;
+    });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = pixelCrop.width;
+    canvas.height = pixelCrop.height;
+    const ctx = canvas.getContext('2d')!;
+
+    ctx.drawImage(
+        image,
+        pixelCrop.x,
+        pixelCrop.y,
+        pixelCrop.width,
+        pixelCrop.height,
+        0,
+        0,
+        pixelCrop.width,
+        pixelCrop.height
+    );
+
+    return new Promise((resolve, reject) => {
+        canvas.toBlob(
+            (blob) => {
+                if (blob) resolve(blob);
+                else reject(new Error('Canvas toBlob failed'));
+            },
+            'image/jpeg',
+            0.95 // high quality
+        );
+    });
+}
 
 function AdminSettingsContent() {
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -20,6 +62,12 @@ function AdminSettingsContent() {
     // Banners state
     const [banners, setBanners] = useState<Banner[]>([]);
     const [bannersLoading, setBannersLoading] = useState(true);
+
+    // Crop state
+    const [cropImageSrc, setCropImageSrc] = useState<string | null>(null);
+    const [crop, setCrop] = useState({ x: 0, y: 0 });
+    const [zoom, setZoom] = useState(1);
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
 
     // Site Config State
     const [siteTitle, setSiteTitle] = useState('');
@@ -50,8 +98,8 @@ function AdminSettingsContent() {
         }
     };
 
-    // --- Banner Upload ---
-    const handleBannerUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // --- Step 1: User picks a file → show cropper ---
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
         if (banners.length >= MAX_BANNERS) {
@@ -60,14 +108,37 @@ function AdminSettingsContent() {
             return;
         }
 
+        const reader = new FileReader();
+        reader.onload = () => {
+            setCropImageSrc(reader.result as string);
+            setCrop({ x: 0, y: 0 });
+            setZoom(1);
+        };
+        reader.readAsDataURL(file);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+    };
+
+    const onCropComplete = useCallback((_croppedArea: Area, croppedAreaPixels: Area) => {
+        setCroppedAreaPixels(croppedAreaPixels);
+    }, []);
+
+    // --- Step 2: Crop confirmed → upload cropped image ---
+    const handleCropConfirm = async () => {
+        if (!cropImageSrc || !croppedAreaPixels) return;
+
         setLoading(true);
         setMessage('');
+        setCropImageSrc(null);
+
         try {
-            const publicUrl = await uploadImage(file, 'products');
+            const croppedBlob = await getCroppedImg(cropImageSrc, croppedAreaPixels);
+            const croppedFile = new File([croppedBlob], `banner_${Date.now()}.jpg`, { type: 'image/jpeg' });
+
+            const publicUrl = await uploadImage(croppedFile, 'products');
             const nextOrder = banners.length > 0 ? Math.max(...banners.map(b => b.display_order)) + 1 : 0;
             await addBanner(publicUrl, nextOrder);
             await loadBanners();
-            setMessage('Banner added successfully!');
+            setMessage('Banner cropped & uploaded successfully!');
             setMessageType('success');
         } catch (error) {
             setMessage('Failed to upload banner.');
@@ -75,8 +146,13 @@ function AdminSettingsContent() {
             console.error(error);
         } finally {
             setLoading(false);
-            if (fileInputRef.current) fileInputRef.current.value = '';
         }
+    };
+
+    const handleCropCancel = () => {
+        setCropImageSrc(null);
+        setCrop({ x: 0, y: 0 });
+        setZoom(1);
     };
 
     const handleDeleteBanner = async (id: number) => {
@@ -186,7 +262,7 @@ function AdminSettingsContent() {
                             <div className="flex items-center justify-between">
                                 <div>
                                     <h3 className="text-lg font-bold text-gray-900">Banner Posters</h3>
-                                    <p className="text-sm text-gray-500">Manage up to {MAX_BANNERS} slideshow banners for the homepage.</p>
+                                    <p className="text-sm text-gray-500">Manage up to {MAX_BANNERS} slideshow banners. Images will be cropped to 16:9 for perfect fit.</p>
                                 </div>
                                 <span className="text-sm font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
                                     {banners.length}/{MAX_BANNERS}
@@ -195,7 +271,7 @@ function AdminSettingsContent() {
                         </div>
 
                         <div className="p-6">
-                            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleBannerUpload} className="hidden" />
+                            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileSelect} className="hidden" />
 
                             {bannersLoading ? (
                                 <div className="text-center py-12 text-gray-400">Loading banners...</div>
@@ -233,8 +309,8 @@ function AdminSettingsContent() {
                                         <div
                                             onClick={loading ? undefined : triggerFileUpload}
                                             className={`aspect-video border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center text-gray-400 transition-all ${loading
-                                                    ? 'opacity-50 cursor-wait'
-                                                    : 'cursor-pointer hover:border-primary hover:bg-primary/5 hover:text-primary'
+                                                ? 'opacity-50 cursor-wait'
+                                                : 'cursor-pointer hover:border-primary hover:bg-primary/5 hover:text-primary'
                                                 }`}
                                         >
                                             {loading ? (
@@ -264,6 +340,75 @@ function AdminSettingsContent() {
                     </div>
                 </div>
             </main>
+
+            {/* ============ CROP MODAL ============ */}
+            {cropImageSrc && (
+                <div className="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden">
+                        {/* Header */}
+                        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 bg-gray-50">
+                            <div className="flex items-center gap-2 text-gray-800 font-bold">
+                                <Crop className="w-5 h-5 text-primary" />
+                                Crop Banner Image
+                            </div>
+                            <button onClick={handleCropCancel} className="p-1.5 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100">
+                                <X className="w-5 h-5" />
+                            </button>
+                        </div>
+
+                        {/* Cropper Area */}
+                        <div className="relative w-full" style={{ height: '400px' }}>
+                            <Cropper
+                                image={cropImageSrc}
+                                crop={crop}
+                                zoom={zoom}
+                                aspect={CROP_ASPECT}
+                                onCropChange={setCrop}
+                                onZoomChange={setZoom}
+                                onCropComplete={onCropComplete}
+                                showGrid={true}
+                                style={{
+                                    containerStyle: { background: '#1a1a1a' },
+                                }}
+                            />
+                        </div>
+
+                        {/* Zoom Slider */}
+                        <div className="px-5 py-3 border-t border-gray-100 bg-gray-50">
+                            <div className="flex items-center gap-3">
+                                <span className="text-xs text-gray-500 font-medium w-10">Zoom</span>
+                                <input
+                                    type="range"
+                                    min={1}
+                                    max={3}
+                                    step={0.01}
+                                    value={zoom}
+                                    onChange={(e) => setZoom(Number(e.target.value))}
+                                    className="flex-1 accent-primary h-1.5"
+                                />
+                                <span className="text-xs text-gray-500 font-medium w-10 text-right">{zoom.toFixed(1)}x</span>
+                            </div>
+                        </div>
+
+                        {/* Footer Buttons */}
+                        <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-gray-200">
+                            <button
+                                onClick={handleCropCancel}
+                                className="px-5 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleCropConfirm}
+                                className="px-5 py-2.5 text-sm font-medium text-white bg-primary rounded-xl hover:bg-primary-dark transition-colors flex items-center gap-2 shadow-md"
+                            >
+                                <CheckCircle className="w-4 h-4" />
+                                Crop & Upload
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
