@@ -95,29 +95,14 @@ export default function Hero() {
                     }}
                 />
 
-                {/* CTA Buttons — Bottom Left */}
-                <div className="absolute bottom-8 left-2 md:bottom-10 md:left-6 z-10 flex flex-wrap gap-2 md:gap-3">
+                {/* CTA Buttons — Bottom Right */}
+                <div className="absolute bottom-8 right-2 md:bottom-10 md:right-6 z-10 flex flex-wrap justify-end gap-2 md:gap-3">
                     <Link
                         href="/categories"
                         className="inline-flex items-center gap-1.5 bg-primary text-white px-3 py-1.5 md:px-6 md:py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg text-xs md:text-base whitespace-nowrap"
                     >
                         View Collection
                     </Link>
-                    <button
-                        onClick={() => {
-                            const bullionSection = document.querySelector('#bullion-section');
-                            if (bullionSection) {
-                                bullionSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                setTimeout(() => {
-                                    const buyButton = bullionSection.querySelector('button[data-bullion-buy]') as HTMLButtonElement;
-                                    if (buyButton) buyButton.click();
-                                }, 500);
-                            }
-                        }}
-                        className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-[#3E2723] px-3 py-1.5 md:px-6 md:py-3 rounded-lg font-medium border-2 border-primary/30 hover:border-primary transition-all cursor-pointer text-xs md:text-base whitespace-nowrap"
-                    >
-                        24K Bullion
-                    </button>
                 </div>
 
                 {/* Slide Indicator Dots */}
