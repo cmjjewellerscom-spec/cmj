@@ -144,3 +144,44 @@ export async function updateSiteConfig(key: string, value: string) {
     if (error) throw error;
     return data[0];
 }
+
+// --- Banners ---
+
+export interface Banner {
+    id: number;
+    image_url: string;
+    display_order: number;
+    created_at?: string;
+}
+
+export async function getBanners(): Promise<Banner[]> {
+    const { data, error } = await supabase
+        .from('banners')
+        .select('*')
+        .order('display_order', { ascending: true });
+
+    if (error) {
+        console.error('Error fetching banners:', error);
+        return [];
+    }
+    return data || [];
+}
+
+export async function addBanner(imageUrl: string, displayOrder: number): Promise<Banner> {
+    const { data, error } = await supabase
+        .from('banners')
+        .insert([{ image_url: imageUrl, display_order: displayOrder }])
+        .select();
+
+    if (error) throw error;
+    return data[0];
+}
+
+export async function deleteBanner(id: number): Promise<void> {
+    const { error } = await supabase
+        .from('banners')
+        .delete()
+        .eq('id', id);
+
+    if (error) throw error;
+}

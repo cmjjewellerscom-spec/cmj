@@ -1,119 +1,141 @@
 "use client";
-import React from 'react';
-import { Edit, ShoppingBag, Percent, Coins } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import type { Banner } from '@/lib/supabaseUtils';
 
+const FALLBACK_BANNERS = [
+    "https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/10983780/pexels-photo-10983780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://images.pexels.com/photos/13022427/pexels-photo-13022427.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+];
 
+const SLIDE_DURATION = 5000; // 5 seconds per slide
 
 export default function Hero() {
-    const [bannerUrl, setBannerUrl] = React.useState("/hero-bg.jpg");
-    const [headline1, setHeadline1] = React.useState("Tradition");
-    const [headline2, setHeadline2] = React.useState("Crafted in Gold");
-    const [description, setDescription] = React.useState("Exquisite handcrafted temple jewellery, passed down through generations of master artisans.");
+    const [banners, setBanners] = useState<string[]>([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
-    React.useEffect(() => {
-        const fetchConfig = async () => {
-            const { getSiteConfig } = await import('@/lib/supabaseUtils');
-
-            const url = await getSiteConfig('home_banner');
-            if (url) setBannerUrl(url);
-
-            const h1 = await getSiteConfig('hero_headline_1');
-            if (h1) setHeadline1(h1);
-
-            const h2 = await getSiteConfig('hero_headline_2');
-            if (h2) setHeadline2(h2);
-
-            const desc = await getSiteConfig('hero_description');
-            if (desc) setDescription(desc);
+    // Fetch banners from Supabase
+    useEffect(() => {
+        const fetchBanners = async () => {
+            try {
+                const { getBanners } = await import('@/lib/supabaseUtils');
+                const data: Banner[] = await getBanners();
+                if (data.length > 0) {
+                    setBanners(data.map(b => b.image_url));
+                } else {
+                    setBanners(FALLBACK_BANNERS);
+                }
+            } catch {
+                setBanners(FALLBACK_BANNERS);
+            }
         };
-        fetchConfig();
+        fetchBanners();
     }, []);
+
+    // Auto-advance slides
+    const nextSlide = useCallback(() => {
+        if (banners.length <= 1) return;
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setCurrentIndex(prev => (prev + 1) % banners.length);
+            setIsTransitioning(false);
+        }, 600); // matches CSS fade duration
+    }, [banners.length]);
+
+    useEffect(() => {
+        if (banners.length <= 1) return;
+        const interval = setInterval(nextSlide, SLIDE_DURATION);
+        return () => clearInterval(interval);
+    }, [nextSlide, banners.length]);
+
+    const goToSlide = (index: number) => {
+        if (index === currentIndex || isTransitioning) return;
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setCurrentIndex(index);
+            setIsTransitioning(false);
+        }, 600);
+    };
 
     return (
         <section className="relative overflow-hidden">
-            {/* ... (rest of the file) */}{/* ... (rest of the file) */}
-
-            {/* Hero Background with Traditional Temple Jewelry Image */}
+            {/* Banner Slideshow */}
             <div className="relative min-h-[400px] md:min-h-[500px]">
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                    <img
-                        src={bannerUrl}
-                        alt={headline1 + " " + headline2}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            const fallbackUrl = "https://images.pexels.com/photos/248077/pexels-photo-248077.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-                            if (target.src !== fallbackUrl) {
-                                target.src = fallbackUrl;
-                            }
+                {/* Slides */}
+                {banners.map((url, index) => (
+                    <div
+                        key={index}
+                        className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+                        style={{
+                            opacity: index === currentIndex && !isTransitioning ? 1 : 0,
+                            zIndex: index === currentIndex ? 2 : 1,
                         }}
-                    />
-                </div>
+                    >
+                        <img
+                            src={url}
+                            alt={`Banner ${index + 1}`}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                if (target.src !== FALLBACK_BANNERS[0]) {
+                                    target.src = FALLBACK_BANNERS[0];
+                                }
+                            }}
+                        />
+                    </div>
+                ))}
 
-                {/* Left Fade Gradient Overlay - Reduced to show more gold */}
+                {/* Bottom gradient for button readability */}
                 <div
-                    className="absolute inset-0 z-[5]"
+                    className="absolute bottom-0 left-0 right-0 h-40 z-[5]"
                     style={{
-                        background: 'linear-gradient(to right, rgba(253, 248, 240, 0.95) 0%, rgba(253, 248, 240, 0.8) 20%, rgba(253, 248, 240, 0.3) 40%, transparent 55%)'
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)'
                     }}
                 />
 
-                <div className="relative z-10 pl-2 pr-4 md:pl-4 md:pr-6 py-12 md:py-16">
-                    <h1 className="leading-tight mb-4 drop-shadow-sm">
-                        <span
-                            className="font-display text-4xl md:text-5xl lg:text-6xl text-[#3E2723] font-bold inline-block px-4 py-1 mb-2"
-                            style={{
-                                background: 'linear-gradient(to right, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05))',
-                                borderRadius: '4px'
-                            }}
-                        >
-                            {headline1}
-                        </span>
-                        <br />
-                        <span
-                            className="font-display text-4xl md:text-5xl lg:text-6xl text-[#3E2723] font-bold inline-block px-4 py-1"
-                            style={{
-                                background: 'linear-gradient(to right, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05))',
-                                borderRadius: '4px'
-                            }}
-                        >
-                            {headline2}
-                        </span>
-                    </h1>
-
-                    <p className="text-sm md:text-base text-[#5D4037] mb-8 max-w-sm">
-                        {description}
-                    </p>
-
-                    {/* CTA Buttons */}
-                    <div className="flex flex-wrap gap-3">
-                        <Link
-                            href="/categories"
-                            className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg"
-                        >
-                            View Collection
-                        </Link>
-                        <button
-                            onClick={() => {
-                                // Scroll to bullion section and trigger modal via custom event
-                                const bullionSection = document.querySelector('#bullion-section');
-                                if (bullionSection) {
-                                    bullionSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                    // Trigger after scroll
-                                    setTimeout(() => {
-                                        const buyButton = bullionSection.querySelector('button[data-bullion-buy]') as HTMLButtonElement;
-                                        if (buyButton) buyButton.click();
-                                    }, 500);
-                                }
-                            }}
-                            className="inline-flex items-center gap-2 bg-white text-text-main-light px-6 py-3 rounded-lg font-medium border-2 border-primary/30 hover:border-primary transition-all cursor-pointer"
-                        >
-                            24K Bullion
-                        </button>
-                    </div>
+                {/* CTA Buttons — Bottom Left */}
+                <div className="absolute bottom-6 left-4 md:left-8 z-10 flex flex-wrap gap-3">
+                    <Link
+                        href="/categories"
+                        className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-all shadow-lg text-sm md:text-base"
+                    >
+                        View Collection
+                    </Link>
+                    <button
+                        onClick={() => {
+                            const bullionSection = document.querySelector('#bullion-section');
+                            if (bullionSection) {
+                                bullionSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                setTimeout(() => {
+                                    const buyButton = bullionSection.querySelector('button[data-bullion-buy]') as HTMLButtonElement;
+                                    if (buyButton) buyButton.click();
+                                }, 500);
+                            }
+                        }}
+                        className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-[#3E2723] px-6 py-3 rounded-lg font-medium border-2 border-primary/30 hover:border-primary transition-all cursor-pointer text-sm md:text-base"
+                    >
+                        24K Bullion
+                    </button>
                 </div>
+
+                {/* Slide Indicator Dots */}
+                {banners.length > 1 && (
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                        {banners.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => goToSlide(index)}
+                                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === currentIndex
+                                        ? 'bg-white scale-125 shadow-md'
+                                        : 'bg-white/50 hover:bg-white/80'
+                                    }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* Customer Love Section */}
@@ -130,18 +152,18 @@ export default function Hero() {
                         href="/order/custom"
                         className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
                     >
-                        <Edit strokeWidth={1.5} className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
                         <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
                             Order Your Own
                         </span>
                     </Link>
 
-                    {/* Daily Wear Items - Links to dedicated page */}
+                    {/* Daily Wear Items */}
                     <Link
                         href="/daily-wear"
                         className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
                     >
-                        <ShoppingBag strokeWidth={1.5} className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
                         <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
                             Daily wear items
                         </span>
@@ -152,7 +174,7 @@ export default function Hero() {
                         href="/vad-items"
                         className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
                     >
-                        <Percent strokeWidth={1.5} className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110"><line x1="19" x2="5" y1="5" y2="19" /><circle cx="6.5" cy="6.5" r="2.5" /><circle cx="17.5" cy="17.5" r="2.5" /></svg>
                         <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
                             0% VAD items
                         </span>
@@ -163,15 +185,13 @@ export default function Hero() {
                         href="/silver"
                         className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
                     >
-                        <Coins strokeWidth={1.5} className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110" />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110"><circle cx="8" cy="8" r="6" /><path d="M18.09 10.37A6 6 0 1 1 10.34 18" /><path d="M7 6h1v4" /><path d="m16.71 13.88.7.71-2.82 2.82" /></svg>
                         <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
                             Silver Bars and Silver ornaments
                         </span>
                     </Link>
                 </div>
             </div>
-
-
         </section>
     );
 }
