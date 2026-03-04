@@ -50,7 +50,7 @@ export default function BullionPage() {
                                     <Image
                                         src="/images/gold_bullion.png"
                                         alt="24K Gold Bar"
-                                        className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] transition-all duration-700 mix-blend-multiply scale-[1.8] md:scale-[2]"
+                                        className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] transition-all duration-700 mix-blend-multiply scale-[1.3] md:scale-[1.5]"
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
