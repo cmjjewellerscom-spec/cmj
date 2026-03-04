@@ -43,10 +43,7 @@ export default function BullionSection() {
                         </div>
 
                         <div className="flex justify-center md:justify-end">
-                            <div className="relative w-full max-w-sm aspect-[3/4] group transition-all duration-500 flex items-center justify-center bg-gradient-to-br from-[#FFF8E7] to-[#F5DEB3] rounded-2xl overflow-hidden shadow-gold border border-primary/10">
-                                {/* Decorative Glow */}
-                                <div className="absolute inset-0 bg-primary/25 blur-[100px] rounded-full scale-50 group-hover:scale-75 transition-transform duration-700"></div>
-
+                            <div className="relative w-full max-w-sm aspect-[3/4] group transition-all duration-500 flex items-center justify-center overflow-hidden">
                                 {/* Gold Bar Image */}
                                 <div className="relative z-10 w-full h-full flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]">
                                     <Image
@@ -56,11 +53,6 @@ export default function BullionSection() {
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
-                                </div>
-
-                                {/* Floating element */}
-                                <div className="absolute -top-4 -right-4 bg-white/95 backdrop-blur-md border border-primary/20 px-3 py-1.5 rounded-xl animate-bounce shadow-xl z-20">
-                                    <span className="text-[0.65rem] font-bold text-primary-dark">▲ +12% Real Value</span>
                                 </div>
                             </div>
                         </div>
