@@ -162,7 +162,7 @@ export default function Hero() {
 
                         {/* Card 2: Heritage Bridal Collections */}
                         <Link
-                            href="/categories"
+                            href="/heritage-bridal"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
                             {/* AI Icon - Crown / Temple Roof */}
