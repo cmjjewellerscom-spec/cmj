@@ -43,13 +43,13 @@ export default function BullionSection() {
                         </div>
 
                         <div className="flex justify-center md:justify-end">
-                            <div className="relative w-full max-w-sm aspect-[3/4] group transition-all duration-500 flex items-center justify-center overflow-hidden">
+                            <div className="relative w-full max-w-[280px] md:max-w-xs aspect-[2/3] group transition-all duration-500 flex items-center justify-center overflow-hidden">
                                 {/* Gold Bar Image */}
-                                <div className="relative z-10 w-full h-full flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]">
+                                <div className="relative z-10 w-full h-full flex items-center justify-center">
                                     <Image
                                         src="/images/bullion_gold1.png"
                                         alt="24K Gold Bar"
-                                        className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] transition-all duration-700 mix-blend-multiply"
+                                        className="object-contain drop-shadow-[0_10px_30px_rgba(62,39,35,0.1)] transition-all duration-700 mix-blend-multiply"
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
