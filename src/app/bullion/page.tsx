@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import { ArrowRight, Check, ShieldCheck, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 export default function BullionPage() {
@@ -46,10 +47,12 @@ export default function BullionPage() {
 
                                 <div className="relative z-10 w-full max-w-lg aspect-square flex items-center justify-center p-4">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent rounded-full blur-3xl scale-75 animate-pulse"></div>
-                                    <img
+                                    <Image
                                         src="/images/gold_bullion.png"
                                         alt="24K Gold Bar"
-                                        className="w-full h-auto max-h-full object-contain drop-shadow-[0_20px_50px_rgba(184,134,11,0.3)] hover:scale-110 transition-transform duration-700 mix-blend-multiply relative z-10"
+                                        className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] transition-all duration-700 mix-blend-multiply scale-[1.8] md:scale-[2]"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
                                 </div>
 
