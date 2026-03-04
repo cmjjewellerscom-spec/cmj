@@ -29,7 +29,7 @@ export default function BullionSection() {
                                 24k Gold Bullion
                             </h2>
                             <p className="text-sm md:text-base text-[#5D4037] mb-8 font-medium">
-                                Secure your future with pure 999 gold coins and bars. Live market rates, starting from just 1 gram.
+                                Secure your future with pure 999 gold coins and bars at live market rates.
                             </p>
 
                             <Link

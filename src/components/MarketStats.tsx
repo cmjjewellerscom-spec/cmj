@@ -143,7 +143,7 @@ export default function MarketStats() {
                         <div className="text-2xl md:text-3xl font-display font-bold text-yellow-800 dark:text-yellow-300">
                             {loading ? '...' : formatPrice(prices.gold24k)}
                         </div>
-                        <p className="text-xs text-yellow-600 dark:text-yellow-500/80 mt-1">per gram</p>
+                        {/* per gram removed */}
                     </div>
 
                     {/* Gold 22K */}
@@ -159,7 +159,7 @@ export default function MarketStats() {
                         <div className="text-2xl md:text-3xl font-display font-bold text-amber-800 dark:text-amber-300">
                             {loading ? '...' : formatPrice(prices.gold22k)}
                         </div>
-                        <p className="text-xs text-amber-600 dark:text-amber-500/80 mt-1">per gram</p>
+                        {/* per gram removed */}
                     </div>
 
                     {/* Silver */}
@@ -176,7 +176,7 @@ export default function MarketStats() {
                         <div className="text-2xl md:text-3xl font-display font-bold text-gray-700 dark:text-gray-200">
                             {loading ? '...' : formatPrice(prices.silver)}
                         </div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400/80 mt-1">per gram</p>
+                        {/* per gram removed */}
                     </div>
                 </div>
 

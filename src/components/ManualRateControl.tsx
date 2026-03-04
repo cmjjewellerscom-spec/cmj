@@ -79,7 +79,7 @@ export default function ManualRateControl() {
                 </div>
                 <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
-                        Gold 24K (1g)
+                        Gold 24K
                     </label>
                     <input
                         type="number"
@@ -90,7 +90,7 @@ export default function ManualRateControl() {
                 </div>
                 <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
-                        Gold 22K (1g)
+                        Gold 22K
                     </label>
                     <input
                         type="number"
@@ -101,7 +101,7 @@ export default function ManualRateControl() {
                 </div>
                 <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
-                        Gold 18K (1g)
+                        Gold 18K
                     </label>
                     <input
                         type="number"
@@ -112,7 +112,7 @@ export default function ManualRateControl() {
                 </div>
                 <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
-                        Silver (1g)
+                        Silver
                     </label>
                     <input
                         type="number"

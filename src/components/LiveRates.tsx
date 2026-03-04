@@ -20,13 +20,13 @@ export default function LiveRates() {
         <>
             <RateItem label="GOLD 24K (10G)" value={`₹${(gold24k10g || gold24k * 10).toLocaleString('en-IN')}`} />
             <span className="text-primary/20 text-xs">•</span>
-            <RateItem label="GOLD 24K (1G)" value={`₹${gold24k.toLocaleString('en-IN')}`} />
+            <RateItem label="GOLD 24K" value={`₹${gold24k.toLocaleString('en-IN')}`} />
             <span className="text-primary/20 text-xs">•</span>
-            <RateItem label="GOLD 22K (1G)" value={`₹${gold22k.toLocaleString('en-IN')}`} />
+            <RateItem label="GOLD 22K" value={`₹${gold22k.toLocaleString('en-IN')}`} />
             <span className="text-primary/20 text-xs">•</span>
-            <RateItem label="GOLD 18K (1G)" value={`₹${gold18k.toLocaleString('en-IN')}`} />
+            <RateItem label="GOLD 18K" value={`₹${gold18k.toLocaleString('en-IN')}`} />
             <span className="text-primary/20 text-xs">•</span>
-            <RateItem label="SILVER (1G)" value={`₹${silver.toLocaleString('en-IN')}`} />
+            <RateItem label="SILVER" value={`₹${silver.toLocaleString('en-IN')}`} />
             <span className="text-primary/20 text-xs">•</span>
             <RateItem label="DIAMOND (1CT)" value={`₹${diamond?.toLocaleString('en-IN') || '65,000'}`} />
             <span className="text-primary/20 text-xs">•</span>
