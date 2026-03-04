@@ -50,7 +50,7 @@ export default function BullionSection() {
                                 {/* Gold Bar Image */}
                                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                                     <Image
-                                        src="/images/gold_bullion.png"
+                                        src="/images/bullion_gold1.png"
                                         alt="24K Gold Bar"
                                         className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] transition-all duration-700 mix-blend-multiply"
                                         fill

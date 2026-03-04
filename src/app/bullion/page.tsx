@@ -48,7 +48,7 @@ export default function BullionPage() {
                                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent rounded-full blur-3xl scale-75 animate-pulse"></div>
                                     <Image
-                                        src="/images/gold_bullion.png"
+                                        src="/images/bullion_gold1.png"
                                         alt="24K Gold Bar"
                                         className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] transition-all duration-700 mix-blend-multiply"
                                         fill
