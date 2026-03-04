@@ -143,15 +143,9 @@ export default function Hero() {
                             href="/order/custom"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* Icon - Intricate Arch */}
-                            <div className="mb-4 md:mb-6 text-[#A0845C] group-hover:text-[#D4AF37] transition-all duration-500 group-hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-12 h-12 md:w-16 md:h-16 drop-shadow-sm">
-                                    <path d="M16 54V32c0-8.837 7.163-16 16-16s16 7.163 16 16v22" strokeLinecap="round" />
-                                    <path d="M26 54V38c0-3.314 2.686-6 6-6s6 2.686 6 6v16" strokeLinecap="round" />
-                                    <path d="M32 16v-6M20 18l-3-4M44 18l3-4" strokeLinecap="round" strokeLinejoin="round" />
-                                    <line x1="8" y1="54" x2="56" y2="54" strokeLinecap="round" />
-                                    <line x1="12" y1="58" x2="52" y2="58" strokeLinecap="round" />
-                                </svg>
+                            {/* AI Icon - Intricate Arch */}
+                            <div className="mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 w-16 h-16 md:w-20 md:h-20 max-w-full">
+                                <img src="/images/icon-arch.png" alt="Signature Custom Creations" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
                             </div>
                             <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Signature Custom<br />Creations</h4>
                             <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Designed Around Your Story</p>
@@ -171,17 +165,9 @@ export default function Hero() {
                             href="/categories"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* Icon - Crown / Temple Roof */}
-                            <div className="mb-4 md:mb-6 text-[#A0845C] group-hover:text-[#D4AF37] transition-all duration-500 group-hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-12 h-12 md:w-16 md:h-16 drop-shadow-sm">
-                                    <path d="M10 44l6-24 5 10 11-16 11 16 5-10 6 24" strokeLinejoin="round" />
-                                    <rect x="12" y="44" width="40" height="4" strokeLinejoin="round" />
-                                    <line x1="8" y1="52" x2="56" y2="52" strokeLinecap="round" />
-                                    <circle cx="32" cy="10" r="2" fill="currentColor" stroke="none" />
-                                    <circle cx="16" cy="16" r="1.5" fill="currentColor" stroke="none" />
-                                    <circle cx="48" cy="16" r="1.5" fill="currentColor" stroke="none" />
-                                    <path d="M21 30v14M32 28v16M43 30v14" opacity="0.5" strokeLinecap="round" />
-                                </svg>
+                            {/* AI Icon - Crown / Temple Roof */}
+                            <div className="mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 w-16 h-16 md:w-20 md:h-20 max-w-full">
+                                <img src="/images/icon-crown.png" alt="Heritage Bridal Collections" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
                             </div>
                             <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Heritage Bridal<br />Collections</h4>
                             <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Limited Edition Wedding Masterpieces</p>
@@ -201,16 +187,9 @@ export default function Hero() {
                             href="/daily-wear"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* Icon - Intricate Trishul */}
-                            <div className="mb-4 md:mb-6 text-[#A0845C] group-hover:text-[#D4AF37] transition-all duration-500 group-hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-12 h-12 md:w-16 md:h-16 drop-shadow-sm">
-                                    <line x1="32" y1="12" x2="32" y2="54" strokeLinecap="round" />
-                                    <path d="M32 12l-6 10h12L32 12z" strokeLinejoin="round" fill="none" />
-                                    <path d="M18 28c0-10 6-14 14-16" strokeLinecap="round" />
-                                    <path d="M46 28c0-10-6-14-14-16" strokeLinecap="round" />
-                                    <path d="M26 36l12-4v8L26 36v8z" strokeLinejoin="round" />
-                                    <line x1="24" y1="54" x2="40" y2="54" strokeLinecap="round" />
-                                </svg>
+                            {/* AI Icon - Intricate Trishul */}
+                            <div className="mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 w-16 h-16 md:w-20 md:h-20 max-w-full">
+                                <img src="/images/icon-trishul.png" alt="Divine Gold Icons" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
                             </div>
                             <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Divine Gold Icons</h4>
                             <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Sacred Luxury</p>
@@ -230,24 +209,9 @@ export default function Hero() {
                             href="/bullion"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* Icon - 3D Gold Bars */}
-                            <div className="mb-4 md:mb-6 text-[#A0845C] group-hover:text-[#D4AF37] transition-all duration-500 group-hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-12 h-12 md:w-16 md:h-16 drop-shadow-sm">
-                                    {/* Bottom Left Bar */}
-                                    <path d="M14 42l10-6h16l-10 6H14z" strokeLinejoin="round" />
-                                    <path d="M14 42v6l10-6v-6" strokeLinejoin="round" />
-                                    <path d="M40 36v6l-10 6v-6" strokeLinejoin="round" />
-
-                                    {/* Bottom Right Bar */}
-                                    <path d="M26 48l10-6h16l-10 6H26z" strokeLinejoin="round" />
-                                    <path d="M26 48v6l10-6v-6" strokeLinejoin="round" />
-                                    <path d="M52 42v6l-10 6v-6" strokeLinejoin="round" />
-
-                                    {/* Top Bar */}
-                                    <path d="M20 30l10-6h16l-10 6H20z" strokeLinejoin="round" />
-                                    <path d="M20 30v6l10-6v-6" strokeLinejoin="round" />
-                                    <path d="M46 24v6l-10 6v-6" strokeLinejoin="round" />
-                                </svg>
+                            {/* AI Icon - 3D Gold Bars */}
+                            <div className="mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 w-16 h-16 md:w-20 md:h-20 max-w-full">
+                                <img src="/images/icon-bullion.png" alt="Premium Bullion" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
                             </div>
                             <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Premium Bullion</h4>
                             <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Purity. Power. Security.</p>
