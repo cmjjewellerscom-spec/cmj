@@ -232,7 +232,7 @@ export default function OrderClient() {
                                 {/* Feature 1: Designed Only For You */}
                                 <div className="bg-white/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:border-[#D4AF37]/40 transition-all duration-300">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-2xl md:text-3xl flex-shrink-0">1️⃣</span>
+                                        <span className="text-3xl md:text-4xl font-bold text-[#D4AF37] flex-shrink-0">1.</span>
                                         <div>
                                             <h3 className="font-display text-lg md:text-2xl font-bold text-[#3E2723] mb-3">Designed Only For You</h3>
                                             <p className="text-[#8B7355] text-sm md:text-base mb-4">This is not a ready-made design. We create the jewellery based on:</p>
@@ -251,7 +251,7 @@ export default function OrderClient() {
                                 {/* Feature 2: Divine Inspiration */}
                                 <div className="bg-white/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:border-[#D4AF37]/40 transition-all duration-300">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-2xl md:text-3xl flex-shrink-0">2️⃣</span>
+                                        <span className="text-3xl md:text-4xl font-bold text-[#D4AF37] flex-shrink-0">2.</span>
                                         <div>
                                             <h3 className="font-display text-lg md:text-2xl font-bold text-[#3E2723] mb-3">Divine Inspiration</h3>
                                             <p className="text-[#8B7355] text-sm md:text-base mb-4">The central design features:</p>
@@ -270,7 +270,7 @@ export default function OrderClient() {
                                 {/* Feature 3: Personal Story Engraved */}
                                 <div className="bg-white/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:border-[#D4AF37]/40 transition-all duration-300">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-2xl md:text-3xl flex-shrink-0">3️⃣</span>
+                                        <span className="text-3xl md:text-4xl font-bold text-[#D4AF37] flex-shrink-0">3.</span>
                                         <div>
                                             <h3 className="font-display text-lg md:text-2xl font-bold text-[#3E2723] mb-3">Personal Story Engraved</h3>
                                             <p className="text-[#8B7355] text-sm md:text-base mb-4">We can include:</p>
@@ -290,7 +290,7 @@ export default function OrderClient() {
                                 {/* Feature 4: Crafted in 22K Gold */}
                                 <div className="bg-white/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:border-[#D4AF37]/40 transition-all duration-300">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-2xl md:text-3xl flex-shrink-0">4️⃣</span>
+                                        <span className="text-3xl md:text-4xl font-bold text-[#D4AF37] flex-shrink-0">4.</span>
                                         <div>
                                             <h3 className="font-display text-lg md:text-2xl font-bold text-[#3E2723] mb-3">Crafted in 22K Gold</h3>
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -308,7 +308,7 @@ export default function OrderClient() {
                                 {/* Feature 5: Limited & Exclusive */}
                                 <div className="bg-white/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg hover:border-[#D4AF37]/40 transition-all duration-300">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-2xl md:text-3xl flex-shrink-0">5️⃣</span>
+                                        <span className="text-3xl md:text-4xl font-bold text-[#D4AF37] flex-shrink-0">5.</span>
                                         <div>
                                             <h3 className="font-display text-lg md:text-2xl font-bold text-[#3E2723] mb-3">Limited & Exclusive</h3>
                                             <p className="text-[#3E2723] text-sm md:text-base">We do not repeat the same design.</p>
@@ -320,7 +320,7 @@ export default function OrderClient() {
                                 {/* Feature 6: By Appointment Only */}
                                 <div className="bg-gradient-to-r from-[#3E2723] to-[#4E342E] border border-[#D4AF37]/30 rounded-2xl p-6 md:p-8 shadow-lg">
                                     <div className="flex items-start gap-4">
-                                        <span className="text-2xl md:text-3xl flex-shrink-0">6️⃣</span>
+                                        <span className="text-3xl md:text-4xl font-bold text-[#D4AF37] flex-shrink-0">6.</span>
                                         <div>
                                             <h3 className="font-display text-lg md:text-2xl font-bold text-[#F5EDE0] mb-3">By Appointment Only</h3>
                                             <div className="space-y-2">
