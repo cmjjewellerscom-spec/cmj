@@ -175,16 +175,7 @@ export default function DivineIconsPage() {
                             </div>
                         </div>
 
-                        {/* CTA Button */}
-                        <div className="mt-16 text-center">
-                            <Link
-                                href="/daily-wear"
-                                className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C9A030] text-[#3E2723] px-10 py-5 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 font-bold font-display text-xl"
-                            >
-                                View Collection
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                            </Link>
-                        </div>
+                        {/* CTA Button removed as requested */}
                     </div>
                 </section>
             </main>
