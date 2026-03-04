@@ -43,7 +43,7 @@ export default function BullionSection() {
                         </div>
 
                         <div className="flex justify-center md:justify-end">
-                            <div className="relative w-72 h-72 md:w-96 md:h-96 group transition-all duration-500 flex items-center justify-center">
+                            <div className="relative w-full max-w-sm aspect-[3/4] group transition-all duration-500 flex items-center justify-center bg-gradient-to-br from-[#FFF8E7] to-[#F5DEB3] rounded-2xl overflow-hidden shadow-gold border border-primary/10">
                                 {/* Decorative Glow */}
                                 <div className="absolute inset-0 bg-primary/25 blur-[100px] rounded-full scale-50 group-hover:scale-75 transition-transform duration-700"></div>
 

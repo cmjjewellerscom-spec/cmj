@@ -39,7 +39,7 @@ export default function BullionPage() {
                     {/* Left Side - Image Gallery Style */}
                     <div className="w-full lg:w-1/2">
                         <div className="sticky top-24">
-                            <div className="bg-gradient-to-br from-[#FFF8E7] to-[#F5DEB3] rounded-2xl relative overflow-hidden shadow-gold border border-primary/10 aspect-square flex items-center justify-center">
+                            <div className="bg-gradient-to-br from-[#FFF8E7] to-[#F5DEB3] rounded-2xl relative overflow-hidden shadow-gold border border-primary/10 aspect-[3/4] md:aspect-[4/5] flex items-center justify-center mx-auto max-w-md">
                                 {/* Background Texture */}
                                 <div className="absolute inset-0 opacity-10 bg-[url('/patterns/cream-paper.png')] mix-blend-multiply"></div>
                                 <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
