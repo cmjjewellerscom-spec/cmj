@@ -49,7 +49,7 @@ export default function BullionSection() {
 
                                 {/* Gold Bar Image */}
                                 <Image
-                                    src="/images/gold_bullion.png"
+                                    src="/images/cmj_bar.png"
                                     alt="24K Gold Bar"
                                     className="relative z-10 object-contain drop-shadow-2xl scale-125 md:scale-150"
                                     fill
