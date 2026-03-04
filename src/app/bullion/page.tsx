@@ -49,7 +49,7 @@ export default function BullionPage() {
                     {/* Left Side - Image Gallery Style */}
                     <div className="w-full lg:w-1/2">
                         <div className="sticky top-24">
-                            <div className="relative group bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-3xl p-4 md:p-6 overflow-hidden shadow-xl transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/10 aspect-[3/4] md:aspect-[4/5] flex items-center justify-center mx-auto max-w-md">
+                            <div className="relative group overflow-hidden aspect-[3/4] md:aspect-[4/5] flex items-center justify-center mx-auto max-w-md">
                                 <div className="relative z-10 w-full h-full flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]">
                                     <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl scale-75 animate-pulse"></div>
                                     <Image
