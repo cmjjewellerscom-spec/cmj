@@ -14,6 +14,7 @@ export default function OrderClient() {
 
     const [product, setProduct] = useState<Product | null>(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -341,192 +342,206 @@ export default function OrderClient() {
                     {/* CTA + Order Form Section */}
                     <section id="custom-form" className="py-12 md:py-20 px-4" style={{ background: 'linear-gradient(180deg, #F5EDE0 0%, #EDE4D4 100%)' }}>
                         <div className="max-w-2xl mx-auto">
-                            {/* CTA Header */}
+                            {/* CTA Header / Button */}
                             <div className="text-center mb-8">
-                                <h2 className="font-display text-2xl md:text-4xl font-bold text-[#3E2723] mb-3">
-                                    💎 Custom Your Own
-                                </h2>
-                                <p className="text-[#8B7355] text-sm md:text-base max-w-lg mx-auto">
-                                    Share your design ideas, inspiration, or requirements and we&apos;ll craft your dream jewellery. Fill in the details below and we&apos;ll connect with you on WhatsApp.
-                                </p>
+                                {!showForm ? (
+                                    <button
+                                        onClick={() => setShowForm(true)}
+                                        className="inline-flex items-center gap-3 bg-[#D4AF37] hover:bg-[#C9A030] text-[#3E2723] px-8 md:px-12 py-4 md:py-6 rounded-2xl shadow-xl hover:shadow-2xl border-2 border-[#D4AF37] hover:border-[#FFF8F0] hover:-translate-y-1 transition-all duration-300 group"
+                                    >
+                                        <span className="text-2xl md:text-4xl group-hover:scale-110 transition-transform">💎</span>
+                                        <span className="font-display text-xl md:text-3xl font-bold">Custom Your Own</span>
+                                    </button>
+                                ) : (
+                                    <>
+                                        <h2 className="font-display text-2xl md:text-4xl font-bold text-[#3E2723] mb-3">
+                                            💎 Custom Your Own
+                                        </h2>
+                                        <p className="text-[#8B7355] text-sm md:text-base max-w-lg mx-auto">
+                                            Share your design ideas, inspiration, or requirements and we&apos;ll craft your dream jewellery. Fill in the details below and we&apos;ll connect with you on WhatsApp.
+                                        </p>
+                                    </>
+                                )}
                             </div>
 
                             {/* Form Card */}
-                            <div className="bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-[#D4AF37]/20 p-6 md:p-8">
-                                <form onSubmit={handleOrderSubmit} className="space-y-5">
-                                    <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-2">Name</label>
-                                        <input
-                                            required
-                                            type="text"
-                                            className="w-full bg-[#FAF6F0] dark:bg-black/20 border border-[#D4AF37]/20 rounded-xl p-4 text-sm focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-[#C4B396]"
-                                            placeholder="Enter your full name"
-                                            value={formData.name}
-                                            onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                        />
-                                    </div>
+                            {showForm && (
+                                <div className="bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-[#D4AF37]/20 p-6 md:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                    <form onSubmit={handleOrderSubmit} className="space-y-5">
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-2">Name</label>
+                                            <input
+                                                required
+                                                type="text"
+                                                className="w-full bg-[#FAF6F0] dark:bg-black/20 border border-[#D4AF37]/20 rounded-xl p-4 text-sm focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-[#C4B396]"
+                                                placeholder="Enter your full name"
+                                                value={formData.name}
+                                                onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                            />
+                                        </div>
 
-                                    <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-2">Phone Number</label>
-                                        <input
-                                            required
-                                            type="tel"
-                                            className="w-full bg-[#FAF6F0] dark:bg-black/20 border border-[#D4AF37]/20 rounded-xl p-4 text-sm focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-[#C4B396]"
-                                            placeholder="+91 99999 99999"
-                                            value={formData.phone}
-                                            onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                                        />
-                                    </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-2">Phone Number</label>
+                                            <input
+                                                required
+                                                type="tel"
+                                                className="w-full bg-[#FAF6F0] dark:bg-black/20 border border-[#D4AF37]/20 rounded-xl p-4 text-sm focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all placeholder:text-[#C4B396]"
+                                                placeholder="+91 99999 99999"
+                                                value={formData.phone}
+                                                onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                                            />
+                                        </div>
 
-                                    <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-2">Delivery Address</label>
-                                        <textarea
-                                            required
-                                            rows={3}
-                                            className="w-full bg-[#FAF6F0] dark:bg-black/20 border border-[#D4AF37]/20 rounded-xl p-4 text-sm focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all resize-none placeholder:text-[#C4B396]"
-                                            placeholder="Enter full delivery address"
-                                            value={formData.address}
-                                            onChange={e => setFormData({ ...formData, address: e.target.value })}
-                                        />
-                                    </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-2">Delivery Address</label>
+                                            <textarea
+                                                required
+                                                rows={3}
+                                                className="w-full bg-[#FAF6F0] dark:bg-black/20 border border-[#D4AF37]/20 rounded-xl p-4 text-sm focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all resize-none placeholder:text-[#C4B396]"
+                                                placeholder="Enter full delivery address"
+                                                value={formData.address}
+                                                onChange={e => setFormData({ ...formData, address: e.target.value })}
+                                            />
+                                        </div>
 
-                                    <div>
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-2">Your Design Requirements</label>
-                                        <textarea
-                                            rows={4}
-                                            className="w-full bg-[#FAF6F0] dark:bg-black/20 border border-[#D4AF37]/20 rounded-xl p-4 text-sm focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all resize-none placeholder:text-[#C4B396]"
-                                            placeholder="Describe your dream jewellery — temple inspiration, god motif, wedding theme, stone preferences..."
-                                            value={formData.message}
-                                            onChange={e => setFormData({ ...formData, message: e.target.value })}
-                                        />
-                                    </div>
+                                        <div>
+                                            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-2">Your Design Requirements</label>
+                                            <textarea
+                                                rows={4}
+                                                className="w-full bg-[#FAF6F0] dark:bg-black/20 border border-[#D4AF37]/20 rounded-xl p-4 text-sm focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 outline-none transition-all resize-none placeholder:text-[#C4B396]"
+                                                placeholder="Describe your dream jewellery — temple inspiration, god motif, wedding theme, stone preferences..."
+                                                value={formData.message}
+                                                onChange={e => setFormData({ ...formData, message: e.target.value })}
+                                            />
+                                        </div>
 
-                                    {/* Image Upload Section */}
-                                    <div className="border-2 border-dashed border-[#D4AF37]/30 rounded-2xl p-5 hover:border-[#D4AF37]/60 transition-colors bg-[#FAF6F0]/50">
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-4">
-                                            📷 Reference Image (Optional)
-                                        </label>
+                                        {/* Image Upload Section */}
+                                        <div className="border-2 border-dashed border-[#D4AF37]/30 rounded-2xl p-5 hover:border-[#D4AF37]/60 transition-colors bg-[#FAF6F0]/50">
+                                            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-4">
+                                                📷 Reference Image (Optional)
+                                            </label>
 
-                                        {!imageFile ? (
-                                            <div className="relative group">
-                                                <input
-                                                    type="file"
-                                                    accept="image/*"
-                                                    onChange={(e) => {
-                                                        if (e.target.files && e.target.files[0]) {
-                                                            setImageFile(e.target.files[0]);
-                                                        }
-                                                    }}
-                                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                                                />
-                                                <div className="flex flex-col items-center justify-center gap-2 py-4 bg-white dark:bg-black/20 rounded-xl group-hover:bg-[#D4AF37]/5 transition-colors">
-                                                    <div className="p-3 bg-[#FAF6F0] rounded-full shadow-sm text-[#D4AF37]">
-                                                        <ImageIcon className="w-6 h-6" />
-                                                    </div>
-                                                    <span className="text-sm font-medium text-[#8B7355]">Click to upload an image</span>
-                                                    <span className="text-xs text-[#C4B396]">JPG, PNG up to 5MB</span>
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="flex items-center gap-3 bg-white dark:bg-black/20 rounded-xl p-3 border border-green-100 dark:border-green-900/30">
-                                                <div className="h-12 w-12 rounded-lg bg-gray-100 overflow-hidden relative">
-                                                    <img
-                                                        src={URL.createObjectURL(imageFile)}
-                                                        alt="Preview"
-                                                        className="w-full h-full object-cover"
+                                            {!imageFile ? (
+                                                <div className="relative group">
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={(e) => {
+                                                            if (e.target.files && e.target.files[0]) {
+                                                                setImageFile(e.target.files[0]);
+                                                            }
+                                                        }}
+                                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                                                     />
+                                                    <div className="flex flex-col items-center justify-center gap-2 py-4 bg-white dark:bg-black/20 rounded-xl group-hover:bg-[#D4AF37]/5 transition-colors">
+                                                        <div className="p-3 bg-[#FAF6F0] rounded-full shadow-sm text-[#D4AF37]">
+                                                            <ImageIcon className="w-6 h-6" />
+                                                        </div>
+                                                        <span className="text-sm font-medium text-[#8B7355]">Click to upload an image</span>
+                                                        <span className="text-xs text-[#C4B396]">JPG, PNG up to 5MB</span>
+                                                    </div>
                                                 </div>
-                                                <div className="flex-1 min-w-0">
-                                                    <p className="text-sm font-bold text-gray-800 dark:text-gray-200 truncate">{imageFile.name}</p>
-                                                    <p className="text-xs text-green-600 font-medium">Ready to attach</p>
-                                                </div>
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setImageFile(null)}
-                                                    className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                                                >
-                                                    <X className="w-5 h-5" />
-                                                </button>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Voice Recording Section */}
-                                    <div className="border-2 border-dashed border-[#D4AF37]/30 rounded-2xl p-5 bg-[#FAF6F0]/50">
-                                        <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-4">
-                                            🎤 Voice Message (Optional)
-                                        </label>
-
-                                        {!audioUrl ? (
-                                            <div className="flex items-center justify-center">
-                                                {!isRecording ? (
+                                            ) : (
+                                                <div className="flex items-center gap-3 bg-white dark:bg-black/20 rounded-xl p-3 border border-green-100 dark:border-green-900/30">
+                                                    <div className="h-12 w-12 rounded-lg bg-gray-100 overflow-hidden relative">
+                                                        <img
+                                                            src={URL.createObjectURL(imageFile)}
+                                                            alt="Preview"
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <p className="text-sm font-bold text-gray-800 dark:text-gray-200 truncate">{imageFile.name}</p>
+                                                        <p className="text-xs text-green-600 font-medium">Ready to attach</p>
+                                                    </div>
                                                     <button
                                                         type="button"
-                                                        onClick={startRecording}
-                                                        className="flex items-center gap-3 bg-[#3E2723] text-[#F5EDE0] px-8 py-4 rounded-full font-bold hover:bg-[#4E342E] transition-all shadow-lg"
+                                                        onClick={() => setImageFile(null)}
+                                                        className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                                                     >
-                                                        <Mic className="w-5 h-5" />
-                                                        <span>Record Voice Message</span>
+                                                        <X className="w-5 h-5" />
                                                     </button>
-                                                ) : (
-                                                    <div className="flex flex-col items-center gap-4">
-                                                        <div className="flex items-center gap-3">
-                                                            <span className="relative flex h-4 w-4">
-                                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                                                <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
-                                                            </span>
-                                                            <span className="text-red-500 font-bold text-2xl font-mono">{formatDuration(recordingDuration)}</span>
-                                                        </div>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Voice Recording Section */}
+                                        <div className="border-2 border-dashed border-[#D4AF37]/30 rounded-2xl p-5 bg-[#FAF6F0]/50">
+                                            <label className="block text-xs font-bold uppercase tracking-wider text-[#8B7355] mb-4">
+                                                🎤 Voice Message (Optional)
+                                            </label>
+
+                                            {!audioUrl ? (
+                                                <div className="flex items-center justify-center">
+                                                    {!isRecording ? (
                                                         <button
                                                             type="button"
-                                                            onClick={stopRecording}
-                                                            className="flex items-center gap-2 bg-red-500 text-white px-8 py-4 rounded-full font-bold hover:bg-red-600 transition-all animate-pulse"
+                                                            onClick={startRecording}
+                                                            className="flex items-center gap-3 bg-[#3E2723] text-[#F5EDE0] px-8 py-4 rounded-full font-bold hover:bg-[#4E342E] transition-all shadow-lg"
                                                         >
-                                                            <Square className="w-5 h-5 fill-current" />
-                                                            <span>Stop Recording</span>
+                                                            <Mic className="w-5 h-5" />
+                                                            <span>Record Voice Message</span>
                                                         </button>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        ) : (
-                                            <div className="flex items-center gap-3 bg-white dark:bg-black/20 rounded-xl p-4">
-                                                <audio src={audioUrl} controls className="flex-1 h-12" />
-                                                <button
-                                                    type="button"
-                                                    onClick={deleteRecording}
-                                                    className="p-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors"
-                                                    title="Delete recording"
-                                                >
-                                                    <Trash2 className="w-5 h-5" />
-                                                </button>
-                                            </div>
-                                        )}
+                                                    ) : (
+                                                        <div className="flex flex-col items-center gap-4">
+                                                            <div className="flex items-center gap-3">
+                                                                <span className="relative flex h-4 w-4">
+                                                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                                                    <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+                                                                </span>
+                                                                <span className="text-red-500 font-bold text-2xl font-mono">{formatDuration(recordingDuration)}</span>
+                                                            </div>
+                                                            <button
+                                                                type="button"
+                                                                onClick={stopRecording}
+                                                                className="flex items-center gap-2 bg-red-500 text-white px-8 py-4 rounded-full font-bold hover:bg-red-600 transition-all animate-pulse"
+                                                            >
+                                                                <Square className="w-5 h-5 fill-current" />
+                                                                <span>Stop Recording</span>
+                                                            </button>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ) : (
+                                                <div className="flex items-center gap-3 bg-white dark:bg-black/20 rounded-xl p-4">
+                                                    <audio src={audioUrl} controls className="flex-1 h-12" />
+                                                    <button
+                                                        type="button"
+                                                        onClick={deleteRecording}
+                                                        className="p-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors"
+                                                        title="Delete recording"
+                                                    >
+                                                        <Trash2 className="w-5 h-5" />
+                                                    </button>
+                                                </div>
+                                            )}
 
-                                        <p className="text-xs text-center text-[#A0845C]/60 mt-3">
-                                            Record your specific requirements in your preferred language
-                                        </p>
-                                    </div>
+                                            <p className="text-xs text-center text-[#A0845C]/60 mt-3">
+                                                Record your specific requirements in your preferred language
+                                            </p>
+                                        </div>
 
-                                    {/* Submit */}
-                                    <button
-                                        type="submit"
-                                        disabled={isProcessing}
-                                        className="w-full bg-[#D4AF37] hover:bg-[#C9A030] disabled:bg-[#D4AF37]/50 text-[#3E2723] font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-3 transition-all text-lg"
-                                    >
-                                        {isProcessing ? (
-                                            <>
-                                                <Loader2 className="w-6 h-6 animate-spin" />
-                                                <span>Processing...</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <span>Proceed to WhatsApp</span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
-                                            </>
-                                        )}
-                                    </button>
-                                </form>
-                            </div>
+                                        {/* Submit */}
+                                        <button
+                                            type="submit"
+                                            disabled={isProcessing}
+                                            className="w-full bg-[#D4AF37] hover:bg-[#C9A030] disabled:bg-[#D4AF37]/50 text-[#3E2723] font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-3 transition-all text-lg"
+                                        >
+                                            {isProcessing ? (
+                                                <>
+                                                    <Loader2 className="w-6 h-6 animate-spin" />
+                                                    <span>Processing...</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span>Proceed to WhatsApp</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+                                                </>
+                                            )}
+                                        </button>
+                                    </form>
+                                </div>
+                            )}
                         </div>
                     </section>
                 </main>
