@@ -43,22 +43,24 @@ export default function BullionSection() {
                         </div>
 
                         <div className="flex justify-center md:justify-end">
-                            <div className="relative w-72 h-72 md:w-96 md:h-96 group hover:scale-105 transition-transform duration-500 flex items-center justify-center">
+                            <div className="relative w-72 h-72 md:w-96 md:h-96 group transition-all duration-500 flex items-center justify-center">
                                 {/* Decorative Glow */}
-                                <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full scale-75 group-hover:scale-90 transition-transform duration-500"></div>
+                                <div className="absolute inset-0 bg-primary/25 blur-[100px] rounded-full scale-50 group-hover:scale-75 transition-transform duration-700"></div>
 
                                 {/* Gold Bar Image */}
-                                <Image
-                                    src="/images/cmj_bar.png"
-                                    alt="24K Gold Bar"
-                                    className="relative z-10 object-contain drop-shadow-2xl scale-125 md:scale-150"
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                />
+                                <div className="relative z-10 w-full h-full flex items-center justify-center p-4">
+                                    <Image
+                                        src="/images/gold_bullion.png"
+                                        alt="24K Gold Bar"
+                                        className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] group-hover:scale-110 group-hover:-rotate-3 transition-all duration-700 mix-blend-multiply scale-150"
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    />
+                                </div>
 
                                 {/* Floating element */}
-                                <div className="absolute -top-4 -right-4 bg-white/90 backdrop-blur-md border border-primary/20 p-2 rounded-lg animate-bounce shadow-lg z-20">
-                                    <span className="text-xs font-mono text-primary-dark font-bold">▲ +12% YoY</span>
+                                <div className="absolute -top-4 -right-4 bg-white/95 backdrop-blur-md border border-primary/20 px-3 py-1.5 rounded-xl animate-bounce shadow-xl z-20">
+                                    <span className="text-[0.65rem] font-bold text-primary-dark">▲ +12% Real Value</span>
                                 </div>
                             </div>
                         </div>

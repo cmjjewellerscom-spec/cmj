@@ -44,12 +44,12 @@ export default function BullionPage() {
                                 <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
 
-                                <div className="relative z-10 w-full max-w-lg aspect-square flex items-center justify-center">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl scale-90 animate-pulse"></div>
+                                <div className="relative z-10 w-full max-w-lg aspect-square flex items-center justify-center p-4">
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent rounded-full blur-3xl scale-75 animate-pulse"></div>
                                     <img
                                         src="/images/gold_bullion.png"
                                         alt="24K Gold Bar"
-                                        className="w-full h-auto max-h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
+                                        className="w-full h-auto max-h-full object-contain drop-shadow-[0_20px_50px_rgba(184,134,11,0.3)] hover:scale-110 transition-transform duration-700 mix-blend-multiply relative z-10"
                                     />
                                 </div>
 
