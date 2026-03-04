@@ -48,7 +48,7 @@ export default function BullionSection() {
                                 <div className="absolute inset-0 bg-primary/25 blur-[100px] rounded-full scale-50 group-hover:scale-75 transition-transform duration-700"></div>
 
                                 {/* Gold Bar Image */}
-                                <div className="relative z-10 w-full h-full flex items-center justify-center p-4">
+                                <div className="relative z-10 w-full h-full flex items-center justify-center">
                                     <Image
                                         src="/images/gold_bullion.png"
                                         alt="24K Gold Bar"
