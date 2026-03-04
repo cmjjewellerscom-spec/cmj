@@ -63,7 +63,7 @@ export default function Header() {
 
                         <div className="space-y-3">
                             <a
-                                href="tel:+919997631117"
+                                href="tel:+917702592121"
                                 className="flex items-center gap-4 p-4 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/30 transition-all border border-green-100 dark:border-green-800/50 group"
                             >
                                 <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-800/50 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -71,12 +71,12 @@ export default function Header() {
                                 </div>
                                 <div className="flex-1 text-left">
                                     <div className="font-bold text-sm uppercase tracking-wide">Call Us</div>
-                                    <div className="text-sm opacity-80">+91 99976 31117</div>
+                                    <div className="text-sm opacity-80">+91 7702592121</div>
                                 </div>
                             </a>
 
                             <a
-                                href="https://wa.me/919997631117"
+                                href="https://wa.me/917702592121"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-4 p-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all border border-blue-100 dark:border-blue-800/50 group"

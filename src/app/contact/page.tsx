@@ -33,20 +33,20 @@ export default function ContactPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {/* Call Card */}
                         <a
-                            href="tel:+919997631117"
+                            href="tel:+917702592121"
                             className="group bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:-translate-y-1 text-center"
                         >
                             <div className="w-16 h-16 mx-auto mb-5 rounded-full bg-green-50 dark:bg-green-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 <Phone className="w-7 h-7 text-green-600 dark:text-green-400" />
                             </div>
                             <h3 className="font-display text-lg font-bold text-gray-900 dark:text-white mb-2">Call Us</h3>
-                            <p className="text-[#D4AF37] font-semibold text-lg font-mono">+91 99976 31117</p>
+                            <p className="text-[#D4AF37] font-semibold text-lg font-mono">+91 7702592121</p>
                             <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">Tap to call directly</p>
                         </a>
 
                         {/* WhatsApp Card */}
                         <a
-                            href="https://wa.me/919997631117"
+                            href="https://wa.me/917702592121"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-800 hover:-translate-y-1 text-center"
@@ -116,8 +116,8 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-gray-900 dark:text-white mb-1">Phone</h4>
-                                        <a href="tel:+919997631117" className="text-[#D4AF37] hover:underline text-sm font-mono">
-                                            +91 99976 31117
+                                        <a href="tel:+917702592121" className="text-[#D4AF37] hover:underline text-sm font-mono">
+                                            +91 7702592121
                                         </a>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@ export default function ContactPage() {
                                         <FaYoutube className="w-5 h-5" />
                                     </a>
                                     <a
-                                        href="https://wa.me/919997631117"
+                                        href="https://wa.me/917702592121"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white hover:scale-110 transition-transform duration-300 shadow-lg"
@@ -189,7 +189,7 @@ export default function ContactPage() {
 
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <a
-                                    href="https://wa.me/919997631117"
+                                    href="https://wa.me/917702592121"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex-1 flex items-center justify-center gap-3 px-6 py-4 bg-[#D4AF37] text-[#3E2723] rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-[#C9A030] transition-colors shadow-lg"
@@ -198,7 +198,7 @@ export default function ContactPage() {
                                     Chat on WhatsApp
                                 </a>
                                 <a
-                                    href="tel:+919997631117"
+                                    href="tel:+917702592121"
                                     className="flex-1 flex items-center justify-center gap-3 px-6 py-4 border-2 border-[#D4AF37] text-[#D4AF37] rounded-xl font-bold text-sm uppercase tracking-wider hover:bg-[#D4AF37] hover:text-[#3E2723] transition-colors"
                                 >
                                     <Phone className="w-5 h-5" />

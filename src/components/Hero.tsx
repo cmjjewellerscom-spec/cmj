@@ -123,58 +123,110 @@ export default function Hero() {
                 )}
             </div>
 
-            {/* Customer Love Section */}
-            <div className="bg-surface-light shimmer-gold px-4 py-10 md:py-16">
-                <div className="ornament-divider">
-                    <h2 className="text-2xl md:text-4xl text-center text-[#3E2723] font-bold inline-block bg-surface-light px-6">
-                        We Know what our CMJ customers love to
-                    </h2>
-                </div>
+            {/* The CMJ Signature Experience Section */}
+            <div className="relative px-4 py-12 md:py-20 overflow-hidden" style={{ background: 'linear-gradient(180deg, #F7F0E6 0%, #EDE4D4 30%, #F5EDE0 60%, #EDE4D4 100%)' }}>
+                {/* Subtle shimmer overlay */}
+                <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(212,175,55,0.1) 0%, transparent 60%)' }} />
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-7xl mx-auto px-2 md:px-4 mt-8">
-                    {/* Order Your Own */}
-                    <Link
-                        href="/order/custom"
-                        className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-                        <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
-                            Order Your Own
-                        </span>
-                    </Link>
+                <div className="relative z-10 max-w-3xl mx-auto">
+                    {/* Header */}
+                    <div className="text-center mb-8 md:mb-12">
+                        <h2 className="text-lg md:text-xl tracking-[0.2em] text-[#8B7355] font-medium mb-1">The CMJ</h2>
+                        <h3 className="text-3xl md:text-5xl font-bold text-[#3E2723] font-display leading-tight">Signature Experience</h3>
+                        <p className="text-sm md:text-lg text-[#8B7355] italic mt-2 md:mt-3 tracking-wide">Where Gold Becomes Legacy</p>
+                    </div>
 
-                    {/* Daily Wear Items */}
-                    <Link
-                        href="/daily-wear"
-                        className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" /><path d="M3 6h18" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>
-                        <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
-                            Daily wear items
-                        </span>
-                    </Link>
+                    {/* 2x2 Card Grid */}
+                    <div className="grid grid-cols-2 gap-3 md:gap-5">
+                        {/* Card 1: Signature Custom Creations */}
+                        <Link
+                            href="/order/custom"
+                            className="group relative bg-[#F5EDE0]/80 backdrop-blur-sm border border-[#D4AF37]/30 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:border-[#D4AF37]/60 hover:-translate-y-1"
+                        >
+                            {/* Icon - Arch/Gate */}
+                            <div className="mb-3 md:mb-5 text-[#A0845C] group-hover:text-[#D4AF37] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10 md:w-14 md:h-14">
+                                    <path d="M12 56V28c0-11.046 8.954-20 20-20s20 8.954 20 20v28" strokeLinecap="round" />
+                                    <path d="M24 56V40c0-4.418 3.582-8 8-8s8 3.582 8 8v16" strokeLinecap="round" />
+                                    <line x1="8" y1="56" x2="56" y2="56" strokeLinecap="round" />
+                                </svg>
+                            </div>
+                            <h4 className="font-display text-sm md:text-xl font-bold text-[#3E2723] mb-1 md:mb-2 leading-snug">Signature Custom<br />Creations</h4>
+                            <p className="text-[10px] md:text-sm italic text-[#A0845C] font-medium mb-2 md:mb-3">Designed Around Your Story</p>
+                            <p className="text-[10px] md:text-xs text-[#8B7355] leading-relaxed hidden sm:block">Bespoke bridal and divine jewellery crafted exclusively for you.</p>
+                        </Link>
 
-                    {/* 0% VAD Items */}
-                    <Link
-                        href="/vad-items"
-                        className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110"><line x1="19" x2="5" y1="5" y2="19" /><circle cx="6.5" cy="6.5" r="2.5" /><circle cx="17.5" cy="17.5" r="2.5" /></svg>
-                        <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
-                            0% VAD items
-                        </span>
-                    </Link>
+                        {/* Card 2: Heritage Bridal Collections */}
+                        <Link
+                            href="/categories"
+                            className="group relative bg-[#F5EDE0]/80 backdrop-blur-sm border border-[#D4AF37]/30 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:border-[#D4AF37]/60 hover:-translate-y-1"
+                        >
+                            {/* Icon - Crown */}
+                            <div className="mb-3 md:mb-5 text-[#A0845C] group-hover:text-[#D4AF37] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10 md:w-14 md:h-14">
+                                    <path d="M8 44l8-24 8 12 8-16 8 16 8-12 8 24" strokeLinejoin="round" strokeLinecap="round" />
+                                    <rect x="8" y="44" width="48" height="6" rx="2" strokeLinejoin="round" />
+                                    <circle cx="32" cy="14" r="3" fill="currentColor" stroke="none" />
+                                    <circle cx="16" cy="20" r="2" fill="currentColor" stroke="none" />
+                                    <circle cx="48" cy="20" r="2" fill="currentColor" stroke="none" />
+                                </svg>
+                            </div>
+                            <h4 className="font-display text-sm md:text-xl font-bold text-[#3E2723] mb-1 md:mb-2 leading-snug">Heritage Bridal<br />Collections</h4>
+                            <p className="text-[10px] md:text-sm italic text-[#A0845C] font-medium mb-2 md:mb-3">Limited Edition Wedding Masterpieces</p>
+                            <p className="text-[10px] md:text-xs text-[#8B7355] leading-relaxed hidden sm:block">Grand yet refined temple-inspired bridal sets.</p>
+                        </Link>
 
-                    {/* Silver Bars */}
-                    <Link
-                        href="/silver"
-                        className="card-warm rounded-xl md:rounded-2xl p-4 md:p-8 shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col items-center justify-center text-center gap-2 md:gap-4 min-h-[140px] md:min-h-[200px]"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8 md:w-12 md:h-12 text-[#3E2723] group-hover:text-[#D4AF37] transition-colors duration-300 transform group-hover:scale-110"><circle cx="8" cy="8" r="6" /><path d="M18.09 10.37A6 6 0 1 1 10.34 18" /><path d="M7 6h1v4" /><path d="m16.71 13.88.7.71-2.82 2.82" /></svg>
-                        <span className="font-display text-sm md:text-xl text-[#3E2723] group-hover:text-[#D4AF37] transition-colors font-medium leading-tight">
-                            Silver Bars and Silver ornaments
-                        </span>
-                    </Link>
+                        {/* Card 3: Divine Gold Icons */}
+                        <Link
+                            href="/daily-wear"
+                            className="group relative bg-[#F5EDE0]/80 backdrop-blur-sm border border-[#D4AF37]/30 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:border-[#D4AF37]/60 hover:-translate-y-1"
+                        >
+                            {/* Icon - Trident */}
+                            <div className="mb-3 md:mb-5 text-[#A0845C] group-hover:text-[#D4AF37] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10 md:w-14 md:h-14">
+                                    <line x1="32" y1="8" x2="32" y2="56" strokeLinecap="round" />
+                                    <path d="M32 8l-12 16h24L32 8z" strokeLinejoin="round" fill="none" />
+                                    <path d="M20 24c0-8 5-14 12-16" strokeLinecap="round" />
+                                    <path d="M44 24c0-8-5-14-12-16" strokeLinecap="round" />
+                                    <line x1="24" y1="36" x2="40" y2="36" strokeLinecap="round" />
+                                </svg>
+                            </div>
+                            <h4 className="font-display text-sm md:text-xl font-bold text-[#3E2723] mb-1 md:mb-2 leading-snug">Divine Gold Icons</h4>
+                            <p className="text-[10px] md:text-sm italic text-[#A0845C] font-medium mb-2 md:mb-3">Sacred Luxury</p>
+                            <p className="text-[10px] md:text-xs text-[#8B7355] leading-relaxed hidden sm:block">Spiritual motifs reimagined in signature gold artistry.</p>
+                        </Link>
+
+                        {/* Card 4: Premium Bullion */}
+                        <Link
+                            href="/bullion"
+                            className="group relative bg-[#F5EDE0]/80 backdrop-blur-sm border border-[#D4AF37]/30 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:border-[#D4AF37]/60 hover:-translate-y-1"
+                        >
+                            {/* Icon - Gold Bars */}
+                            <div className="mb-3 md:mb-5 text-[#A0845C] group-hover:text-[#D4AF37] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10 md:w-14 md:h-14">
+                                    <path d="M10 44l6-12h32l6 12H10z" strokeLinejoin="round" />
+                                    <path d="M18 32l4-8h20l4 8" strokeLinejoin="round" />
+                                    <line x1="10" y1="44" x2="54" y2="44" strokeLinecap="round" />
+                                    <line x1="16" y1="32" x2="48" y2="32" strokeLinecap="round" />
+                                </svg>
+                            </div>
+                            <h4 className="font-display text-sm md:text-xl font-bold text-[#3E2723] mb-1 md:mb-2 leading-snug">Premium Bullion</h4>
+                            <p className="text-[10px] md:text-sm italic text-[#A0845C] font-medium mb-2 md:mb-3">Purity. Power. Security.</p>
+                            <p className="text-[10px] md:text-xs text-[#8B7355] leading-relaxed hidden sm:block">Certified 24K gold crafted for investment excellence.</p>
+                        </Link>
+                    </div>
+
+                    {/* Bottom Points */}
+                    <div className="mt-8 md:mt-12 space-y-2 md:space-y-3 text-center">
+                        <p className="text-sm md:text-lg text-[#3E2723] font-medium flex items-center justify-center gap-2">
+                            <span className="text-[#D4AF37] text-base md:text-xl">✦</span>
+                            By Appointment Only for Custom Creations
+                        </p>
+                        <p className="text-sm md:text-lg text-[#3E2723] font-medium flex items-center justify-center gap-2">
+                            <span className="text-[#D4AF37] text-base md:text-xl">✦</span>
+                            Limited Pieces Crafted Each Season
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>

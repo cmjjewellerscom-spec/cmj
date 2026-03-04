@@ -7,14 +7,14 @@ export default function OrderForm() {
     const [details, setDetails] = useState('');
 
     const handleWhatsAppRedirect = () => {
-        const phone = "919997631117";
+        const phone = "917702592121";
         const text = details ? `Hi CMJ, I would like to enquire about: ${details}` : "Hi CMJ, I have an enquiry.";
         const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
         window.open(url, '_blank');
     };
 
     const handleCall = () => {
-        window.location.href = 'tel:+919997631117';
+        window.location.href = 'tel:+917702592121';
     };
 
     return (
@@ -62,7 +62,7 @@ export default function OrderForm() {
                         </button>
                     </div>
                     <p className="text-[0.6rem] text-center mt-3 text-text-sub-light/60">
-                        *Contact: +91 99976 31117
+                        *Contact: +91 7702592121
                     </p>
                 </div>
             )}

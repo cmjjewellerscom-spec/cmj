@@ -18,7 +18,7 @@ export default function BullionPage() {
             return;
         }
 
-        const phone = "919997631117";
+        const phone = "917702592121";
         const message = `Hi CMJ, I would like to purchase 24K Gold Coin:\n\nName: ${userName}\nPhone: ${userPhone}\nWeight: ${selectedWeight} Grams\n\nPlease confirm availability and pricing.`;
         const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
@@ -165,7 +165,7 @@ export default function BullionPage() {
                                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                     </button>
                                     <p className="text-xs text-center text-[#8D6E63] mt-3">
-                                        Secure transaction via WhatsApp +91 99976 31117. Prices are subject to market fluctuations.
+                                        Secure transaction via WhatsApp +91 7702592121. Prices are subject to market fluctuations.
                                     </p>
                                 </div>
                             </div>

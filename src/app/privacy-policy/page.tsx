@@ -61,7 +61,7 @@ export default function PrivacyPolicy() {
 
                     <section>
                         <h2 className="text-xl font-bold text-[#3E2723] mb-3">7. Contact Us</h2>
-                        <p>If you have questions or comments about this policy, you may email us at <a href="mailto:cmjjewellers.com@gmail.com" className="text-[#D4AF37] hover:underline">cmjjewellers.com@gmail.com</a> or by phone at <a href="tel:+919997631117" className="text-[#D4AF37] hover:underline">+91 99976 31117</a>.</p>
+                        <p>If you have questions or comments about this policy, you may email us at <a href="mailto:cmjjewellers.com@gmail.com" className="text-[#D4AF37] hover:underline">cmjjewellers.com@gmail.com</a> or by phone at <a href="tel:+917702592121" className="text-[#D4AF37] hover:underline">+91 7702592121</a>.</p>
                     </section>
                 </div>
             </main>
