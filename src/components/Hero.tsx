@@ -141,78 +141,125 @@ export default function Hero() {
                         {/* Card 1: Signature Custom Creations */}
                         <Link
                             href="/order/custom"
-                            className="group relative bg-[#F5EDE0]/80 backdrop-blur-sm border border-[#D4AF37]/30 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:border-[#D4AF37]/60 hover:-translate-y-1"
+                            className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* Icon - Arch/Gate */}
-                            <div className="mb-3 md:mb-5 text-[#A0845C] group-hover:text-[#D4AF37] transition-colors duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10 md:w-14 md:h-14">
-                                    <path d="M12 56V28c0-11.046 8.954-20 20-20s20 8.954 20 20v28" strokeLinecap="round" />
-                                    <path d="M24 56V40c0-4.418 3.582-8 8-8s8 3.582 8 8v16" strokeLinecap="round" />
-                                    <line x1="8" y1="56" x2="56" y2="56" strokeLinecap="round" />
+                            {/* Icon - Intricate Arch */}
+                            <div className="mb-4 md:mb-6 text-[#A0845C] group-hover:text-[#D4AF37] transition-all duration-500 group-hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-12 h-12 md:w-16 md:h-16 drop-shadow-sm">
+                                    <path d="M16 54V32c0-8.837 7.163-16 16-16s16 7.163 16 16v22" strokeLinecap="round" />
+                                    <path d="M26 54V38c0-3.314 2.686-6 6-6s6 2.686 6 6v16" strokeLinecap="round" />
+                                    <path d="M32 16v-6M20 18l-3-4M44 18l3-4" strokeLinecap="round" strokeLinejoin="round" />
+                                    <line x1="8" y1="54" x2="56" y2="54" strokeLinecap="round" />
+                                    <line x1="12" y1="58" x2="52" y2="58" strokeLinecap="round" />
                                 </svg>
                             </div>
-                            <h4 className="font-display text-sm md:text-xl font-bold text-[#3E2723] mb-1 md:mb-2 leading-snug">Signature Custom<br />Creations</h4>
-                            <p className="text-[10px] md:text-sm italic text-[#A0845C] font-medium mb-2 md:mb-3">Designed Around Your Story</p>
-                            <p className="text-[10px] md:text-xs text-[#8B7355] leading-relaxed hidden sm:block">Bespoke bridal and divine jewellery crafted exclusively for you.</p>
+                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Signature Custom<br />Creations</h4>
+                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Designed Around Your Story</p>
+
+                            {/* Divider Line */}
+                            <div className="flex items-center justify-center gap-2 w-full mb-3 md:mb-4 opacity-50">
+                                <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
+                                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rotate-45 border border-[#8B7355]"></div>
+                                <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
+                            </div>
+
+                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Bespoke bridal and divine<br className="hidden sm:block" />jewellery crafted exclusively<br className="hidden sm:block" />for you.</p>
                         </Link>
 
                         {/* Card 2: Heritage Bridal Collections */}
                         <Link
                             href="/categories"
-                            className="group relative bg-[#F5EDE0]/80 backdrop-blur-sm border border-[#D4AF37]/30 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:border-[#D4AF37]/60 hover:-translate-y-1"
+                            className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* Icon - Crown */}
-                            <div className="mb-3 md:mb-5 text-[#A0845C] group-hover:text-[#D4AF37] transition-colors duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10 md:w-14 md:h-14">
-                                    <path d="M8 44l8-24 8 12 8-16 8 16 8-12 8 24" strokeLinejoin="round" strokeLinecap="round" />
-                                    <rect x="8" y="44" width="48" height="6" rx="2" strokeLinejoin="round" />
-                                    <circle cx="32" cy="14" r="3" fill="currentColor" stroke="none" />
-                                    <circle cx="16" cy="20" r="2" fill="currentColor" stroke="none" />
-                                    <circle cx="48" cy="20" r="2" fill="currentColor" stroke="none" />
+                            {/* Icon - Crown / Temple Roof */}
+                            <div className="mb-4 md:mb-6 text-[#A0845C] group-hover:text-[#D4AF37] transition-all duration-500 group-hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-12 h-12 md:w-16 md:h-16 drop-shadow-sm">
+                                    <path d="M10 44l6-24 5 10 11-16 11 16 5-10 6 24" strokeLinejoin="round" />
+                                    <rect x="12" y="44" width="40" height="4" strokeLinejoin="round" />
+                                    <line x1="8" y1="52" x2="56" y2="52" strokeLinecap="round" />
+                                    <circle cx="32" cy="10" r="2" fill="currentColor" stroke="none" />
+                                    <circle cx="16" cy="16" r="1.5" fill="currentColor" stroke="none" />
+                                    <circle cx="48" cy="16" r="1.5" fill="currentColor" stroke="none" />
+                                    <path d="M21 30v14M32 28v16M43 30v14" opacity="0.5" strokeLinecap="round" />
                                 </svg>
                             </div>
-                            <h4 className="font-display text-sm md:text-xl font-bold text-[#3E2723] mb-1 md:mb-2 leading-snug">Heritage Bridal<br />Collections</h4>
-                            <p className="text-[10px] md:text-sm italic text-[#A0845C] font-medium mb-2 md:mb-3">Limited Edition Wedding Masterpieces</p>
-                            <p className="text-[10px] md:text-xs text-[#8B7355] leading-relaxed hidden sm:block">Grand yet refined temple-inspired bridal sets.</p>
+                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Heritage Bridal<br />Collections</h4>
+                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Limited Edition Wedding Masterpieces</p>
+
+                            {/* Divider Line */}
+                            <div className="flex items-center justify-center gap-2 w-full mb-3 md:mb-4 opacity-50">
+                                <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
+                                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rotate-45 border border-[#8B7355]"></div>
+                                <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
+                            </div>
+
+                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Grand yet refined<br className="hidden sm:block" />temple-inspired bridal sets.</p>
                         </Link>
 
                         {/* Card 3: Divine Gold Icons */}
                         <Link
                             href="/daily-wear"
-                            className="group relative bg-[#F5EDE0]/80 backdrop-blur-sm border border-[#D4AF37]/30 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:border-[#D4AF37]/60 hover:-translate-y-1"
+                            className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* Icon - Trident */}
-                            <div className="mb-3 md:mb-5 text-[#A0845C] group-hover:text-[#D4AF37] transition-colors duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10 md:w-14 md:h-14">
-                                    <line x1="32" y1="8" x2="32" y2="56" strokeLinecap="round" />
-                                    <path d="M32 8l-12 16h24L32 8z" strokeLinejoin="round" fill="none" />
-                                    <path d="M20 24c0-8 5-14 12-16" strokeLinecap="round" />
-                                    <path d="M44 24c0-8-5-14-12-16" strokeLinecap="round" />
-                                    <line x1="24" y1="36" x2="40" y2="36" strokeLinecap="round" />
+                            {/* Icon - Intricate Trishul */}
+                            <div className="mb-4 md:mb-6 text-[#A0845C] group-hover:text-[#D4AF37] transition-all duration-500 group-hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-12 h-12 md:w-16 md:h-16 drop-shadow-sm">
+                                    <line x1="32" y1="12" x2="32" y2="54" strokeLinecap="round" />
+                                    <path d="M32 12l-6 10h12L32 12z" strokeLinejoin="round" fill="none" />
+                                    <path d="M18 28c0-10 6-14 14-16" strokeLinecap="round" />
+                                    <path d="M46 28c0-10-6-14-14-16" strokeLinecap="round" />
+                                    <path d="M26 36l12-4v8L26 36v8z" strokeLinejoin="round" />
+                                    <line x1="24" y1="54" x2="40" y2="54" strokeLinecap="round" />
                                 </svg>
                             </div>
-                            <h4 className="font-display text-sm md:text-xl font-bold text-[#3E2723] mb-1 md:mb-2 leading-snug">Divine Gold Icons</h4>
-                            <p className="text-[10px] md:text-sm italic text-[#A0845C] font-medium mb-2 md:mb-3">Sacred Luxury</p>
-                            <p className="text-[10px] md:text-xs text-[#8B7355] leading-relaxed hidden sm:block">Spiritual motifs reimagined in signature gold artistry.</p>
+                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Divine Gold Icons</h4>
+                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Sacred Luxury</p>
+
+                            {/* Divider Line */}
+                            <div className="flex items-center justify-center gap-2 w-full mb-3 md:mb-4 opacity-50">
+                                <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
+                                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rotate-45 border border-[#8B7355]"></div>
+                                <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
+                            </div>
+
+                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Spiritual motifs reimagined<br className="hidden sm:block" />in signature gold artistry.</p>
                         </Link>
 
                         {/* Card 4: Premium Bullion */}
                         <Link
                             href="/bullion"
-                            className="group relative bg-[#F5EDE0]/80 backdrop-blur-sm border border-[#D4AF37]/30 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl hover:shadow-[#D4AF37]/10 hover:border-[#D4AF37]/60 hover:-translate-y-1"
+                            className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* Icon - Gold Bars */}
-                            <div className="mb-3 md:mb-5 text-[#A0845C] group-hover:text-[#D4AF37] transition-colors duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" className="w-10 h-10 md:w-14 md:h-14">
-                                    <path d="M10 44l6-12h32l6 12H10z" strokeLinejoin="round" />
-                                    <path d="M18 32l4-8h20l4 8" strokeLinejoin="round" />
-                                    <line x1="10" y1="44" x2="54" y2="44" strokeLinecap="round" />
-                                    <line x1="16" y1="32" x2="48" y2="32" strokeLinecap="round" />
+                            {/* Icon - 3D Gold Bars */}
+                            <div className="mb-4 md:mb-6 text-[#A0845C] group-hover:text-[#D4AF37] transition-all duration-500 group-hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-12 h-12 md:w-16 md:h-16 drop-shadow-sm">
+                                    {/* Bottom Left Bar */}
+                                    <path d="M14 42l10-6h16l-10 6H14z" strokeLinejoin="round" />
+                                    <path d="M14 42v6l10-6v-6" strokeLinejoin="round" />
+                                    <path d="M40 36v6l-10 6v-6" strokeLinejoin="round" />
+
+                                    {/* Bottom Right Bar */}
+                                    <path d="M26 48l10-6h16l-10 6H26z" strokeLinejoin="round" />
+                                    <path d="M26 48v6l10-6v-6" strokeLinejoin="round" />
+                                    <path d="M52 42v6l-10 6v-6" strokeLinejoin="round" />
+
+                                    {/* Top Bar */}
+                                    <path d="M20 30l10-6h16l-10 6H20z" strokeLinejoin="round" />
+                                    <path d="M20 30v6l10-6v-6" strokeLinejoin="round" />
+                                    <path d="M46 24v6l-10 6v-6" strokeLinejoin="round" />
                                 </svg>
                             </div>
-                            <h4 className="font-display text-sm md:text-xl font-bold text-[#3E2723] mb-1 md:mb-2 leading-snug">Premium Bullion</h4>
-                            <p className="text-[10px] md:text-sm italic text-[#A0845C] font-medium mb-2 md:mb-3">Purity. Power. Security.</p>
-                            <p className="text-[10px] md:text-xs text-[#8B7355] leading-relaxed hidden sm:block">Certified 24K gold crafted for investment excellence.</p>
+                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Premium Bullion</h4>
+                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Purity. Power. Security.</p>
+
+                            {/* Divider Line */}
+                            <div className="flex items-center justify-center gap-2 w-full mb-3 md:mb-4 opacity-50">
+                                <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
+                                <div className="w-1.5 h-1.5 md:w-2 md:h-2 rotate-45 border border-[#8B7355]"></div>
+                                <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
+                            </div>
+
+                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Certified 24K gold crafted<br className="hidden sm:block" />for investment excellence.</p>
                         </Link>
                     </div>
 
