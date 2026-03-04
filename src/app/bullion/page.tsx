@@ -26,142 +26,149 @@ export default function BullionPage() {
     };
 
     return (
-        <main className="min-h-screen bg-[#FFF8F0] pt-24 pb-12">
-            <div className="container mx-auto px-4">
-                {/* Breadcrumbs */}
-                <div className="flex items-center gap-2 text-sm text-[#8D6E63] mb-8">
-                    <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-                    <span>/</span>
-                    <span className="text-[#3E2723] font-semibold">Gold Bullion</span>
+        <main className="min-h-screen relative overflow-hidden pt-24 pb-12" style={{ background: 'linear-gradient(180deg, #F7F0E6 0%, #EDE4D4 30%, #F5EDE0 60%, #EDE4D4 100%)' }}>
+            {/* Subtle shimmer overlay */}
+            <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(212,175,55,0.1) 0%, transparent 60%)' }} />
+
+            <div className="container relative z-10 mx-auto px-4">
+                {/* Header Section */}
+                <div className="text-center mb-12">
+                    <h2 className="text-lg md:text-xl tracking-[0.2em] text-[#8B7355] font-medium mb-1 uppercase">The CMJ</h2>
+                    <h3 className="text-3xl md:text-5xl font-bold text-[#3E2723] font-display leading-tight mb-2">Premium Bullion</h3>
+                    <p className="text-sm md:text-lg text-[#8B7355] italic tracking-wide">Purity • Power • Security</p>
+
+                    {/* Divider Motif */}
+                    <div className="flex items-center justify-center gap-2 w-full mt-6 opacity-60">
+                        <div className="h-[1px] w-12 md:w-20 bg-[#8B7355]"></div>
+                        <div className="w-2 h-2 rotate-45 border border-[#8B7355]"></div>
+                        <div className="h-[1px] w-12 md:w-20 bg-[#8B7355]"></div>
+                    </div>
                 </div>
 
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
                     {/* Left Side - Image Gallery Style */}
                     <div className="w-full lg:w-1/2">
                         <div className="sticky top-24">
-                            <div className="relative overflow-hidden aspect-[3/4] md:aspect-[4/5] flex items-center justify-center mx-auto max-w-md">
-
+                            <div className="relative group bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-3xl p-4 md:p-6 overflow-hidden shadow-xl transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/10 aspect-[3/4] md:aspect-[4/5] flex items-center justify-center mx-auto max-w-md">
                                 <div className="relative z-10 w-full h-full flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)]">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent rounded-full blur-3xl scale-75 animate-pulse"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl scale-75 animate-pulse"></div>
                                     <Image
                                         src="/images/bullion_gold1.png"
                                         alt="24K Gold Bar"
-                                        className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] transition-all duration-700 mix-blend-multiply"
+                                        className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.2)] transition-all duration-700 mix-blend-multiply group-hover:scale-105"
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     />
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                </div>
 
-                {/* Right Side - Product Details */}
-                <div className="w-full lg:w-1/2">
-                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-primary/5">
-                        <div className="mb-6 border-b border-primary/10 pb-6">
-                            <span className="text-primary font-bold tracking-wider text-sm uppercase mb-2 block">Premium Collection</span>
-                            <h1 className="font-display text-4xl md:text-5xl text-[#3E2723] font-bold mb-4">24K Gold Bar (999 Purity)</h1>
-                            <p className="text-[#5D4037] text-lg leading-relaxed mb-4">
-                                Invest in timeless value with our certified 24K gold bars. Perfect for investment, gifting, and securing your future wealth. Each bar comes with BIS Hallmark certification ensuring 99.9% purity.
-                            </p>
-                            <div className="flex items-end gap-3">
-                                <div>
-                                    <p className="text-sm text-[#8D6E63] mb-1">Live Market Rate</p>
-                                    <p className="text-3xl font-bold text-primary">₹7,250<span className="text-lg text-[#5D4037] font-medium">/gram</span></p>
-                                </div>
-                                <div className="pb-1">
-                                    <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">+ GST applicable</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="space-y-8">
-                            {/* Weight Selection */}
-                            <div>
-                                <label className="block text-sm font-bold text-[#3E2723] mb-4 uppercase tracking-wide flex justify-between">
-                                    <span>Select Weight (Grams)</span>
-                                    {selectedWeight && <span className="text-primary">{selectedWeight}g Selected</span>}
-                                </label>
-                                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                                    {weights.map((weight) => {
-                                        const isSelected = selectedWeight === weight;
-                                        return (
-                                            <button
-                                                key={weight}
-                                                onClick={() => setSelectedWeight(weight)}
-                                                className={`aspect-square sm:aspect-auto sm:h-14 rounded-xl border-2 transition-all relative overflow-hidden group flex items-center justify-center ${isSelected
-                                                    ? 'border-primary bg-primary text-white shadow-lg shadow-primary/30'
-                                                    : 'border-primary/10 bg-[#FFF8F0] hover:border-primary text-[#5D4037] hover:bg-primary/5'
-                                                    }`}
-                                            >
-                                                <span className="text-lg font-bold relative z-10">{weight}g</span>
-                                                {isSelected && <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark opacity-100"></div>}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-
-                            {/* Highlights */}
-                            <div className="grid grid-cols-2 gap-4">
-                                {[
-                                    "99.9% Pure Gold",
-                                    "BIS Hallmarked",
-                                    "Tamper-proof Pack",
-                                    "Buyback Guarantee"
-                                ].map((feature, i) => (
-                                    <div key={i} className="flex items-center gap-2 text-sm text-[#5D4037]">
-                                        <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                            <Check className="w-3 h-3 text-green-600" />
-                                        </div>
-                                        {feature}
-                                    </div>
-                                ))}
-                            </div>
-
-                            {/* Purchase Form */}
-                            <div className="bg-[#FFF8F0] p-6 rounded-xl border border-primary/10">
-                                <h3 className="font-display text-xl text-[#3E2723] font-bold mb-4">Your Details</h3>
-                                <div className="space-y-4">
-                                    <div>
-                                        <input
-                                            type="text"
-                                            value={userName}
-                                            onChange={(e) => setUserName(e.target.value)}
-                                            placeholder="Enter Full Name"
-                                            className="w-full px-4 py-3 bg-white border border-primary/10 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none text-[#3E2723] placeholder-primary/30 transition-all"
-                                        />
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="tel"
-                                            value={userPhone}
-                                            onChange={(e) => setUserPhone(e.target.value)}
-                                            placeholder="Phone Number"
-                                            className="w-full px-4 py-3 bg-white border border-primary/10 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none text-[#3E2723] placeholder-primary/30 transition-all"
-                                        />
-                                    </div>
-                                </div>
-
-                                <button
-                                    onClick={handleWhatsAppRedirect}
-                                    disabled={!selectedWeight || !userName || !userPhone}
-                                    className="w-full mt-6 py-4 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:shadow-primary/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 group"
-                                >
-                                    <span>Buy Now via WhatsApp</span>
-                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </button>
-                                <p className="text-xs text-center text-[#8D6E63] mt-3">
-                                    Secure transaction via WhatsApp +91 7702592121. Prices are subject to market fluctuations.
+                    {/* Right Side - Product Details */}
+                    <div className="w-full lg:w-1/2">
+                        <div className="bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-3xl p-6 md:p-8 shadow-xl">
+                            <div className="mb-6 border-b border-[#D4AF37]/20 pb-6">
+                                <span className="text-[#8B7355] font-bold tracking-wider text-sm uppercase mb-2 block">Designed Around Your Story</span>
+                                <h1 className="font-display text-4xl md:text-5xl text-[#3E2723] font-bold mb-4">24K Gold Bar</h1>
+                                <p className="text-[#5D4037] text-lg leading-relaxed mb-4">
+                                    Invest in timeless value with our certified 24K gold bars. Perfect for investment, gifting, and securing your future wealth. Each bar comes with BIS Hallmark certification ensuring 99.9% purity.
                                 </p>
+                                <div className="flex items-end gap-3">
+                                    <div>
+                                        <p className="text-sm text-[#8D6E63] mb-1">Live Market Rate</p>
+                                        <p className="text-3xl font-bold text-primary">₹7,250<span className="text-lg text-[#5D4037] font-medium">/gram</span></p>
+                                    </div>
+                                    <div className="pb-1">
+                                        <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded">+ GST applicable</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-8">
+                                {/* Weight Selection */}
+                                <div>
+                                    <label className="block text-sm font-bold text-[#3E2723] mb-4 uppercase tracking-wide flex justify-between">
+                                        <span>Select Weight (Grams)</span>
+                                        {selectedWeight && <span className="text-primary">{selectedWeight}g Selected</span>}
+                                    </label>
+                                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                                        {weights.map((weight) => {
+                                            const isSelected = selectedWeight === weight;
+                                            return (
+                                                <button
+                                                    key={weight}
+                                                    onClick={() => setSelectedWeight(weight)}
+                                                    className={`aspect-square sm:aspect-auto sm:h-14 rounded-xl border-2 transition-all relative overflow-hidden group flex items-center justify-center ${isSelected
+                                                        ? 'border-primary bg-primary text-white shadow-lg shadow-primary/30'
+                                                        : 'border-primary/10 bg-[#FFF8F0] hover:border-primary text-[#5D4037] hover:bg-primary/5'
+                                                        }`}
+                                                >
+                                                    <span className="text-lg font-bold relative z-10">{weight}g</span>
+                                                    {isSelected && <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark opacity-100"></div>}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                {/* Highlights */}
+                                <div className="grid grid-cols-2 gap-4">
+                                    {[
+                                        "99.9% Pure Gold",
+                                        "BIS Hallmarked",
+                                        "Tamper-proof Pack",
+                                        "Buyback Guarantee"
+                                    ].map((feature, i) => (
+                                        <div key={i} className="flex items-center gap-2 text-sm text-[#5D4037]">
+                                            <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                                <Check className="w-3 h-3 text-green-600" />
+                                            </div>
+                                            {feature}
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Purchase Form */}
+                                <div className="bg-[#FFF8F0] p-6 rounded-xl border border-primary/10">
+                                    <h3 className="font-display text-xl text-[#3E2723] font-bold mb-4">Your Details</h3>
+                                    <div className="space-y-4">
+                                        <div>
+                                            <input
+                                                type="text"
+                                                value={userName}
+                                                onChange={(e) => setUserName(e.target.value)}
+                                                placeholder="Enter Full Name"
+                                                className="w-full px-4 py-3 bg-white border border-primary/10 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none text-[#3E2723] placeholder-primary/30 transition-all"
+                                            />
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="tel"
+                                                value={userPhone}
+                                                onChange={(e) => setUserPhone(e.target.value)}
+                                                placeholder="Phone Number"
+                                                className="w-full px-4 py-3 bg-white border border-primary/10 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none text-[#3E2723] placeholder-primary/30 transition-all"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick={handleWhatsAppRedirect}
+                                        disabled={!selectedWeight || !userName || !userPhone}
+                                        className="w-full mt-6 py-4 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:shadow-primary/40 disabled:opacity-50 disabled:cursor-not-allowed transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2 group"
+                                    >
+                                        <span>Buy Now via WhatsApp</span>
+                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                    <p className="text-xs text-center text-[#8D6E63] mt-3">
+                                        Secure transaction via WhatsApp +91 7702592121. Prices are subject to market fluctuations.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </main >
     );
 }
