@@ -138,17 +138,17 @@ export default function Hero() {
 
                     {/* 2x2 Card Grid */}
                     <div className="grid grid-cols-2 gap-3 md:gap-5">
-                        {/* Card 1: Order Your Own */}
+                        {/* Card 1: Signature Custom Creations */}
                         <Link
                             href="/order/custom"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* AI Icon */}
+                            {/* AI Icon - Intricate Arch */}
                             <div className="mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 w-16 h-16 md:w-20 md:h-20 max-w-full">
-                                <img src="/images/icon-arch.png" alt="Order Your Own" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
+                                <img src="/images/icon-arch.png" alt="Signature Custom Creations" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
                             </div>
-                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Order Your Own</h4>
-                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Custom Made Just For You</p>
+                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Signature Custom<br />Creations</h4>
+                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Designed Around Your Story</p>
 
                             {/* Divider Line */}
                             <div className="flex items-center justify-center gap-2 w-full mb-3 md:mb-4 opacity-50">
@@ -157,7 +157,7 @@ export default function Hero() {
                                 <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
                             </div>
 
-                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Design your dream jewellery<br className="hidden sm:block" />with our expert craftsmen.</p>
+                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Bespoke bridal and divine<br className="hidden sm:block" />jewellery crafted exclusively<br className="hidden sm:block" />for you.</p>
                         </Link>
 
                         {/* Card 2: Daily Wear Items */}
