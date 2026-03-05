@@ -42,15 +42,15 @@ export default function BullionSection() {
                             </Link>
                         </div>
 
-                        <div className="flex justify-center md:justify-end">
-                            <div className="w-full max-w-[320px] md:max-w-sm group transition-all duration-500 flex items-center justify-center">
+                        <div className="flex justify-center md:justify-end h-full">
+                            <div className="w-full h-full group transition-all duration-500 overflow-hidden rounded-r-2xl md:min-h-[300px]">
                                 {/* Gold Bar Image */}
                                 <Image
-                                    src="/images/cmj-bar.png"
-                                    alt="CMJ 24K Gold Bar"
-                                    width={500}
-                                    height={500}
-                                    className="object-contain drop-shadow-[0_10px_30px_rgba(184,143,57,0.3)] transition-all duration-700 w-full h-auto"
+                                    src="/images/cmj-ai-bar.png"
+                                    alt="CMJ Premium 24K Gold Bar"
+                                    width={600}
+                                    height={600}
+                                    className="object-cover transition-all duration-700 w-full h-full"
                                     priority
                                 />
                             </div>
