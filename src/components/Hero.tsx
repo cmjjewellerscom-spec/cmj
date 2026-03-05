@@ -160,17 +160,17 @@ export default function Hero() {
                             <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Bespoke bridal and divine<br className="hidden sm:block" />jewellery crafted exclusively<br className="hidden sm:block" />for you.</p>
                         </Link>
 
-                        {/* Card 2: Daily Wear Items */}
+                        {/* Card 2: Heritage Bridal Collections */}
                         <Link
-                            href="/categories"
+                            href="/heritage-bridal"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* AI Icon */}
+                            {/* AI Icon - Crown / Temple Roof */}
                             <div className="mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 w-16 h-16 md:w-20 md:h-20 max-w-full">
-                                <img src="/images/icon-crown.png" alt="Daily Wear Items" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
+                                <img src="/images/icon-crown.png" alt="Heritage Bridal Collections" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
                             </div>
-                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Daily Wear Items</h4>
-                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Elegant Everyday Essentials</p>
+                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Heritage Bridal<br />Collections</h4>
+                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Limited Edition Wedding Masterpieces</p>
 
                             {/* Divider Line */}
                             <div className="flex items-center justify-center gap-2 w-full mb-3 md:mb-4 opacity-50">
@@ -179,20 +179,20 @@ export default function Hero() {
                                 <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
                             </div>
 
-                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Lightweight gold jewellery<br className="hidden sm:block" />perfect for everyday wear.</p>
+                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Grand yet refined<br className="hidden sm:block" />temple-inspired bridal sets.</p>
                         </Link>
 
-                        {/* Card 3: 0% VAD Items */}
+                        {/* Card 3: Divine Gold Icons */}
                         <Link
-                            href="/categories"
+                            href="/divine-icons"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* AI Icon */}
+                            {/* AI Icon - Intricate Trishul */}
                             <div className="mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 w-16 h-16 md:w-20 md:h-20 max-w-full">
-                                <img src="/images/icon-trishul.png" alt="0% VAD Items" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
+                                <img src="/images/icon-trishul.png" alt="Divine Gold Icons" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
                             </div>
-                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">0% VAD Items</h4>
-                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Zero Making Charges</p>
+                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Divine Gold Icons</h4>
+                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Sacred Luxury</p>
 
                             {/* Divider Line */}
                             <div className="flex items-center justify-center gap-2 w-full mb-3 md:mb-4 opacity-50">
@@ -201,20 +201,20 @@ export default function Hero() {
                                 <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
                             </div>
 
-                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Premium gold jewellery<br className="hidden sm:block" />with zero value addition.</p>
+                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Spiritual motifs reimagined<br className="hidden sm:block" />in signature gold artistry.</p>
                         </Link>
 
-                        {/* Card 4: Silver Bars & Ornaments */}
+                        {/* Card 4: Premium Bullion */}
                         <Link
-                            href="/categories"
+                            href="/bullion"
                             className="group relative bg-[#FAF5F0]/80 backdrop-blur-sm border border-[#D4AF37]/20 rounded-2xl md:rounded-3xl p-5 md:p-8 flex flex-col items-center text-center transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:border-[#D4AF37]/50 hover:-translate-y-1"
                         >
-                            {/* AI Icon */}
+                            {/* AI Icon - 3D Gold Bars */}
                             <div className="mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-500 w-16 h-16 md:w-20 md:h-20 max-w-full">
-                                <img src="/images/icon-bullion.png" alt="Silver Bars & Ornaments" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
+                                <img src="/images/icon-bullion.png" alt="Premium Bullion" className="w-full h-full object-contain mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm" />
                             </div>
-                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Silver Bars &<br />Ornaments</h4>
-                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Pure Silver Collection</p>
+                            <h4 className="font-display text-base md:text-xl font-medium text-[#3E2723] mb-1 md:mb-2 leading-snug">Premium Bullion</h4>
+                            <p className="text-[11px] md:text-sm italic text-[#8B7355] mb-3 md:mb-4">Purity. Power. Security.</p>
 
                             {/* Divider Line */}
                             <div className="flex items-center justify-center gap-2 w-full mb-3 md:mb-4 opacity-50">
@@ -223,7 +223,7 @@ export default function Hero() {
                                 <div className="h-[1px] w-8 md:w-12 bg-[#8B7355]"></div>
                             </div>
 
-                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Premium silver bars and<br className="hidden sm:block" />beautifully crafted ornaments.</p>
+                            <p className="text-[11px] md:text-sm text-[#5D4037] leading-relaxed max-w-[200px] md:max-w-[280px]">Certified 24K gold crafted<br className="hidden sm:block" />for investment excellence.</p>
                         </Link>
                     </div>
 
