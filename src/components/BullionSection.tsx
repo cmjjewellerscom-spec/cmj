@@ -44,9 +44,9 @@ export default function BullionSection() {
 
                         <div className="flex justify-center md:justify-end w-full">
                             <div className="relative w-full max-w-[400px] md:max-w-md lg:max-w-lg group transition-all duration-500 flex items-center justify-center aspect-[4/3]">
-                                {/* Premium Dark Background */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#2A1C14] to-[#0A0705] rounded-3xl shadow-xl border border-[#D4AF37]/20 overflow-hidden">
-                                    <div className="absolute top-0 left-1/4 w-1/2 h-full bg-[#D4AF37]/10 blur-3xl transform -skew-x-12 transition-transform duration-700 group-hover:translate-x-8"></div>
+                                {/* Premium Gold Background */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#FFEDB3] to-[#F5D061] rounded-3xl shadow-lg border border-[#D4AF37]/40 overflow-hidden">
+                                    <div className="absolute top-0 left-1/4 w-1/2 h-full bg-white/40 blur-3xl transform -skew-x-12 transition-transform duration-700 group-hover:translate-x-8"></div>
                                 </div>
 
                                 {/* Gold Bar Image */}
@@ -56,7 +56,7 @@ export default function BullionSection() {
                                         alt="CMJ 24K Gold Bar"
                                         width={600}
                                         height={600}
-                                        className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition-all duration-700 w-full h-auto transform group-hover:scale-105"
+                                        className="object-contain drop-shadow-[0_15px_30px_rgba(184,143,57,0.4)] transition-all duration-700 w-full h-auto transform group-hover:scale-105"
                                         priority
                                     />
                                 </div>

@@ -50,18 +50,18 @@ export default function BullionPage() {
                     <div className="w-full lg:w-1/2">
                         <div className="sticky top-24">
                             <div className="relative group aspect-[4/3] flex items-center justify-center mx-auto max-w-lg lg:max-w-xl">
-                                {/* Premium Dark Background */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#2A1C14] to-[#0A0705] rounded-3xl shadow-2xl border border-[#D4AF37]/20 overflow-hidden">
+                                {/* Premium Gold Background */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#FFEDB3] to-[#F5D061] rounded-3xl shadow-xl border border-[#D4AF37]/40 overflow-hidden">
                                     {/* Lighting Effect */}
-                                    <div className="absolute top-0 left-1/4 w-1/2 h-full bg-[#D4AF37]/10 blur-3xl transform -skew-x-12 transition-transform duration-700 group-hover:translate-x-8"></div>
-                                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-[#D4AF37]/15 blur-3xl"></div>
+                                    <div className="absolute top-0 left-1/4 w-1/2 h-full bg-white/40 blur-3xl transform -skew-x-12 transition-transform duration-700 group-hover:translate-x-8"></div>
+                                    <div className="absolute bottom-0 right-0 w-32 h-32 bg-white/30 blur-2xl"></div>
                                 </div>
 
                                 <div className="relative z-10 w-full h-full flex items-center justify-center p-6 md:p-8">
                                     <Image
                                         src="/images/cmj-bar.png"
                                         alt="CMJ 24K Gold Bar"
-                                        className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 w-full h-auto transform group-hover:scale-105"
+                                        className="object-contain drop-shadow-[0_20px_40px_rgba(184,143,57,0.4)] transition-all duration-700 w-full h-auto transform group-hover:scale-105"
                                         width={600}
                                         height={600}
                                         priority
