@@ -49,14 +49,14 @@ export default function BullionPage() {
                     {/* Left Side - Image Gallery Style */}
                     <div className="w-full lg:w-1/2">
                         <div className="sticky top-24">
-                            <div className="relative group overflow-hidden aspect-[2/3] flex items-center justify-center mx-auto max-w-sm">
+                            <div className="relative group overflow-hidden aspect-[4/3] flex items-center justify-center mx-auto max-w-sm">
                                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                                     <Image
-                                        src="/images/bullion_gold1.png"
-                                        alt="24K Gold Bar"
-                                        className="object-contain drop-shadow-[0_20px_40px_rgba(62,39,35,0.1)] transition-all duration-700 mix-blend-multiply"
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        src="/images/cmj-bar.png"
+                                        alt="CMJ 24K Gold Bar"
+                                        className="object-contain drop-shadow-[0_20px_40px_rgba(184,143,57,0.3)] transition-all duration-700 w-full h-auto"
+                                        width={500}
+                                        height={500}
                                         priority
                                     />
                                 </div>

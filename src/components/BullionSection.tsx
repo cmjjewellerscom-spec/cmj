@@ -18,8 +18,8 @@ export default function BullionSection() {
                     <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
 
-                    <div className="flex flex-col md:flex-row relative z-10 items-stretch">
-                        <div className="w-full md:w-1/2 p-6 md:p-10 text-center md:text-left flex flex-col justify-center">
+                    <div className="grid md:grid-cols-2 gap-6 p-4 md:p-6 relative z-10 items-center">
+                        <div className="text-center md:text-left flex flex-col justify-center">
                             <div className="inline-flex flex-wrap items-center justify-center md:justify-start gap-2 bg-primary/10 px-3 py-1 rounded-full border border-primary/20 mb-4 self-center md:self-start w-max">
                                 <TrendingUp className="w-3 h-3 text-primary" />
                                 <span className="text-[0.65rem] md:text-xs font-bold uppercase tracking-wider text-primary">Smart Investment</span>
@@ -42,14 +42,15 @@ export default function BullionSection() {
                             </Link>
                         </div>
 
-                        <div className="w-full md:w-1/2 relative min-h-[300px] md:min-h-full">
-                            <div className="absolute inset-0 w-full h-full">
+                        <div className="flex justify-center md:justify-end">
+                            <div className="w-full max-w-[320px] md:max-w-sm group transition-all duration-500 flex items-center justify-center">
                                 {/* Gold Bar Image */}
                                 <Image
-                                    src="/images/cmj-ai-bar-v2.png"
-                                    alt="CMJ Premium 24K Gold Bar"
-                                    fill
-                                    className="object-cover transition-all duration-700 w-full h-full md:rounded-r-2xl"
+                                    src="/images/cmj-bar.png"
+                                    alt="CMJ 24K Gold Bar"
+                                    width={500}
+                                    height={500}
+                                    className="object-contain drop-shadow-[0_10px_30px_rgba(184,143,57,0.3)] transition-all duration-700 w-full h-auto"
                                     priority
                                 />
                             </div>
