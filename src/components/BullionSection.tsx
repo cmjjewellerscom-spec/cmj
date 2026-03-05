@@ -43,16 +43,23 @@ export default function BullionSection() {
                         </div>
 
                         <div className="flex justify-center md:justify-end">
-                            <div className="w-full max-w-[320px] md:max-w-sm group transition-all duration-500 flex items-center justify-center">
+                            <div className="relative w-full max-w-[320px] md:max-w-sm group transition-all duration-500 flex items-center justify-center aspect-[4/3]">
+                                {/* Premium Dark Background */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#2A1C14] to-[#0A0705] rounded-3xl shadow-xl border border-[#D4AF37]/20 overflow-hidden">
+                                    <div className="absolute top-0 left-1/4 w-1/2 h-full bg-[#D4AF37]/10 blur-3xl transform -skew-x-12 transition-transform duration-700 group-hover:translate-x-8"></div>
+                                </div>
+
                                 {/* Gold Bar Image */}
-                                <Image
-                                    src="/images/cmj-bar.png"
-                                    alt="CMJ 24K Gold Bar"
-                                    width={500}
-                                    height={500}
-                                    className="object-contain drop-shadow-[0_10px_30px_rgba(184,143,57,0.3)] transition-all duration-700 w-full h-auto"
-                                    priority
-                                />
+                                <div className="relative z-10 w-full h-full flex items-center justify-center p-6 sm:p-8">
+                                    <Image
+                                        src="/images/cmj-bar.png"
+                                        alt="CMJ 24K Gold Bar"
+                                        width={500}
+                                        height={500}
+                                        className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition-all duration-700 w-full h-auto transform group-hover:scale-105"
+                                        priority
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
