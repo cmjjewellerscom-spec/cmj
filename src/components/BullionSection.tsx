@@ -42,8 +42,8 @@ export default function BullionSection() {
                             </Link>
                         </div>
 
-                        <div className="flex justify-center md:justify-end">
-                            <div className="relative w-full max-w-[320px] md:max-w-sm group transition-all duration-500 flex items-center justify-center aspect-[4/3]">
+                        <div className="flex justify-center md:justify-end w-full">
+                            <div className="relative w-full max-w-[400px] md:max-w-md lg:max-w-lg group transition-all duration-500 flex items-center justify-center aspect-[4/3]">
                                 {/* Premium Dark Background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-[#2A1C14] to-[#0A0705] rounded-3xl shadow-xl border border-[#D4AF37]/20 overflow-hidden">
                                     <div className="absolute top-0 left-1/4 w-1/2 h-full bg-[#D4AF37]/10 blur-3xl transform -skew-x-12 transition-transform duration-700 group-hover:translate-x-8"></div>
@@ -54,8 +54,8 @@ export default function BullionSection() {
                                     <Image
                                         src="/images/cmj-bar.png"
                                         alt="CMJ 24K Gold Bar"
-                                        width={500}
-                                        height={500}
+                                        width={600}
+                                        height={600}
                                         className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition-all duration-700 w-full h-auto transform group-hover:scale-105"
                                         priority
                                     />

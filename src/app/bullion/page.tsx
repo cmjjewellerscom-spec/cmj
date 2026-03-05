@@ -49,7 +49,7 @@ export default function BullionPage() {
                     {/* Left Side - Image Gallery Style */}
                     <div className="w-full lg:w-1/2">
                         <div className="sticky top-24">
-                            <div className="relative group aspect-[4/3] flex items-center justify-center mx-auto max-w-sm">
+                            <div className="relative group aspect-[4/3] flex items-center justify-center mx-auto max-w-lg lg:max-w-xl">
                                 {/* Premium Dark Background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-[#2A1C14] to-[#0A0705] rounded-3xl shadow-2xl border border-[#D4AF37]/20 overflow-hidden">
                                     {/* Lighting Effect */}
@@ -62,8 +62,8 @@ export default function BullionPage() {
                                         src="/images/cmj-bar.png"
                                         alt="CMJ 24K Gold Bar"
                                         className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-700 w-full h-auto transform group-hover:scale-105"
-                                        width={500}
-                                        height={500}
+                                        width={600}
+                                        height={600}
                                         priority
                                     />
                                 </div>
