@@ -18,9 +18,9 @@ export default function BullionSection() {
                     <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
 
-                    <div className="grid md:grid-cols-2 gap-6 p-4 md:p-6 relative z-10 items-center">
-                        <div className="text-center md:text-left">
-                            <div className="inline-flex items-center gap-2 bg-primary/10 px-3 py-1 rounded-full border border-primary/20 mb-4">
+                    <div className="flex flex-col md:flex-row relative z-10 items-stretch">
+                        <div className="w-full md:w-1/2 p-6 md:p-10 text-center md:text-left flex flex-col justify-center">
+                            <div className="inline-flex flex-wrap items-center justify-center md:justify-start gap-2 bg-primary/10 px-3 py-1 rounded-full border border-primary/20 mb-4 self-center md:self-start w-max">
                                 <TrendingUp className="w-3 h-3 text-primary" />
                                 <span className="text-[0.65rem] md:text-xs font-bold uppercase tracking-wider text-primary">Smart Investment</span>
                             </div>
@@ -34,7 +34,7 @@ export default function BullionSection() {
 
                             <Link
                                 href="/bullion"
-                                className="bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all flex items-center justify-center gap-2 mx-auto md:mx-0 group w-full md:w-auto transform hover:-translate-y-0.5 inline-flex"
+                                className="bg-gradient-to-r from-primary to-primary-dark text-white font-bold py-3 px-8 rounded-full shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all flex items-center justify-center gap-2 mx-auto md:mx-0 group w-max transform hover:-translate-y-0.5 inline-flex"
                             >
                                 <Coins className="w-5 h-5" />
                                 <span>Buy Gold</span>
@@ -42,15 +42,14 @@ export default function BullionSection() {
                             </Link>
                         </div>
 
-                        <div className="flex justify-center md:justify-end h-full">
-                            <div className="w-full h-full group transition-all duration-500 overflow-hidden rounded-r-2xl md:min-h-[300px]">
+                        <div className="w-full md:w-1/2 relative min-h-[300px] md:min-h-full">
+                            <div className="absolute inset-0 w-full h-full">
                                 {/* Gold Bar Image */}
                                 <Image
-                                    src="/images/cmj-ai-bar.png"
+                                    src="/images/cmj-ai-bar-v2.png"
                                     alt="CMJ Premium 24K Gold Bar"
-                                    width={600}
-                                    height={600}
-                                    className="object-cover transition-all duration-700 w-full h-full"
+                                    fill
+                                    className="object-cover transition-all duration-700 w-full h-full md:rounded-r-2xl"
                                     priority
                                 />
                             </div>
